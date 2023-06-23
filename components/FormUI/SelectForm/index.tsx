@@ -5,7 +5,7 @@ import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import { Checkbox, FormControlLabel, FormGroup, Typography } from '@mui/material';
 import { useController } from 'react-hook-form';
-import { SelectFormObj } from '@/models/form/formItem';
+import { SelectFormObj } from '@/models/FormUI/FormUIData';
 import { FormProps } from '..';
 
 interface SelectFormProps extends FormProps {

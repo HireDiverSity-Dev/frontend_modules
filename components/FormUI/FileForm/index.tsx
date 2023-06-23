@@ -4,7 +4,7 @@ import { Box, Typography } from '@mui/material';
 import { useAtom } from 'jotai';
 import { useController } from 'react-hook-form';
 import { authAtom } from '@/atoms/authAtom';
-import { FileFormObj } from '@/models/form/formItem';
+import { FileFormObj } from '@/models/FormUI/FormUIData';
 import { Translation } from '@/models/lang';
 import { UploadFileApi } from '@/remotes/form';
 import { getCurrentDate } from '@/utils/function';

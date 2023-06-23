@@ -1,6 +1,6 @@
 import React from 'react';
-import { FormUIProps } from '@/models/form/FormUI';
-import { ParagraphFormObj } from '@/models/form/formItem';
+import { FormUIProps } from '@/models/FormUI/FormUI';
+import { ParagraphFormObj } from '@/models/FormUI/FormUIData';
 
 function ParagraphForm({ form, uiSetting, lang }: FormUIProps) {
   const formData = uiSetting.formData as ParagraphFormObj;

@@ -1,110 +1,58 @@
 import React, { useEffect } from 'react';
-import { FormControlLabel, RadioGroup, Typography } from '@mui/material';
-import Radio from '@mui/material/Radio';
+import { RadioGroup } from '@mui/material';
 import { useController } from 'react-hook-form';
-import { BooleanFormObj } from '@/models/form/formItem';
-import { FormProps } from '..';
+import { FormUIProps } from '@/models/FormUI/FormUI';
+import { Boolean_FormUIData } from '@/models/FormUI/FormUIData';
+import BooleanLabel from '@/components/FormUI/BooleanForm/BooleanLabel';
+import BooleanText from '@/components/FormUI/BooleanForm/BooleanText';
+import BoolearnRadio from '@/components/FormUI/BooleanForm/BooleanRadio';
 
-function SelectForm({ pageForm, setting, lang }: FormProps) {
-  const formData = setting.formData as BooleanFormObj;
+function boolearnValidate(value: boolean) {
+  if (value === true || value === false) {
+    return true;
+  }
+  return false;
+}
+
+function BooleanForm({ form, uiSetting, lang }: FormUIProps) {
+  const data = uiSetting.data as Boolean_FormUIData;
+  const validateFunction = uiSetting.rule?.required ? boolearnValidate : undefined;
   const { field } = useController({
-    name: setting.formKey,
-    control: pageForm.control,
+    name: uiSetting.formKey,
+    control: form.control,
     rules: {
-      validate: {
-        ...setting.rules,
-        //@ts-ignore
-      }?.required
-        ? {
-            required: (value) => {
-              if (value === true || value === false) {
-                return true;
-              }
-              return false;
-            },
-          }
-        : undefined,
+      validate: validateFunction,
     },
   });
 
   useEffect(() => {
-    if (setting.rules?.default && setting.defaultValue != undefined) {
-      field.onChange(setting.defaultValue as boolean);
+    if (uiSetting.rule?.default && uiSetting.defaultValue != undefined) {
+      field.onChange(uiSetting.defaultValue as boolean);
     }
-  }, [setting.rules?.default, setting.defaultValue]);
+  }, [uiSetting.rule?.default, uiSetting.defaultValue]);
 
   const handleChange = (bool: boolean) => {
     field.onChange(bool);
   };
 
-  const vertical = formData?.style === 'vertical';
+  const isHorizontal = data.style === 'horizontal';
   return (
-    <>
-      <RadioGroup
-        //기본은 horizontal 옵션에 따라 verticl
-        row={!vertical}
-        sx={{ justifyContent: 'space-evenly', mx: 2 }}
-      >
-        <FormControlLabel
-          value={'true'}
-          control={
-            <Radio
-              sx={{
-                '& .MuiSvgIcon-root': {
-                  fontSize: '1.8rem',
-                },
-              }}
-              checked={field.value === true}
-              onChange={() => {
-                handleChange(true);
-              }}
-            />
-          }
-          label={
-            <Typography variant="body1" sx={{ fontSize: '1.2rem', p: '0.4rem' }}>
-              {formData?.options?.[0]?.label?.[lang] || Label.true[lang]}
-            </Typography>
-          }
-          sx={
-            vertical
-              ? {
-                  '.MuiFormControlLabel-label': {
-                    flex: 1,
-                  },
-                  mb: '0.5rem',
-                  display: 'flex',
-                  alignItems: 'start',
-                  width: '100%',
-                }
-              : {}
-          }
-          disabled={setting.rules?.readonly}
-        />
-        <FormControlLabel
-          value={'false'}
-          control={
-            <Radio
-              sx={{
-                '& .MuiSvgIcon-root': {
-                  fontSize: '1.8rem',
-                },
-              }}
-              checked={field.value === false}
-              onChange={() => {
-                handleChange(false);
-              }}
-            />
-          }
-          label={formData?.options?.[1]?.label?.[lang] || Label.false[lang]}
-          sx={{
-            '.MuiFormControlLabel-label': {
-              fontSize: '1.2rem',
-            },
-          }}
-          disabled={setting.rules?.readonly}
-        />
-      </RadioGroup>
-    </>
+    <RadioGroup row={isHorizontal} sx={{ justifyContent: 'space-evenly', mx: 2 }}>
+      <BooleanLabel
+        type={true}
+        isHorizontal={isHorizontal}
+        isDisabled={uiSetting.rule?.readonly ?? false}
+        control={<BoolearnRadio type={true} curValue={field.value} onChange={handleChange} />}
+        label={<BooleanText msg={data.options?.[0]?.label?.[lang] || Label.true[lang]} />}
+      />
+      <BooleanLabel
+        type={false}
+        isHorizontal={isHorizontal}
+        isDisabled={uiSetting.rule?.readonly ?? false}
+        control={<BoolearnRadio type={false} curValue={field.value} onChange={handleChange} />}
+        label={<BooleanText msg={data.options?.[1]?.label?.[lang] || Label.false[lang]} />}
+      />
+    </RadioGroup>
   );
 }
 
@@ -121,4 +69,4 @@ const Label = {
   },
 };
 
-export default SelectForm;
+export default BooleanForm;
