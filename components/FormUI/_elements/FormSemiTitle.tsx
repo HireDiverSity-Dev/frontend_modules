@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormUISetting } from '@/models/form/FormUI';
+import { FormUISetting } from '@/models/FormUI/FormUI';
 import { Lang } from '@/models/lang';
 import { Typography } from '@mui/material';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useWatch } from 'react-hook-form';
 import { FieldValues, UseFormReturn } from 'react-hook-form';
-import { FormSettings } from '@/models/form/formPage';
+import { FormSettings } from '@/models/formPage';
 
 function SetSetting(pageForm: UseFormReturn<FieldValues, any>, setting: FormSettings) {
   //

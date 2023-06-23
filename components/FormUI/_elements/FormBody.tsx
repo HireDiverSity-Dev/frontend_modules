@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormUIProps } from '@/models/form/FormUI';
+import { FormUIProps } from '@/models/FormUI/FormUI';
 import BooleanForm from '@/components/FormUI/BooleanForm';
 import EmailAuthForm from '@/components/FormUI/EmailAuthForm';
 import FileForm from '@/components/FormUI/FileForm';

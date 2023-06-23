@@ -1,6 +1,5 @@
 import React from 'react';
-import { Box } from '@mui/system';
-import { FormUIProps } from '@/models/form/FormUI';
+import { FormUIProps } from '@/models/FormUI/FormUI';
 import SetSetting from './SetSetting';
 import FormBody from '@/components/FormUI/_elements/FormBody';
 import FormSemiTitle from '@/components/FormUI/_elements/FormSemiTitle';
