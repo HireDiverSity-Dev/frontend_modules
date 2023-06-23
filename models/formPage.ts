@@ -1,6 +1,6 @@
 import { Attachment as AirtableAttachment } from 'airtable';
-import { Translation } from '../lang';
-import { FormObj } from './formItem';
+import { Translation } from './lang';
+import { FormObj } from './FormUI/FormUIData';
 
 export interface PageSettings {
   path: string;
@@ -14,8 +14,6 @@ export interface PageSettings {
   deploy?: boolean;
   redirect?: string;
 }
-
-export type FormValue = string | boolean | number | string[] | Partial<AirtableAttachment>[];
 
 // 폼 로직(조건문)
 export const formConditionOperatorParams = {
@@ -40,20 +38,6 @@ export const formConditionActionParams = {
 };
 export type FormConditionAction = keyof typeof formConditionActionParams;
 
-export interface Trigger {
-  formKey: string;
-  operator: FormConditionOperator;
-  val?: FormValue;
-}
-
-export interface FormConditions {
-  triggers: Array<Trigger>;
-  action: {
-    action: FormConditionAction;
-    val?: string;
-  };
-}
-
 // 규칙
 export const TextPatternList = {
   '': undefined,
@@ -75,20 +59,3 @@ export const TextPatternList = {
   },
 };
 export type TextPattern = keyof typeof TextPatternList;
-
-export interface FormRules {
-  required?: boolean;
-  default?: boolean;
-  invisible?: boolean;
-  readonly?: boolean;
-  disabled?: boolean; // disabled 처리 방지용
-}
-
-export interface FormSettings {
-  formKey: string;
-  page: number;
-  formData: FormObj;
-  rules?: FormRules;
-  condition?: Array<FormConditions>;
-  defaultValue?: string | boolean | number | string[] | Partial<AirtableAttachment>[];
-}
