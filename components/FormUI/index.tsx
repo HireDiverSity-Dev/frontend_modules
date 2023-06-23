@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Divider, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { FieldValues, UseFormReturn } from 'react-hook-form';
-import { useWatch } from 'react-hook-form';
 import { ParagraphFormObj } from '@/models/form/formItem';
 import { FormSettings } from '@/models/form/formPage';
 import { Lang } from '@/models/lang';
@@ -12,7 +11,7 @@ import FileForm from './FileForm';
 import RateForm from './RateForm';
 import SelectForm from './SelectForm';
 import SetSetting from './SetSetting';
-import SignForm from './SignForm/SignForm';
+import SignForm from './SignForm';
 import TextForm from './TextForm';
 
 export interface FormProps {

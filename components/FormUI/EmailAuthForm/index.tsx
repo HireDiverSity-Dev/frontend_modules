@@ -3,7 +3,7 @@ import { Box, Button, Checkbox, TextField } from '@mui/material';
 import { useTranslation } from 'next-i18next';
 import { UseFormReturn, useWatch } from 'react-hook-form';
 import { FormProps } from '@/components/FormUI/index';
-import TextForm from '@/components/FormUI/TextForm/TextForm';
+import TextForm from '@/components/FormUI/TextForm';
 import FlexBox from '@/components/others/FlexBox';
 import { ConfirmVerificationCode, SendVerificationEmail } from '@/remotes/form';
 
