@@ -1,0 +1,608 @@
+{
+  "증명사진": {
+    "type": "file",
+    "imgSrc": "/images/form/증명사진.png",
+    "label": {
+      "title": "신규.증명사진.타이틀"
+    },
+    "s3path": "증명사진",
+
+    "col": "1. 증명사진",
+    "resubmit": ["증명사진 여권 검토 완료", "증명사진프로그램실행여부"]
+  },
+  "여권사본": {
+    "type": "file",
+    "imgSrc": "/images/form/여권사본.png",
+    "label": {
+      "title": "신규.여권사본.타이틀"
+    },
+    "s3path": "여권사본",
+
+    "col": "2. 여권사본",
+    "resubmit": ["증명사진 여권 검토 완료"]
+  },
+  "사증발급확인서": {
+    "type": "file",
+    "imgSrc": "/images/form/사증발급확인서.jpg",
+    "label": {
+      "title": "신규.사증발급확인서.타이틀"
+    },
+    "s3path": "사증발급확인서",
+
+    "col": "3. 사증발급확인서",
+    "resubmit": ["사증 재학증명서 검토 완료 여부"]
+  },
+  "재학증명서": {
+    "type": "file",
+    "label": {
+      "title": "신규.재학증명서.타이틀"
+    },
+    "s3path": "재학증명서",
+
+    "col": "4. 재학증명서",
+    "resubmit": ["사증 재학증명서 검토 완료 여부"]
+  },
+  "거주지입증서류": {
+    "type": "file",
+    "imgSrc": "/images/form/거주제공확인서.png",
+    "label": {
+      "title": "신규.거주지입증서류.타이틀"
+    },
+    "s3path": "거주지입증서류",
+
+    "col": "5. 거주지서류",
+    "resubmit": ["거주지 서류 검토 완료"]
+  },
+  "재정유지확인서": {
+    "type": "file",
+    "imgSrc": "/images/form/유학생재정유지확인서.jpg",
+    "label": {
+      "title": "신규.재정유지확인서.타이틀"
+    },
+    "s3path": "재정유지확인서",
+
+    "col": "6. 재정유지확인서",
+    "resubmit": ["수원 검토 완료 여부"]
+  },
+  "GKS장학증명서": {
+    "type": "file",
+    "imgSrc": "/images/form/GKS장학증명서.jpg",
+    "label": {
+      "title": "신규.GKS장학증명서.타이틀"
+    },
+    "s3path": "GKS장학증명서",
+
+    "col": "7. GKS 증명서",
+    "resubmit": ["GKS 장학증명서 검토 완료 여부"]
+  },
+  "반려보완서류": {
+    "type": "file",
+    "label": {
+      "title": "신규.반려보완서류.타이틀"
+    },
+    "s3path": "반려보완서류",
+
+    "col": "보완서류",
+    "resubmit": []
+  },
+  "반려보완서명": {
+    "type": "sign",
+    "label": {
+      "title": ""
+    },
+
+    "col": "반려보완서명"
+  },
+  "단체접수만족도": {
+    "type": "rate",
+    "label": {
+      "title": "신규.단체접수만족도.타이틀"
+    },
+    "require": true,
+
+    "col": "단체접수 만족도",
+    "server": "groupReceptionSatisfaction"
+  },
+  "학교생활만족도": {
+    "type": "rate",
+    "label": {
+      "title": "신규.학교생활만족도.타이틀"
+    },
+    "require": true,
+
+    "col": "학교생활만족도",
+    "server": "universitySatisfaction"
+  },
+  "학교정책만족여부": {
+    "type": "boolean",
+    "label": {
+      "title": "신규.학교정책만족여부.타이틀"
+    },
+    "require": true,
+
+    "server": "universityPolicySatisfaction"
+  },
+  "만족하는학교정책": {
+    "type": "text",
+    "label": {
+      "title": "신규.만족하는학교정책.타이틀",
+      "subtitle": "신규.만족하는학교정책.본문"
+    },
+    "require": true,
+
+    "server": "universityPolicySatisfactionContent"
+  },
+  "한국생활의어려운점": {
+    "type": "text",
+    "label": {
+      "title": "신규.한국생활의어려운점.타이틀",
+      "subtitle": "신규.한국생활의어려운점.본문"
+    },
+    "require": true,
+
+    "server": "koreaLivingInconvenient"
+  },
+  "앱다운로드여부": {
+    "type": "boolean",
+    "label": {
+      "title": "신규.앱다운로드여부.타이틀"
+    },
+    "options": [
+      null,
+      {
+        "fallback": ["앱다운안하는이유"]
+      }
+    ],
+    "require": true,
+
+    "server": "appDownloadCheck"
+  },
+  "앱다운안하는이유": {
+    "type": "multiselect",
+    "label": {
+      "title": "신규.앱다운안하는이유.타이틀"
+    },
+    "options": [
+      {
+        "label": "신규.앱다운안하는이유.옵션.1",
+        "value": "1. 앱이 있는 것을 몰라서"
+      },
+      {
+        "label": "신규.앱다운안하는이유.옵션.2",
+        "value": "2. 필요성을 못 느껴서"
+      },
+      {
+        "label": "신규.앱다운안하는이유.옵션.3",
+        "value": "3. 핸드폰 용량이 없어서"
+      },
+      {
+        "label": "신규.앱다운안하는이유.옵션.4",
+        "value": "4. 기타",
+        "fallback": ["앱다운안하는이유(자유)"]
+      }
+    ],
+    "require": true,
+
+    "server": "appNotDownloadReason"
+  },
+  "앱다운안하는이유(자유)": {
+    "type": "text",
+    "label": {
+      "title": "신규.앱다운안하는이유(자유).타이틀"
+    },
+    "require": true,
+
+    "server": "appNotDownloadReasonRemark"
+  },
+  "앱원하는기능": {
+    "type": "text",
+    "label": {
+      "title": "신규.앱원하는기능.타이틀"
+    },
+
+    "server": "appUserWantFunction"
+  },
+  "설문조사참여여부": {
+    "type": "boolean",
+    "label": {
+      "title": "신규.설문조사참여여부.타이틀"
+    },
+    "options": [
+      {
+        "fallback": ["편했던점", "불편했던점", "외국인등록증이없을때불편한점", "USIM구매처"]
+      },
+      null
+    ],
+    "require": true,
+
+    "server": "researchCheck"
+  },
+  "편했던점": {
+    "type": "multiselect",
+    "label": {
+      "title": "신규.편했던점.타이틀"
+    },
+    "options": [
+      {
+        "label": "신규.편했던점.옵션.1",
+        "value": "1. 출입국 방문 없이 신청 가능한 것"
+      },
+      {
+        "label": "신규.편했던점.옵션.2",
+        "value": "2. 준비할 서류 생략되는 것"
+      },
+      {
+        "label": "신규.편했던점.옵션.3",
+        "value": "3. 신청 진행 상황이 조회 가능한 것"
+      },
+      {
+        "label": "신규.편했던점.옵션.4",
+        "value": "4. 다국어 CS지원이 되는 것"
+      },
+      {
+        "label": "신규.편했던점.옵션.5",
+        "value": "5. 기타",
+        "fallback": ["편했던점(자유)"]
+      }
+    ],
+    "require": true,
+
+    "server": "arcProcessConvenient"
+  },
+  "편했던점(자유)": {
+    "type": "text",
+    "label": {
+      "title": "신규.편했던점(자유).타이틀"
+    },
+    "require": true,
+
+    "server": "arcProcessConvenientRemark"
+  },
+  "불편했던점": {
+    "type": "multiselect",
+    "label": {
+      "title": "신규.불편했던점.타이틀"
+    },
+    "options": [
+      {
+        "label": "신규.불편했던점.옵션.1",
+        "value": "1. CS 속도가 느림"
+      },
+      {
+        "label": "신규.불편했던점.옵션.2",
+        "value": "2. 필요 서류 알기가 어려움"
+      },
+      {
+        "label": "신규.불편했던점.옵션.3",
+        "value": "3. 많이 오는 서류 보완 요청"
+      },
+      {
+        "label": "신규.불편했던점.옵션.4",
+        "value": "4. 서버 오류"
+      },
+      {
+        "label": "신규.불편했던점.옵션.5",
+        "value": "5. 기타",
+        "fallback": ["불편했던점(자유)"]
+      }
+    ],
+    "require": true,
+
+    "server": "arcProcessInconvenient"
+  },
+  "불편했던점(자유)": {
+    "type": "text",
+    "label": {
+      "title": "신규.불편했던점(자유).타이틀"
+    },
+    "require": true,
+
+    "server": "arcProcessInconvenientRemark"
+  },
+  "외국인등록증이없을때불편한점": {
+    "type": "multiselect",
+    "label": {
+      "title": "신규.외국인등록증이없을때불편한점.타이틀"
+    },
+    "options": [
+      {
+        "label": "신규.외국인등록증이없을때불편한점.옵션.1",
+        "value": "1. 은행 업무를 못하는 것"
+      },
+      {
+        "label": "신규.외국인등록증이없을때불편한점.옵션.2",
+        "value": "2. 모바일 본인 인증을 못하는 것"
+      },
+      {
+        "label": "신규.외국인등록증이없을때불편한점.옵션.3",
+        "value": "3. 온라인 쇼핑을 못하는 것"
+      },
+      {
+        "label": "신규.외국인등록증이없을때불편한점.옵션.4",
+        "value": "4. 여권을 들고 다녀야 하는 것"
+      },
+      {
+        "label": "신규.외국인등록증이없을때불편한점.옵션.5",
+        "value": "5. 기타",
+        "fallback": ["외국인등록증이없을때불편한점(자유)"]
+      }
+    ],
+    "require": true,
+
+    "server": "notArcInconvenience"
+  },
+  "외국인등록증이없을때불편한점(자유)": {
+    "type": "text",
+    "label": {
+      "title": "신규.외국인등록증이없을때불편한점(자유).타이틀"
+    },
+    "require": true,
+
+    "server": "notArcInconvenienceRemark"
+  },
+  "USIM구매처": {
+    "type": "singleselect",
+    "label": {
+      "title": "신규.USIM구매처.타이틀",
+      "subtitle": "신규.USIM구매처.본문"
+    },
+    "options": [
+      {
+        "label": "신규.USIM구매처.옵션.1",
+        "value": "친구모바일"
+      },
+      {
+        "label": "신규.USIM구매처.옵션.2",
+        "value": "우리모바일"
+      },
+      {
+        "label": "신규.USIM구매처.옵션.3",
+        "value": "코리아심"
+      },
+      {
+        "label": "신규.USIM구매처.옵션.4",
+        "value": "엔텔레콤"
+      },
+      {
+        "label": "신규.USIM구매처.옵션.5",
+        "value": "보람모바일"
+      },
+      {
+        "label": "신규.USIM구매처.옵션.6",
+        "value": "탑모바일"
+      },
+      {
+        "label": "신규.USIM구매처.옵션.7",
+        "value": "기타",
+        "fallback": ["USIM구매처(자유)"]
+      }
+    ],
+    "require": false,
+
+    "server": "usimPurchase"
+  },
+  "USIM구매처(자유)": {
+    "type": "text",
+    "label": {
+      "title": "신규.USIM구매처(자유).타이틀"
+    },
+    "require": true,
+
+    "server": "usimPurchaseRemark"
+  },
+  "연장": {
+    "여권": {
+      "type": "file",
+      "imgSrc": "/images/form/여권사본.png",
+      "label": {
+        "title": "연장.여권.타이틀"
+      },
+      "s3path": "연장_여권",
+
+      "col": "여권사본",
+      "resubmit": ["사유별 검토완료"]
+    },
+    "RC앞": {
+      "type": "file",
+      "imgSrc": "/images/form/외국인등록증 앞면 예시.png",
+      "label": {
+        "title": "연장.RC앞.타이틀"
+      },
+      "s3path": "연장_RC앞",
+
+      "col": "[1] ARC앞면사본",
+      "resubmit": ["사유별 검토완료"]
+    },
+    "RC뒤": {
+      "type": "file",
+      "imgSrc": "/images/form/외국인등록증 뒷면 예시.png",
+      "label": {
+        "title": "연장.RC뒤.타이틀"
+      },
+      "s3path": "연장_RC뒤",
+
+      "col": "ARC뒷면사본",
+      "resubmit": ["사유별 검토완료"]
+    },
+    "재학": {
+      "type": "file",
+      "imgSrc": "/images/form/재학증명서 샘플.JPEG",
+      "label": {
+        "title": "연장.재학.타이틀"
+      },
+      "s3path": "연장_재학",
+
+      "col": "[2] 재학증명서",
+      "resubmit": ["사유별 검토완료"]
+    },
+    "수료": {
+      "type": "file",
+      "imgSrc": "/images/form/수료증명서.jpg",
+      "label": {
+        "title": "연장.수료.타이틀"
+      },
+      "s3path": "연장_수료",
+
+      "col": "[2] 재학증명서",
+      "resubmit": ["사유별 검토완료"]
+    },
+    "성적": {
+      "type": "file",
+      "imgSrc": "/images/form/성적증명서 샘플.JPEG",
+      "label": {
+        "title": "연장.성적.타이틀"
+      },
+      "s3path": "연장_성적",
+
+      "col": "[3] 성적증명서",
+      "resubmit": ["사유별 검토완료"]
+    },
+    "등록금": {
+      "type": "file",
+      "imgSrc": "/images/form/등록금납입증명서 샘플.JPEG",
+      "label": {
+        "title": "연장.등록금.타이틀"
+      },
+      "s3path": "연장_등록금",
+
+      "col": "[4] 등록금납입증명서",
+      "resubmit": ["사유별 검토완료"]
+    },
+    "표입허": {
+      "type": "file",
+      "imgSrc": "/images/form/표입허샘플.jpg",
+      "label": {
+        "title": "연장.표입허.타이틀"
+      },
+      "s3path": "연장_표입허",
+
+      "col": "[5] 표준입학허가서",
+      "resubmit": ["사유별 검토완료"]
+    },
+    "최종학력": {
+      "type": "file",
+      "imgSrc": "/images/form/최종학력증명서샘플.jpg",
+      "label": {
+        "title": "연장.최종학력.타이틀"
+      },
+      "s3path": "연장_최종학력",
+
+      "col": "[7] 최종학력증명서",
+      "resubmit": ["사유별 검토완료"]
+    },
+    "지도": {
+      "type": "file",
+      "imgSrc": "/images/form/지도교수확인서예시.jpg",
+      "label": {
+        "title": "연장.지도.타이틀"
+      },
+      "s3path": "연장_지도",
+
+      "col": "[6] 지도교수확인서",
+      "resubmit": ["사유별 검토완료"]
+    },
+    "사유서": {
+      "type": "file",
+      "imgSrc": "/images/form/초과학기샘플.jpg",
+      "label": {
+        "title": "연장.사유서.타이틀"
+      },
+      "s3path": "연장_사유서",
+
+      "col": "[6] 지도교수확인서",
+      "resubmit": ["사유별 검토완료"]
+    },
+    "재정": {
+      "type": "file",
+      "imgSrc": "/images/form/유학생재정유지확인서.jpg",
+      "label": {
+        "title": "연장.재정.타이틀"
+      },
+      "s3path": "연장_재정",
+
+      "col": "[11] 유학생재정입증서류",
+      "resubmit": ["사유별 검토완료"]
+    },
+    "출석": {
+      "type": "file",
+      "label": {
+        "title": "연장.출석.타이틀"
+      },
+      "s3path": "연장_출석",
+
+      "col": "[8] 출석률증명서",
+      "resubmit": ["사유별 검토완료"]
+    },
+    "잔고90": {
+      "type": "file",
+      "imgSrc": "/images/form/잔고증명서예시.jfif",
+      "label": {
+        "title": "연장.잔고90.타이틀"
+      },
+      "s3path": "연장_잔고",
+
+      "col": "[12] 잔고증명서(90만원)",
+      "resubmit": ["사유별 검토완료"]
+    },
+    "잔고1200": {
+      "type": "file",
+      "imgSrc": "/images/form/잔고증명서예시.jfif",
+      "label": {
+        "title": "연장.잔고1200.타이틀"
+      },
+      "s3path": "연장_잔고",
+
+      "col": "[9] 잔고증명서(1200만원)",
+      "resubmit": ["사유별 검토완료"]
+    },
+    "GKS": {
+      "type": "file",
+      "imgSrc": "/images/form/GKS2.jpg",
+      "label": {
+        "title": "연장.GKS.타이틀"
+      },
+      "s3path": "연장_GKS",
+
+      "col": "[10] GKS 장학증명서",
+      "resubmit": ["사유별 검토완료"]
+    },
+    "거주지_1": {
+      "type": "file",
+      "label": {
+        "title": "연장.거주지_1.타이틀"
+      },
+      "s3path": "연장_거주지",
+
+      "col": "거주지 합",
+      "resubmit": ["사유별 검토완료"]
+    },
+    "거주지_2": {
+      "type": "file",
+      "label": {
+        "title": "연장.거주지_2.타이틀"
+      },
+      "s3path": "연장_거주지",
+
+      "col": "거주지 합",
+      "resubmit": ["사유별 검토완료"]
+    },
+    "반려보완서류": {
+      "type": "file",
+      "label": {
+        "title": "연장.반려보완서류.타이틀"
+      },
+      "s3path": "연장_반려보완서류",
+
+      "col": "반려보완 서류"
+    },
+    "반려관련코멘트": {
+      "type": "text",
+      "label": {
+        "title": "연장.반려관련코멘트.타이틀",
+        "subtitle": "연장.반려관련코멘트.본문"
+      },
+      "require": false,
+      "col": "반려 관련 코맨트"
+    }
+  }
+}

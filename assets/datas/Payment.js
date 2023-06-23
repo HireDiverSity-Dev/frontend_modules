@@ -1,0 +1,33 @@
+export const ProductPrice = {
+  konkuk: 40000,
+  hyu: 40000,
+  skku_suwon: 40000,
+  skku_seoul: 40000,
+  c: 0,
+  cau: 40000,
+  snu: 40000,
+  mju_yongin: 40000,
+  skli: 40000,
+  kmu: 40000,
+  kmu_off: 40000,
+  mju_seoul_off: 40000,
+  mju_seoul: 40000,
+  snulei_siheung: 40000,
+  seoultech: 40000,
+  skku_seoul_off: 40000,
+  cauile: 40000,
+  hyuiie_off: 40000,
+  uosiice: 40000,
+  hu: 40000,
+  yskli: 40000,
+  uosiice_off: 40000,
+  yonsei: 40000,
+  sogang: 40000,
+  sogangklec: 40000,
+};
+
+export const ProductName = {
+  kor: '외국인록증 신규 발급 수수료',
+  eng: 'RC new issuance fee',
+  chn: '外国人登录证新发行费',
+};
