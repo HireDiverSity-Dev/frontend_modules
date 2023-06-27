@@ -12,7 +12,7 @@ export default function TextInput({ field, disabled, multiline, onCustomChange }
     <TextField
       onChange={onCustomChange ?? field.onChange}
       onBlur={field.onBlur}
-      value={field.value}
+      value={field.value ?? ''}
       name={field.name}
       inputRef={field.ref}
       multiline={multiline}
