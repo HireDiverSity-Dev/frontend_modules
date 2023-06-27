@@ -6,7 +6,7 @@ export interface FormPageProps {
   path: string;
   title: Translation;
   submit: {
-    condition: Array<FormUICondition>;
+    conditions: Array<FormUICondition>;
     label: Translation;
   };
   forms: Array<FormUISetting>;

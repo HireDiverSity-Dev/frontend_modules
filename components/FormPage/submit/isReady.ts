@@ -1,9 +1,12 @@
 import { FormUICondition } from '@/models/FormUI/FormUICondition';
 
-export default function isReady(condition: Array<FormUICondition>, watch: any) {
+export default function isReady(conditions: Array<FormUICondition> | undefined, watch: any) {
   let hideButton = false;
+  if (conditions === undefined) {
+    return hideButton;
+  }
 
-  condition.forEach((curCondition) => {
+  conditions.forEach((curCondition) => {
     if (!hideButton) {
       let tmp = true;
       curCondition.triggers?.forEach((trigger) => {

@@ -12,10 +12,10 @@ function SetSetting(form: FormUIUseFormReturn, uiSetting: FormUISetting): FormUI
   let newUiSetting = { ...uiSetting, disabled: false };
   let newRule = { ...uiSetting.rule };
 
-  uiSetting.condition?.forEach((condition) => {
+  uiSetting.conditions?.forEach((conditions) => {
     // 조건 충족 여부 확인
     let satisfied = true;
-    condition.triggers.forEach((trigger) => {
+    conditions.triggers.forEach((trigger) => {
       const value = watch[trigger.formKey];
 
       switch (trigger.operator) {
@@ -118,7 +118,7 @@ function SetSetting(form: FormUIUseFormReturn, uiSetting: FormUISetting): FormUI
 
     // 조건 충족할 경우 액션 처리
     if (satisfied) {
-      switch (condition.action.action) {
+      switch (conditions.action.action) {
         case 'show':
           newRule = {
             ...newRule,
