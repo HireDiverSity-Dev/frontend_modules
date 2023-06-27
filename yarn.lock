@@ -810,7 +810,7 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
-"@babel/runtime@^7.12.5", "@babel/runtime@^7.18.3", "@babel/runtime@^7.20.13", "@babel/runtime@^7.20.7", "@babel/runtime@^7.21.0", "@babel/runtime@^7.22.5", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.7":
+"@babel/runtime@^7.12.5", "@babel/runtime@^7.18.3", "@babel/runtime@^7.20.13", "@babel/runtime@^7.20.6", "@babel/runtime@^7.20.7", "@babel/runtime@^7.21.0", "@babel/runtime@^7.21.5", "@babel/runtime@^7.22.3", "@babel/runtime@^7.22.5", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.7":
   version "7.22.5"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.22.5.tgz#8564dd588182ce0047d55d7a75e93921107b57ec"
   integrity sha512-ecjvYlnAaZ/KVneE/OdKYBYfgXV3Ptu6zQWmgEF7vwKhQnvVS6bjMD2XYgj+SNvQ1GfK/pjgokfPkC/2CO8CuA==
@@ -1879,6 +1879,13 @@ cosmiconfig@^7.0.0:
     path-type "^4.0.0"
     yaml "^1.10.0"
 
+cross-fetch@3.1.6:
+  version "3.1.6"
+  resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.1.6.tgz#bae05aa31a4da760969756318feeee6e70f15d6c"
+  integrity sha512-riRvo06crlE8HiqOwIpQhxwdOk4fOeR7FVM/wXoxchFEqMNUjvbs3bfo4OTgMEMHzppd4DxFBDbyySj8Cv781g==
+  dependencies:
+    node-fetch "^2.6.11"
+
 cross-spawn@^7.0.2, cross-spawn@^7.0.3:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-7.0.3.tgz#f73a85b9d5d41d045551c177e2882d4ac85728a6"
@@ -2786,10 +2793,39 @@ human-signals@^4.3.0:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-4.3.1.tgz#ab7f811e851fca97ffbd2c1fe9a958964de321b2"
   integrity sha512-nZXjEF2nbo7lIw3mgYjItAfgQXog3OjJogSbKa2CQIIvSGWcKgeJnQlNXip6NglNzYH45nSRiEVimMvYL8DDqQ==
 
+i18next-chained-backend@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/i18next-chained-backend/-/i18next-chained-backend-4.4.0.tgz#e81ab29bd62ba3ad68f448de506aab8ceb1fa7b1"
+  integrity sha512-I+mG0Bly9lbUk8kPZYbJuV7zPY0QDueOJ9yiUqz9o/RX2Mb7eC8RrfwtTX1QhVZmT9KSs9Oq5VDVLxPOeXBIgg==
+  dependencies:
+    "@babel/runtime" "^7.22.3"
+    i18next-resources-to-backend "1.1.4"
+
 i18next-fs-backend@^2.1.5:
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/i18next-fs-backend/-/i18next-fs-backend-2.1.5.tgz#03347eacde6a35b599da1889a048ae63bcf0c687"
   integrity sha512-7fgSH8nVhXSBYPHR/W3tEXXhcnwHwNiND4Dfx9knzPzdsWTUTL/TdDVV+DY0dL0asHKLbdoJaXS4LdVW6R8MVQ==
+
+i18next-http-backend@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/i18next-http-backend/-/i18next-http-backend-2.2.1.tgz#cdb7efbafa46ce8f237d9db443f62514664a3bdf"
+  integrity sha512-ZXIdn/8NJIBJ0X4hzXfc3STYxKrCKh1fYjji9HPyIpEJfvTvy8/ZlTl8RuTizzCPj2ZcWrfaecyOMKs6bQ7u5A==
+  dependencies:
+    cross-fetch "3.1.6"
+
+i18next-localstorage-backend@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/i18next-localstorage-backend/-/i18next-localstorage-backend-4.1.1.tgz#a27d38b3e933f911c03bfabc03ebd889b90eaf2b"
+  integrity sha512-gz3OP6m0jygF2SAzarDSFpaziYzF8mS8DP/pEUze+kDquzHTz2sy/eshcSkmFEYyGXMC037xUtlT97bNGlpZPA==
+  dependencies:
+    "@babel/runtime" "^7.20.6"
+
+i18next-resources-to-backend@1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/i18next-resources-to-backend/-/i18next-resources-to-backend-1.1.4.tgz#d139ca0cacc270dcc90b7926e192f4cd5aa4db60"
+  integrity sha512-hMyr9AOmIea17AOaVe1srNxK/l3mbk81P7Uf3fdcjlw3ehZy3UNTd0OP3EEi6yu4J02kf9jzhCcjokz6AFlEOg==
+  dependencies:
+    "@babel/runtime" "^7.21.5"
 
 i18next@^23.2.3:
   version "23.2.3"
@@ -3419,6 +3455,13 @@ next@13.4.7:
     "@next/swc-win32-arm64-msvc" "13.4.7"
     "@next/swc-win32-ia32-msvc" "13.4.7"
     "@next/swc-win32-x64-msvc" "13.4.7"
+
+node-fetch@^2.6.11:
+  version "2.6.11"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.11.tgz#cde7fc71deef3131ef80a738919f999e6edfff25"
+  integrity sha512-4I6pdBY1EthSqDmJkiNk3JIT8cswwR9nfeW/cPdUagJYEQG7R95WRH74wpz7ma8Gh/9dI9FP+OU+0E4FvtA55w==
+  dependencies:
+    whatwg-url "^5.0.0"
 
 npm-run-path@^4.0.1:
   version "4.0.1"
@@ -4261,6 +4304,11 @@ to-regex-range@^5.0.1:
   dependencies:
     is-number "^7.0.0"
 
+tr46@~0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/tr46/-/tr46-0.0.3.tgz#8184fd347dac9cdc185992f3a6622e14b9d9ab6a"
+  integrity sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==
+
 "traverse@>=0.3.0 <0.4":
   version "0.3.9"
   resolved "https://registry.yarnpkg.com/traverse/-/traverse-0.3.9.tgz#717b8f220cc0bb7b44e40514c22b2e8bbc70d8b9"
@@ -4422,6 +4470,19 @@ watchpack@2.4.0:
   dependencies:
     glob-to-regexp "^0.4.1"
     graceful-fs "^4.1.2"
+
+webidl-conversions@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-3.0.1.tgz#24534275e2a7bc6be7bc86611cc16ae0a5654871"
+  integrity sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==
+
+whatwg-url@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/whatwg-url/-/whatwg-url-5.0.0.tgz#966454e8765462e37644d3626f6742ce8b70965d"
+  integrity sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==
+  dependencies:
+    tr46 "~0.0.3"
+    webidl-conversions "^3.0.0"
 
 which-boxed-primitive@^1.0.2:
   version "1.0.2"

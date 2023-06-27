@@ -1,0 +1,294 @@
+{
+  "공통": {
+    "참거짓": {
+      "참": "Yes",
+      "거짓": "No"
+    },
+    "파일": {
+      "파일찾기": "Browse Files",
+      "유의사항": "Only jpg, jpeg, png, and pdf files can be uploaded."
+    },
+    "예약폼": {
+      "타이틀": "Reservation Time"
+    },
+    "서명폼": {
+      "타이틀": "Signature",
+      "본문": "If you agree to all of the terms below, please select Agree and sign the e-signature",
+      "초기화": "clear"
+    }
+  },
+  "신규": {
+    "보완서류제출": {
+      "타이틀": "Submission of supplementary documents",
+      "버튼": "Submitting {{documentNumber}} Files",
+      "반려버튼": "Submit",
+      "성공모달": {
+        "타이틀": "Submission of supplementary documents has been completed",
+        "본문": "Return to Main Screen",
+        "버튼": "close window"
+      }
+    },
+    "증명사진": {
+      "타이틀": "ID Photo"
+    },
+    "여권사본": {
+      "타이틀": "Passport Copy"
+    },
+    "사증발급확인서": {
+      "타이틀": "Visa Grant Notice"
+    },
+    "재학증명서": {
+      "타이틀": "Certificate of Enrollment"
+    },
+    "거주지입증서류": {
+      "타이틀": "Proof of Residence"
+    },
+    "재정유지확인서": {
+      "타이틀": "Confirmation of Financial Maintenance for International Students"
+    },
+    "GKS장학증명서": {
+      "타이틀": "GKS Scholarship Certificate"
+    },
+    "반려보완서류": {
+      "타이틀": "Supplementary Documents"
+    },
+    "지문등록": {
+      "타이틀": "Reserve FingerPrint Registration",
+      "주의사항": {
+        "타이틀": "Caution",
+        "본문": [
+          "One reservation per person. For duplicate reservations, only the last reservation is valid.",
+          "If the slot is full, you can't do the reservations for the slot",
+          "The available time for fingerprint registration is up to 30 minutes before the on-site deadline.",
+          "Please make sure to bring the original passport. (Copies and other identification cards are not allowed.)",
+          "If you do not come on the day, you need to visit the immigration office by yourself and register fingerprint.",
+          "Please note that if fingerprint registration is delayed, your RC issuance will be delayed."
+        ]
+      },
+      "버튼": "Reservation Confirm",
+
+      "예약시간": "Current Reservation: ",
+      "변경": "Reservation Change",
+      "모달": {
+        "성공": {
+          "타이틀": "",
+          "본문": "Fingerprint registration reservation is completed.",
+          "버튼": "Go to Main"
+        },
+        "마감": {
+          "타이틀": "The reservation for that time has been completed",
+          "본문": "Please select a different booking time",
+          "버튼": "Close"
+        },
+        "중복": {
+          "타이틀": "You have already made a reservation",
+          "본문": "Contact the manager",
+          "버튼": "Go to Main"
+        },
+        "에러": {
+          "타이틀": "An unknown error has occurred",
+          "본문": "Contact the manager",
+          "버튼": "Close"
+        }
+      }
+    },
+    "단체접수만족도": {
+      "타이틀": "Please let us know your satisfaction level of the group application for RC. "
+    },
+    "학교생활만족도": {
+      "타이틀": "Are you satisfied with your current school life?"
+    },
+    "학교정책만족여부": {
+      "타이틀": "Are you satisfied with the current  school policy to support international students?"
+    },
+    "만족하는학교정책": {
+      "타이틀": "What policy are you satisfied with? Or if you are dissatisfied, what policy do you feel necessary?",
+      "본문": "If there is no additional policy needed, please write 'None'"
+    },
+    "한국생활의어려운점": {
+      "타이틀": "Feel free to write down the difficulties in Korean life.",
+      "본문": "If there is no additional policy needed, please write 'None'"
+    },
+    "앱다운로드여부": {
+      "타이틀": "Did you download the Hirevisa app?"
+    },
+    "앱다운안하는이유": {
+      "타이틀": "What is the reason you don’t down load it? ",
+      "옵션": {
+        "1": "1. Didn't know there was a Hirevisa app",
+        "2": "2. Don’t need a Hirevisa app",
+        "3": "3. Not enough cell phone capacity",
+        "4": "4. Other reasons"
+      }
+    },
+    "앱다운안하는이유(자유)": {
+      "타이틀": "Please enter the reason why you don't download the Hirevisa app."
+    },
+    "앱원하는기능": {
+      "타이틀": "What functions do you need more for the Hirevisa app?",
+      "본문": " Current functions: RC progress check, push notification, Hirevisa+ subscription page"
+    },
+    "설문조사참여여부": {
+      "타이틀": "Are you participating in a more detailed survey?"
+    },
+    "편했던점": {
+      "타이틀": "Are you participating in a more detailed survey?",
+      "옵션": {
+        "1": "1. No need to visit the immigration",
+        "2": "2. No need to prepare some documents",
+        "3": "3. The progress of the application can be inquired",
+        "4": "4. Multilingual CS support",
+        "5": "5. Other convenience"
+      }
+    },
+    "편했던점(자유)": {
+      "타이틀": "Please enter what was convenient."
+    },
+    "불편했던점": {
+      "타이틀": "Please let us know what was inconvenient during the RC process.",
+      "옵션": {
+        "1": "1. Slow CS speed",
+        "2": "2. Difficult to know the necessary documents",
+        "3": "3. Too much request for documents supplementation ",
+        "4": "4. Server Error",
+        "5": "5. Other inconvenience "
+      }
+    },
+    "불편했던점(자유)": {
+      "타이틀": "Please enter what was inconvenient."
+    },
+    "외국인등록증이없을때불편한점": {
+      "타이틀": "Please let us know the inconvenience when you don't have an RC.",
+      "옵션": {
+        "1": "1. Unable to do banking",
+        "2": "2. Unable to authenticate your mobile identity",
+        "3": "3. Unable to shop online",
+        "4": "4. Must carry your passport in your daily life",
+        "5": "5. Other inconvenience"
+      }
+    },
+    "외국인등록증이없을때불편한점(자유)": {
+      "타이틀": "Please enter what was inconvenient."
+    },
+    "USIM구매처": {
+      "타이틀": "For online verification, select your current mobile agency where you bought USIM",
+      "본문": "To check the online verification process of each agency",
+      "옵션": {
+        "1": "1. Chingu Mobile",
+        "2": "2. Woori Mobile",
+        "3": "3. Korea SIM",
+        "4": "4. N telecom",
+        "5": "5. Boram Mobile",
+        "6": "6. Top Mobile",
+        "7": "7. Others"
+      }
+    },
+    "USIM구매처(자유)": {
+      "타이틀": "For online verification, please write down your current mobile agency where you bought USIM"
+    },
+    "방문수령": {
+      "타이틀": "RC Pick-up Reservation",
+      "버튼": "Reservation Confirm",
+      "변경": "Reservation Change",
+      "성공모달": {
+        "타이틀": "",
+        "본문": "The reservation for receiving your alien registration card has been completed.",
+        "버튼": "Go to Main"
+      }
+    },
+    "멤버십안내": {
+      "타이틀": "If you participate in a more detailed survey, we will give you a free one-day class ticket for HireVisa+ members on a first-come, first-served basis.",
+      "본문": [
+        {
+          "내용": "Festivals",
+          "하위내용": [
+            "Seoul World Culture Festival (Various cultures, experiences)",
+            "Han-River 뚜벅뚜벅 Festival (Various foods, experiences)",
+            "Reading Books Along Han-River Park (Various Books, Refreshing)",
+            "Han-River Spacing-out Competition(Special memory)"
+          ]
+        },
+        {
+          "내용": "Get valuable information about festivals through HireVisa+. You can check out further information from the link below."
+        }
+      ],
+      "둘러보기": {
+        "타이틀": "Tour",
+        "링크": "https://hirevisa.plus/class"
+      }
+    }
+  },
+  "연장": {
+    "보완서류제출": {
+      "타이틀": "Submission of supplementary documents",
+      "버튼": "Submitting {{documentNumber}} Files",
+      "반려버튼": "Submit",
+      "성공모달": {
+        "타이틀": "Submission of supplementary documents has been completed",
+        "본문": "Return to Main Screen",
+        "버튼": "close window"
+      }
+    },
+    "여권": {
+      "타이틀": "Passport Copy"
+    },
+    "RC앞": {
+      "타이틀": "RC Front part"
+    },
+    "RC뒤": {
+      "타이틀": "RC back Part"
+    },
+    "재학": {
+      "타이틀": "Certificate of enrollment, certificate of completion"
+    },
+    "수료": {
+      "타이틀": "Certificate of completion"
+    },
+    "성적": {
+      "타이틀": "Transcript"
+    },
+    "등록금": {
+      "타이틀": "Certificate of Tuition Fee"
+    },
+    "표입허": {
+      "타이틀": "Standard admission letter"
+    },
+    "최종학력": {
+      "타이틀": "Final education certificate"
+    },
+    "지도": {
+      "타이틀": "Confirmation for Faculty Advisor on a Student's Thesis"
+    },
+    "사유서": {
+      "타이틀": "A statement of reasons for the extra term semester"
+    },
+    "재정": {
+      "타이틀": "Confirmation of Financial Maintenance for International Students"
+    },
+    "출석": {
+      "타이틀": "Certificate of attendance"
+    },
+    "잔고90": {
+      "타이틀": "Certificate of balance"
+    },
+    "잔고1200": {
+      "타이틀": "Certificate of balance"
+    },
+    "GKS": {
+      "타이틀": "GKS Scholarship Certificate"
+    },
+    "거주지_1": {
+      "타이틀": "Residence verification document (multiple copies can be uploaded)"
+    },
+    "거주지_2": {
+      "타이틀": "Residence verification document (multiple copies can be uploaded)"
+    },
+    "반려보완서류": {
+      "타이틀": "Please submit the requested document. (You can upload multiple files)"
+    },
+    "반려관련코멘트": {
+      "타이틀": "Comments about your application supplement",
+      "본문": "ex) Local tax payment has been completed, health insurance has been paid, and I have visited the immigration office. and so on"
+    }
+  }
+}
