@@ -9,7 +9,7 @@ interface Props {
   imageKey: number;
 }
 
-function UploadedImg({ data, deleteImage, imageKey }: Props) {
+function FileUploadedImg({ data, deleteImage, imageKey }: Props) {
   const onClickHandler = () => {
     deleteImage(imageKey);
   };
@@ -35,7 +35,7 @@ function UploadedImg({ data, deleteImage, imageKey }: Props) {
   );
 }
 
-export default UploadedImg;
+export default FileUploadedImg;
 
 const styles = {
   mainContainer: {
