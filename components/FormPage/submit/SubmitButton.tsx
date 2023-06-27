@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button, CircularProgress } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import SubmitModal from './SubmitModal';
 import getRedirect from './getRedirect';
 import isReady from './isReady';
@@ -53,7 +53,7 @@ function FormSubmitButton({ form, page, auth }: Props) {
   return (
     <Button
       variant="contained"
-      sx={{ width: '100%', mt: 3, display: isReady(page.submit.condition, watch) ? 'none' : undefined }}
+      sx={{ width: '100%', mt: 3, display: isReady(page.submit.conditions, watch) ? 'none' : undefined }}
       disabled={(!formState.isValid || loading) && false}
       onClick={async (e) => {
         console.log('[Submissions]\n', form.watch());

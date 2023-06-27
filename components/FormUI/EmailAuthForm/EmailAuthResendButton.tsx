@@ -1,6 +1,6 @@
 import FlexBox from '@/components/basic/FlexBox';
 import { Button } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 export default function EmailAuthResentButton({ onVerify }: { onVerify: () => void }) {
   const { t } = useTranslation(['customForm']);
