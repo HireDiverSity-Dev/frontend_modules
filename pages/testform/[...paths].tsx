@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   getItemCommandOutputFromDynamoDB,
   getScanCommandOutputFromDynamoDB,
@@ -10,11 +10,12 @@ import { Auth, DefaultAuth, Status } from '@/models/auth';
 import FormPage from '@/components/FormPage/index';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-export default function testform({ props }: { props: FormPageProps }) {
+export default function testform({ data }: { data: FormPageProps }) {
   const [auth, setAuth] = useState<Auth>({ ...DefaultAuth, status: Status.VALID, email: '' });
 
-  return <FormPage props={props} auth={auth} />;
+  return <FormPage props={data} auth={auth} />;
 }
 
 interface PageParams extends ParsedUrlQuery {
@@ -37,9 +38,11 @@ export const getStaticPaths: GetStaticPaths<PageParams> = async () => {
   return { paths, fallback: 'blocking' };
 };
 
-export const getStaticProps: GetStaticProps<FormPageProps, PageParams> = async (context) => {
+export const getStaticProps: GetStaticProps<{ data: FormPageProps }, PageParams> = async (context) => {
+  const locale = context.locale;
+  const paths = context.params?.paths;
+  let data: FormPageProps;
   try {
-    const paths = context.params?.paths;
     let str = '';
     if (paths !== undefined) {
       str = paths.join('/');
@@ -51,7 +54,7 @@ export const getStaticProps: GetStaticProps<FormPageProps, PageParams> = async (
       },
     };
     const output = await getItemCommandOutputFromDynamoDB(pageParam);
-    const data = parseRecord(output) as FormPageProps;
+    data = parseRecord(output) as FormPageProps;
     //배포 미완료시 404 redirect
     if (!data.isDeployed) {
       throw new Error('is not deployed');
@@ -70,10 +73,6 @@ export const getStaticProps: GetStaticProps<FormPageProps, PageParams> = async (
         return { ...form, data: itemData };
       }),
     );
-
-    return {
-      props: data,
-    };
   } catch (error) {
     console.log(error);
     return {
@@ -83,4 +82,11 @@ export const getStaticProps: GetStaticProps<FormPageProps, PageParams> = async (
       },
     };
   }
+  const translation = await serverSideTranslations(locale as string, ['customForm', 'form', 'common']);
+  return {
+    props: {
+      data: data,
+      ...translation,
+    },
+  };
 };
