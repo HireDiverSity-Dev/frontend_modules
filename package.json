@@ -30,6 +30,7 @@
     "@aws-sdk/util-dynamodb": "^3.359.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@types/react-signature-canvas": "^1.0.2",
     "aws-crt": "^1.15.18",
     "aws-sdk": "^2.1404.0",
     "axios": "^1.4.0",
@@ -40,7 +41,9 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "i18next": "^23.2.3",
+    "jwt-decode": "^3.1.2",
     "prettier": "^2.8.4",
-    "react-i18next": "^13.0.1"
+    "react-i18next": "^13.0.1",
+    "react-signature-canvas": "^1.0.6"
   }
 }
