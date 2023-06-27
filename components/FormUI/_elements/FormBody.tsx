@@ -10,39 +10,39 @@ import TextForm from '@/components/FormUI/TextForm';
 import ParagraphForm from '@/components/FormUI/ParagraphForm/index';
 import { Divider } from '@mui/material';
 
-function FormBody({ form, uiSetting, lang }: FormUIProps) {
-  const type = uiSetting.formData.type;
+function FormBody(props: FormUIProps) {
+  const type = props.uiSetting.data.type;
   let body: JSX.Element;
   switch (type) {
     case 'text':
-      body = <TextForm form={form} uiSetting={uiSetting} lang={lang} />;
+      body = <TextForm {...props} />;
       break;
     case 'longtext':
-      body = <TextForm form={form} uiSetting={uiSetting} lang={lang} multiline />;
+      body = <TextForm {...props} multiline />;
       break;
     case 'file':
-      body = <FileForm form={form} uiSetting={uiSetting} lang={lang} />;
+      body = <FileForm {...props} />;
       break;
     case 'rate':
-      body = <RateForm form={form} uiSetting={uiSetting} lang={lang} />;
+      body = <RateForm {...props} />;
       break;
     case 'boolean':
-      body = <BooleanForm form={form} uiSetting={uiSetting} lang={lang} />;
+      body = <BooleanForm {...props} />;
       break;
     case 'singleselect':
-      body = <SelectForm form={form} uiSetting={uiSetting} lang={lang} />;
+      body = <SelectForm {...props} />;
       break;
     case 'multiselect':
-      body = <SelectForm form={form} uiSetting={uiSetting} lang={lang} multiple />;
+      body = <SelectForm {...props} multiple />;
       break;
     case 'signature':
-      body = <SignForm form={form} uiSetting={uiSetting} lang={lang} />;
+      body = <SignForm {...props} />;
       break;
     case 'emailAuth':
-      body = <EmailAuthForm form={form} uiSetting={uiSetting} lang={lang} />;
+      body = <EmailAuthForm {...props} />;
       break;
     case 'paragraph':
-      body = <ParagraphForm form={form} uiSetting={uiSetting} lang={lang} />;
+      body = <ParagraphForm {...props} />;
       break;
     case 'divider':
       body = <Divider sx={{ my: 3 }} />;

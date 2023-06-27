@@ -1,7 +1,6 @@
-import React from 'react';
 import { Button, Typography } from '@mui/material';
 import { useModal } from '@/hooks/useModal';
-import FlexBox from '../others/FlexBox';
+import FlexBox from '../basic/FlexBox';
 
 const ExampleImg = ({ imgSrc }: { imgSrc: string }) => {
   const { openModal } = useModal();
