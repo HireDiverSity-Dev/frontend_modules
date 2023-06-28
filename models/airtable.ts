@@ -1,3 +1,5 @@
+import SupplementInfo from '@/assets/datas/SupplementInfo.json';
+
 export interface ProgressProps {
   data: AirTableRecord;
 }

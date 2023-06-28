@@ -1,0 +1,96 @@
+{
+  "로그인": {
+    "타이틀": "Log In",
+    "비밀번호찾기": "Forget Password?",
+    "버튼": "Log In",
+    "모달": {
+      "실패": {
+        "타이틀": "Log In Error",
+        "본문": "Incorrect ID or password",
+        "버튼": "Close"
+      },
+      "에러": {
+        "타이틀": "An unknown error has occurred",
+        "본문": "Contact the manager",
+        "버튼": "Close"
+      }
+    }
+  },
+  "비밀번호변경": {
+    "타이틀": "Forget Password?",
+    "본문": "Please enter your email. A reset link will be sent to you.",
+    "버튼": "Reset Password",
+    "모달": {
+      "성공": {
+        "타이틀": "E-mail has been sent",
+        "본문": "Please check your e-mail inbox",
+        "버튼": "Close"
+      },
+      "일제한": {
+        "타이틀": "E-mail can be sent only once a day",
+        "본문": "Please contact us for detailed information",
+        "버튼": "Close"
+      },
+      "미가입": {
+        "타이틀": "This E-mail has not been registered.",
+        "본문": "Please check your e-mail address",
+        "버튼": "Close"
+      },
+      "에러": {
+        "타이틀": "An unknown error has occurred",
+        "본문": "Contact the manager",
+        "버튼": "Close"
+      }
+    }
+  },
+  "로그아웃노티": "You will be automatically logged out when you close this page",
+  "푸터": {
+    "회사명": "HireVisa",
+    "정보": [
+      "Hirediversity Co., Ltd. | Representative: SHIM HWAYUNG | Business Number: $t(사업자등록번호) | Mail-Order Sales Approval Number: $t(통신판매신고번호)",
+      "하이어다이버시티 행정사사무소 | Representative: SHIM HWAYUNG | Business Number: $t(사업자등록번호_행정사)",
+      "$t(주소)"
+    ],
+    "서비스이용약관": "Terms and Conditions",
+    "개인정보처리방침": "Privacy Policy",
+    "서비스이용약관링크": "https://www.hirevisa.com/terms/eng",
+    "개인정보처리방침링크": "https://www.hirevisa.com/privacy/eng"
+  },
+  "이메일": "official@hirediversity.club",
+  "전화번호": "+82 70-4126-5300",
+  "사업자등록번호": "774-81-01735",
+  "사업자등록번호_행정사": "792-39-00792",
+  "통신판매신고번호": "2023-서울종로-0101",
+  "주소": "6, Jong-ro, Jongno-gu, Seoul, Republic of Korea",
+  "결제상태": {
+    "완료": "Payment succeed!",
+    "확인중": "We are checking your payment now.",
+    "미결제": "To receive RC, please finish payment first.",
+    "미결제_연장": "Please note that the application will be canceled if you do not pay the service fee before HireVisa submits documents to the Immigration Office.",
+    "설명": "It might take time to recognize your payment. If you already paid, please check again tomorrow.",
+    "보완미완료": "The RC issuance fee will not be refunded becuase we already paid it to the immigration office. Instead, you don't need to pay to the immigration office. You can check the payment statement at below.",
+    "버튼": "Go to the payment"
+  },
+  "메뉴": {
+    "타이틀": "Settings",
+    "전화번호변경": "Change Phone Number",
+    "비밀번호변경": "Change Password",
+    "로그아웃": "LogOut"
+  },
+  "404": {
+    "타이틀": "Wrong Access",
+    "버튼": "back to main"
+  },
+  "비밀번호초기화": {
+    "성공": {
+      "타이틀": "Success!",
+      "본문": "You may leave this page.",
+      "버튼": "Go to Main"
+    },
+    "실패": {
+      "타이틀": "Failed :(",
+      "본문": "Please contact to the admin.",
+      "버튼": "Go to Main"
+    }
+  }
+}

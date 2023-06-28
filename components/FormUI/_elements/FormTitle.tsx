@@ -15,7 +15,7 @@ function Star() {
 function FormTitle({ uiSetting, lang }: FormTitleProps) {
   return (
     <Typography variant="subtitle2" mb={1}>
-      {uiSetting.formData?.title?.[lang]}
+      {uiSetting.data?.title?.[lang]}
       {uiSetting.rule?.required && <Star />}
     </Typography>
   );

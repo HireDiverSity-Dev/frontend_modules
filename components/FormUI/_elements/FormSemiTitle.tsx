@@ -15,7 +15,7 @@ function FormSemiTitle({ uiSetting, lang }: FormSemiTitleProps) {
       mb={1}
       px={1}
       dangerouslySetInnerHTML={{
-        __html: uiSetting.formData.subtitle?.[lang] ?? '',
+        __html: uiSetting.data.subtitle?.[lang] ?? '',
       }}
     ></Typography>
   );

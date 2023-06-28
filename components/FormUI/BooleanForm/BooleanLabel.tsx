@@ -1,34 +1,33 @@
-import { ChangeEvent } from 'react';
-import { FormControlLabel, Radio, Typography } from '@mui/material';
+import { FormControlLabel } from '@mui/material';
 
 interface BooleanLabelProps {
-  type: boolean;
+  value: boolean;
   isHorizontal: boolean;
-  isDisabled: boolean;
+  disabled: boolean;
   control: JSX.Element;
   label: JSX.Element;
 }
 
-function BooleanLabel({ type, isHorizontal, isDisabled, control, label }: BooleanLabelProps) {
-  const verticalStyle = {
-    '.MuiFormControlLabel-label': {
-      flex: 1,
-    },
-    mb: '0.5rem',
-    display: 'flex',
-    alignItems: 'start',
-    width: '100%',
-  };
-
+function BooleanLabel({ value, isHorizontal, disabled, control, label }: BooleanLabelProps) {
   return (
     <FormControlLabel
-      value={type}
+      value={value}
       control={control}
       label={label}
       sx={!isHorizontal ? verticalStyle : undefined}
-      disabled={isDisabled}
+      disabled={disabled}
     />
   );
 }
+
+const verticalStyle = {
+  '.MuiFormControlLabel-label': {
+    flex: 1,
+  },
+  mb: '0.5rem',
+  display: 'flex',
+  alignItems: 'start',
+  width: '100%',
+};
 
 export default BooleanLabel;

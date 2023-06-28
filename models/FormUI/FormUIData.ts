@@ -1,3 +1,4 @@
+import { ValidationRule } from 'react-hook-form';
 import { Translation } from '../lang';
 
 const DataTypeList = {
@@ -21,6 +22,11 @@ export interface FormUIData {
   title: Translation;
   subtitle?: Translation;
   placeholder?: Translation;
+  pattern?: {
+    label: string;
+    message: string;
+    value: RegExp;
+  };
 
   airtable?: {
     base: number;

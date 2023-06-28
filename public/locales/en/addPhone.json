@@ -1,0 +1,24 @@
+{
+  "제목": "Current Phone Number",
+  "전화번호기본값": "None",
+  "본문": {
+    "전화번호있음": "If your phone number changed, please press the button below to change your number.",
+    "전화번호없음": "Please press the button below to add your phone number or issue a new number."
+  },
+  "버튼": {
+    "전화번호있음": "Change Phone Number",
+    "전화번호없음": "Add Phone Number"
+  },
+  "변경페이지": {
+    "제목": "Change Phone Number",
+    "버튼": "Change",
+    "버튼2": "Issue New Number"
+  },
+  "모달": {
+    "변경완료": {
+      "타이틀": "Your Phone Number has changed",
+      "본문": "",
+      "버튼": "Back to main"
+    }
+  }
+}
