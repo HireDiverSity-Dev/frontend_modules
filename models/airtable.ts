@@ -1,4 +1,4 @@
-import SupplementInfo from '@/assets/datas/SupplementInfo.json';
+import SupplementInfo from './SupplementInfo.json';
 
 export interface ProgressProps {
   data: AirTableRecord;
