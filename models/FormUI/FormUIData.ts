@@ -1,4 +1,3 @@
-import { ValidationRule } from 'react-hook-form';
 import { Translation } from 'fe-modules/models/lang';
 
 const DataTypeList = {
