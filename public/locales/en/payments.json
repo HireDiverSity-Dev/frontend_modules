@@ -1,0 +1,93 @@
+{
+  "언어코드": "EN",
+  "단건결제": {
+    "결제정보": {
+      "제목": "Payment Information",
+      "항목": {
+        "상품명": "Product Name",
+        "가격": "Amount",
+        "상품정보": "Product Details",
+        "환불규정": "Refund Policy"
+      }
+    },
+    "결제수단": {
+      "제목": "Select the payment method",
+      "항목": {
+        "한국카드": "Korean Cards/Pay APP",
+        "해외카드": "Overseas Card",
+        "페이팔": "PayPal"
+      }
+    },
+    "상품정보": {
+      "RC발급수수료": {
+        "상품명": "RC new issuance fee",
+        "USD가격": {
+          "41000": "37.90",
+          "40000": "36.99",
+          "30000": "29.99",
+          "20000": "18.50"
+        },
+        "이용기간": "* The maximum period of use is 6 months.",
+        "상세정보": "This service helps international students to register their residence card(RC) easily and quickly on an untact basis.\nYou can use the online banking and payment service fastest in Korea with HireVisa through fast administrative agency.\n\nIt takes 1-2 months to issue the RC.\n\nSee more: https://www.hirevisa.com/",
+        "환불규정": ["공통", "비자"]
+      }
+    }
+  },
+  "정기결제": {},
+  "환불규정": {
+    "공통": {
+      "제목": "General",
+      "내용": [
+        {
+          "사례": "Cancellation due to customer's personal reasons",
+          "규정": "Not refundable"
+        },
+        {
+          "사례": "Services that are explicitly stated to be non-refundable at the time of service request",
+          "규정": "Not refundable"
+        },
+        {
+          "사례": "Situation in which service cannot be provided due to customer negligence",
+          "규정": "Not refundable"
+        }
+      ]
+    },
+    "비자": {
+      "제목": "Visa",
+      "내용": [
+        {
+          "사례": "Refund of application fee for GKS scholarship recipients",
+          "규정": "Refund of application fee for GKS scholarship recipients"
+        },
+        {
+          "사례": "In case an extension application is not possible because the period of stay is more than 4 months from the date of expiry of stay as of the current date",
+          "규정": "Refund of application fee for GKS scholarship recipients"
+        },
+        {
+          "사례": "In case the agency service cannot be used due to document problems for newcomers\n(Ex) Passport holders whose date has been expired, those whose period of stay has expired, those who are subject to processing by the Immigration Office, and those who request cancellation of their application due to document problems",
+          "규정": "Not refundable"
+        },
+        {
+          "사례": "In case an extension application is not possible because the period of stay is more than 4 months from the date of expiry of stay as of the current date",
+          "규정": "Not refundable"
+        },
+        {
+          "사례": "In case of overlapping application for immigration and Hirevisa service",
+          "규정": "Not refundable"
+        },
+        {
+          "사례": "If you only made a payment and did not successfully apply",
+          "규정": "Not refundable"
+        },
+        {
+          "사례": "If you made a duplicate payment due to your negligence",
+          "규정": "Not refundable"
+        },
+        {
+          "사례": "If you apply after the specified application period has passed",
+          "규정": "Not refundable"
+        }
+      ]
+    }
+  }
+}

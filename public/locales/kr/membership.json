@@ -1,0 +1,21 @@
+{
+  "제목": "제공중인 서비스",
+  "서비스": [
+    {
+      "제목": "All-round Care",
+      "가격": {
+        "통화": "USD",
+        "금액": "19.99"
+      },
+      "이미지": "/images/membership/service1_default.png",
+      "링크": "https://hirevisa.plus"
+    }
+  ],
+  "배너": [
+    {
+      "제목": "Job waitlist",
+      "이미지": "/images/membership/banner1_default.png",
+      "링크": "https://hirevisa.plus"
+    }
+  ]
+}

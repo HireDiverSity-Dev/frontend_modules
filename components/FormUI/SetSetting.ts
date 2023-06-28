@@ -1,22 +1,21 @@
+import { FormUISetting, FormUIUseFormReturn } from '@/models/FormUI/FormUI';
 import React from 'react';
 import { useWatch } from 'react-hook-form';
 import { FieldValues, UseFormReturn } from 'react-hook-form';
-import { FormSettings } from '@/models/formPage';
 
-function SetSetting(pageForm: UseFormReturn<FieldValues, any>, setting: FormSettings) {
-  //
-  const { control } = pageForm;
+function SetSetting(form: FormUIUseFormReturn, uiSetting: FormUISetting): FormUISetting {
+  const { control } = form;
   const watch = useWatch({
     control,
   });
 
-  let newSettings = { ...setting, disabled: false };
-  let newRules = { ...setting.rules };
+  let newUiSetting = { ...uiSetting, disabled: false };
+  let newRule = { ...uiSetting.rule };
 
-  setting.condition?.forEach((condition) => {
+  uiSetting.conditions?.forEach((conditions) => {
     // 조건 충족 여부 확인
     let satisfied = true;
-    condition.triggers.forEach((trigger) => {
+    conditions.triggers.forEach((trigger) => {
       const value = watch[trigger.formKey];
 
       switch (trigger.operator) {
@@ -105,12 +104,12 @@ function SetSetting(pageForm: UseFormReturn<FieldValues, any>, setting: FormSett
           }
           break;
         case 'visible':
-          if (!newRules?.invisible) {
+          if (!newRule?.invisible) {
             satisfied = false;
           }
           break;
         case 'invisible':
-          if (!newRules?.invisible) {
+          if (!newRule?.invisible) {
             satisfied = false;
           }
           break;
@@ -119,46 +118,46 @@ function SetSetting(pageForm: UseFormReturn<FieldValues, any>, setting: FormSett
 
     // 조건 충족할 경우 액션 처리
     if (satisfied) {
-      switch (condition.action.action) {
+      switch (conditions.action.action) {
         case 'show':
-          newRules = {
-            ...newRules,
+          newRule = {
+            ...newRule,
             invisible: false,
           };
           break;
         case 'hide':
-          newRules = {
-            ...newRules,
+          newRule = {
+            ...newRule,
             invisible: true,
           };
           break;
         case 'required':
-          newRules = {
-            ...newRules,
+          newRule = {
+            ...newRule,
             required: true,
           };
           break;
         case 'notRequired':
-          newRules = {
-            ...newRules,
+          newRule = {
+            ...newRule,
             required: false,
           };
           break;
         default:
-          newRules = { ...newRules };
+          newRule = { ...newRule };
           break;
       }
     }
 
     // 보이지 않을 경우 필수 처리 제거
-    if (newRules?.invisible == true) {
-      newRules.required = false;
+    if (newRule?.invisible == true) {
+      newRule.required = false;
     }
   });
 
   return {
-    ...newSettings,
-    rules: newRules,
+    ...newUiSetting,
+    rule: newRule,
   };
 }
 

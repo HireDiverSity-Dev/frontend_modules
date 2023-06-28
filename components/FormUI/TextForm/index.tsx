@@ -1,65 +1,33 @@
-import React, { useState } from 'react';
-import { TextField, Typography } from '@mui/material';
+import { useEffect } from 'react';
 import { useController } from 'react-hook-form';
-import { RegisterOptions } from 'react-hook-form';
-import FlexBox from '@/components/others/FlexBox';
-import { FormProps } from '..';
+import { FormUIProps } from '@/models/FormUI/FormUI';
+import FlexBox from '@/components/basic/FlexBox';
+import TextInput from '@/components/FormUI/TextForm/TextInput';
+import TextError from '@/components/FormUI/TextForm/TextError';
 
-function TextForm({
-  lang,
-  pageForm,
-  setting,
-  multiline,
-  emailAuth,
-}: FormProps & { multiline?: boolean; emailAuth?: boolean }) {
-  const name = emailAuth ? `${setting.formKey}.email` : setting.formKey;
-  const rules = { ...setting.rules, disabled: false } as RegisterOptions;
-  let { field } = useController({
-    control: pageForm.control,
-    name: name,
-    rules: rules,
-    defaultValue: '',
+function TextForm({ form, uiSetting, lang, multiline }: FormUIProps & { multiline?: boolean }) {
+  let { field, fieldState } = useController({
+    name: uiSetting.formKey,
+    control: form.control,
+    rules: {
+      required: uiSetting.rule?.required,
+      pattern: uiSetting.data.pattern && {
+        value: uiSetting.data.pattern.value,
+        message: uiSetting.data.pattern.message,
+      },
+    },
   });
 
-  const [valid, setValid] = useState<boolean>(true);
-  const handleValidation = (event: any) => {
-    if (setting.formData.rules?.pattern) {
-      //@ts-ignore
-      const regex = new RegExp(setting.formData.rules?.pattern?.value);
-      setValid(regex.test(event.target.value) || (!setting.rules?.required && event.target.value === ''));
-    } else {
-      setValid(true);
+  useEffect(() => {
+    if (uiSetting.rule?.default && uiSetting.defaultValue != undefined) {
+      field.onChange(uiSetting.defaultValue);
     }
-    pageForm.setValue(name, event.target.value);
-  };
+  }, [uiSetting.rule?.default, uiSetting.defaultValue]);
 
   return (
     <FlexBox sx={{ flexDirection: 'column', width: '100' }}>
-      <TextField
-        onChange={handleValidation}
-        onBlur={field.onBlur}
-        value={field.value}
-        name={field.name}
-        placeholder={setting.formData.placeholder?.[lang]}
-        inputRef={field.ref}
-        multiline={multiline}
-        fullWidth
-        // InputProps={{
-        //   readOnly: setting.rules?.readonly,
-        // }}
-        disabled={setting.rules?.readonly}
-        error={!valid}
-      />
-      <Typography
-        variant="caption"
-        color="error"
-        sx={{ display: valid ? 'none' : undefined, textAlign: 'start', width: '100%' }}
-      >
-        {
-          //@ts-ignore
-          setting.formData.rules?.pattern?.message
-        }
-      </Typography>
+      <TextInput field={field} multiline={multiline ?? false} disabled={uiSetting.rule?.readonly ?? false} />
+      {fieldState.invalid && <TextError msg={fieldState.error?.message ?? ''} />}
     </FlexBox>
   );
 }

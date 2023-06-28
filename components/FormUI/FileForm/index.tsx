@@ -1,24 +1,24 @@
 import React, { ChangeEventHandler, useCallback, useEffect, useRef, useState } from 'react';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import { Box, Typography } from '@mui/material';
-import { useAtom } from 'jotai';
+import { Box } from '@mui/material';
 import { useController } from 'react-hook-form';
-import { authAtom } from '@/atoms/authAtom';
-import { FileFormObj } from '@/models/FormUI/FormUIData';
-import { Translation } from '@/models/lang';
-import { UploadFileApi } from '@/remotes/form';
-import { getCurrentDate } from '@/utils/function';
-import { FormProps } from '..';
+import { File_FormUIData } from '@/models/FormUI/FormUIData';
 import ExampleImg from '../ExampleImg';
 import { getFileType } from '../utils';
-import UploadedImg from './UploadedImg';
+import { FormUIProps } from '@/models/FormUI/FormUI';
+import { Auth } from '@/models/auth';
+import FileUploadedImg from './FileUploadedImg';
+import FileBrowse from './FileBrowse';
+import FileText from './FileText';
+import { postFileToS3 } from '@/apis/s3/request/file';
+import { getCurrentDate } from '@/utils/date';
 
 interface FormOption {
   exampleImg?: boolean;
 }
 
-interface FileFormProps extends FormProps {
+interface FileFormProps extends FormUIProps {
   options?: FormOption;
+  auth: Auth;
 }
 
 export interface ImageObj {
@@ -30,23 +30,24 @@ export interface ImageObj {
   loading: boolean;
 }
 
-function FileForm({ pageForm, setting, options = { exampleImg: true }, lang }: FileFormProps) {
-  const formData = setting.formData as FileFormObj;
-  const [auth] = useAtom(authAtom);
+function FileForm({ form, uiSetting, options = { exampleImg: true }, lang, auth }: FileFormProps) {
+  const formData = uiSetting.data as File_FormUIData;
   const curDate = getCurrentDate();
 
   const [imageList, setImageList] = useState<Array<ImageObj>>([]);
   const [imgCnt, setImgCnt] = useState(0);
 
   const { field } = useController({
-    control: pageForm.control,
-    name: setting.formKey,
-    rules: setting.rules,
+    control: form.control,
+    name: uiSetting.formKey,
+    rules: {
+      required: uiSetting.rule?.required,
+    },
   });
 
   //input ref 관련
   const photoInput = useRef<HTMLInputElement>(null);
-  const imgClick = () => {
+  const imgOnClick = () => {
     photoInput?.current?.click();
   };
 
@@ -54,7 +55,6 @@ function FileForm({ pageForm, setting, options = { exampleImg: true }, lang }: F
   const uploadComplete = useCallback(
     (fileName: string) => {
       setImageList((prevState) => {
-        //console.log(fileName, prevState);
         const updatedList = prevState.map((val, index) => {
           if (val.name !== fileName) {
             return val;
@@ -70,7 +70,6 @@ function FileForm({ pageForm, setting, options = { exampleImg: true }, lang }: F
 
   // react-hook-form 등록
   useEffect(() => {
-    //console.log(imageList);
     field.onChange(imageList.map((val) => val.s3Path));
   }, [imageList]);
 
@@ -83,7 +82,6 @@ function FileForm({ pageForm, setting, options = { exampleImg: true }, lang }: F
       const newImage = Array.from(e?.target?.files, (file) => {
         const fileType = getFileType(file);
         if (fileType === 'other') {
-          // 지원되지 않는 파일 타입 모달창 열기
           return;
         }
         const objectUrl = URL.createObjectURL(file);
@@ -98,7 +96,7 @@ function FileForm({ pageForm, setting, options = { exampleImg: true }, lang }: F
           loading: false,
         };
 
-        UploadFileApi(imageObj.s3Path, file, () => {
+        postFileToS3(imageObj.s3Path, file, () => {
           uploadComplete(imageObj.name);
         });
 
@@ -118,49 +116,19 @@ function FileForm({ pageForm, setting, options = { exampleImg: true }, lang }: F
 
   return (
     <Box sx={{ width: '100%', mt: 2 }}>
-      {formData?.imgSrc &&
+      {formData.imgSrc &&
         options.exampleImg &&
-        formData?.imgSrc.map((img: string, index: number) => <ExampleImg imgSrc={img} key={index} />)}
+        formData.imgSrc.map((img: string, index: number) => {
+          return <ExampleImg imgSrc={img} key={index} />;
+        })}
       <input type="file" multiple style={{ display: 'none' }} ref={photoInput} onChange={uploadFile} />
-      <Box onClick={imgClick} sx={styles.container}>
-        <CloudUploadIcon fontSize="large" />
-        <Typography>{Label.파일찾기[lang as keyof Translation]}</Typography>
-      </Box>
-      <Typography sx={{ fontSize: '14px', color: '#909090', mt: 0.5, mb: 2 }}>
-        {Label.유의사항[lang as keyof Translation]}
-      </Typography>
+      <FileBrowse lang={lang} onClick={imgOnClick} />
+      <FileText lang={lang} />
       {imageList.map((image, index) => {
-        return <UploadedImg data={image} deleteImage={deleteFile} imageKey={index} key={index} />;
+        return <FileUploadedImg data={image} deleteImage={deleteFile} imageKey={index} key={index} />;
       })}
     </Box>
   );
 }
 
 export default FileForm;
-
-const styles = {
-  container: {
-    width: '100%',
-    aspectRatio: '5/2',
-    backgroundColor: '#f2f2f2',
-    border: '2px dashed #cecece',
-    borderRadius: '8px',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-};
-
-const Label: { [key: string]: Translation } = {
-  파일찾기: {
-    kr: '파일 선택',
-    zh: '浏览文件',
-    en: 'Browse Files',
-  },
-  유의사항: {
-    kr: 'jpg, jpeg, png 와 pdf 파일만 올릴 수 있습니다',
-    zh: '只能上传 jpg、jpeg、png 和 pdf 文件',
-    en: 'Only jpg, jpeg, png, and pdf files can be uploaded.',
-  },
-};

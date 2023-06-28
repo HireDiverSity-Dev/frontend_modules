@@ -1,12 +1,12 @@
 import { Radio } from '@mui/material';
 
 interface BoolearnRadioProps {
-  type: boolean;
+  value: boolean;
   curValue: boolean;
   onChange: (value: boolean) => void;
 }
 
-function BoolearnRadio({ type, curValue, onChange }: BoolearnRadioProps) {
+function BoolearnRadio({ value, curValue, onChange }: BoolearnRadioProps) {
   return (
     <Radio
       sx={{
@@ -14,8 +14,8 @@ function BoolearnRadio({ type, curValue, onChange }: BoolearnRadioProps) {
           fontSize: '1.8rem',
         },
       }}
-      checked={curValue === type}
-      onChange={() => onChange(type)}
+      checked={curValue === value}
+      onChange={() => onChange(value)}
     />
   );
 }

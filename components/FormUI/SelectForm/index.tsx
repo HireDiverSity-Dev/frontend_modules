@@ -1,113 +1,67 @@
 import React, { useEffect, useState } from 'react';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
-import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
-import { Checkbox, FormControlLabel, FormGroup, Typography } from '@mui/material';
+import { FormGroup } from '@mui/material';
 import { useController } from 'react-hook-form';
-import { SelectFormObj } from '@/models/FormUI/FormUIData';
-import { FormProps } from '..';
+import { FormUIProps } from '@/models/FormUI/FormUI';
+import { Select_FormUIData } from '@/models/FormUI/FormUIData';
+import SelectLabel from './SelectLabel';
+import SelectText from '@/components/FormUI/SelectForm/SelectText';
+import SelectCheckbox from '@/components/FormUI/SelectForm/SelectCheckbox';
 
-interface SelectFormProps extends FormProps {
-  multiple?: boolean;
-}
-
-function SelectForm({ pageForm, setting, lang, multiple }: SelectFormProps) {
-  const formData = setting.formData as SelectFormObj;
+export default function SelectForm({ form, uiSetting, lang, multiple }: FormUIProps & { multiple?: boolean }) {
+  const formData = uiSetting.data as Select_FormUIData;
   const { field } = useController({
-    name: setting.formKey,
-    control: pageForm.control,
-    rules: setting.rules,
+    name: uiSetting.formKey,
+    control: form.control,
+    rules: {
+      required: uiSetting.rule?.required,
+    },
   });
 
   useEffect(() => {
-    if (setting.rules?.default && setting.defaultValue) {
-      setState(formData.options.map((val) => (setting.defaultValue as string[]).includes(val!.name)));
+    if (uiSetting.rule?.default && uiSetting.defaultValue) {
+      setState(formData.options.map((val) => (uiSetting.defaultValue as string[]).includes(val!.name)));
     }
-  }, [setting.rules?.default, setting.defaultValue]);
+  }, [uiSetting.rule?.default, uiSetting.defaultValue]);
 
-  const [state, setState] = useState(Array(formData.options.length).fill(false));
+  const [state, setState] = useState(Array<boolean>(formData.options.length).fill(false));
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const num = parseInt(event.target.value);
-
+    let newState: boolean[] = [];
     if (multiple) {
-      const newState = state.map((val, index) => {
+      newState = state.map((val, index) => {
         if (index === num) {
           return !val;
         } else {
           return val;
         }
       });
-      setState(newState);
     } else {
-      const newState = Array(formData.options.length).fill(false);
+      newState = Array<boolean>(formData.options.length).fill(false);
       newState[num] = true;
-      setState(newState);
     }
+    setState(newState);
+
+    const data: string[] = [];
+    newState.map((value, index) => {
+      if (value) {
+        data.push(formData.options[index]?.name);
+      }
+    });
+    field.onChange(data);
   };
 
-  useEffect(() => {
-    if (multiple) {
-      field.onChange(
-        state.reduce((prev, cur, index) => {
-          if (cur) {
-            prev.push(formData.options[index]?.name);
-          }
-          return prev;
-        }, []),
-      );
-    } else {
-      field.onChange(
-        state.reduce((prev, cur, index) => {
-          if (cur) {
-            return formData.options[index]?.name;
-          } else return prev;
-        }, undefined),
-      );
-    }
-  }, state);
-
   return (
-    <>
-      <FormGroup
-        //기본은 horizontal 옵션에 따라 verticl
-        row={formData?.style === 'horizontal' ? true : false}
-        sx={{ mx: 1 }}
-      >
-        {formData.options.map((option, index) => (
-          <FormControlLabel
-            key={index}
-            control={
-              <div>
-                <Checkbox
-                  icon={multiple ? <CheckBoxOutlineBlankIcon /> : <RadioButtonUncheckedIcon />}
-                  checkedIcon={multiple ? <CheckBoxIcon /> : <RadioButtonCheckedIcon />}
-                  checked={!!state[index]}
-                  value={index}
-                  onChange={handleChange}
-                  disabled={setting.rules?.readonly}
-                />
-              </div>
-            }
-            label={
-              <Typography variant="body1" sx={{ fontSize: '1.2rem', p: '0.4rem' }}>
-                {option?.label?.[lang] ?? ''}
-              </Typography>
-            }
-            sx={{
-              '.MuiFormControlLabel-label': {
-                flex: 1,
-              },
-              mb: '0.5rem',
-              display: 'flex',
-              alignItems: 'start',
-            }}
-          />
-        ))}
-      </FormGroup>
-    </>
+    <FormGroup row={formData?.style === 'horizontal' ? true : false} sx={{ mx: 1 }}>
+      {formData.options.map((option, index) => (
+        <SelectLabel
+          control={
+            <SelectCheckbox value={index} isChecked={!!state[index]} multiple={!!multiple} onChange={handleChange} />
+          }
+          label={<SelectText msg={option?.label?.[lang] ?? ''} />}
+          disabled={!!uiSetting.rule?.readonly}
+        />
+      ))}
+    </FormGroup>
   );
 }
-
-export default SelectForm;

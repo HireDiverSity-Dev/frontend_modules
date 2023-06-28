@@ -3,25 +3,17 @@ import { RadioGroup } from '@mui/material';
 import { useController } from 'react-hook-form';
 import { FormUIProps } from '@/models/FormUI/FormUI';
 import { Boolean_FormUIData } from '@/models/FormUI/FormUIData';
-import BooleanLabel from '@/components/FormUI/BooleanForm/BooleanLabel';
-import BooleanText from '@/components/FormUI/BooleanForm/BooleanText';
-import BoolearnRadio from '@/components/FormUI/BooleanForm/BooleanRadio';
-
-function boolearnValidate(value: boolean) {
-  if (value === true || value === false) {
-    return true;
-  }
-  return false;
-}
+import BooleanLabel from './BooleanLabel';
+import BooleanText from './BooleanText';
+import BoolearnRadio from './BooleanRadio';
 
 function BooleanForm({ form, uiSetting, lang }: FormUIProps) {
   const data = uiSetting.data as Boolean_FormUIData;
-  const validateFunction = uiSetting.rule?.required ? boolearnValidate : undefined;
   const { field } = useController({
     name: uiSetting.formKey,
     control: form.control,
     rules: {
-      validate: validateFunction,
+      required: uiSetting.rule?.required,
     },
   });
 
@@ -39,17 +31,17 @@ function BooleanForm({ form, uiSetting, lang }: FormUIProps) {
   return (
     <RadioGroup row={isHorizontal} sx={{ justifyContent: 'space-evenly', mx: 2 }}>
       <BooleanLabel
-        type={true}
+        value={true}
         isHorizontal={isHorizontal}
-        isDisabled={uiSetting.rule?.readonly ?? false}
-        control={<BoolearnRadio type={true} curValue={field.value} onChange={handleChange} />}
+        disabled={!!uiSetting.rule?.readonly}
+        control={<BoolearnRadio value={true} curValue={field.value} onChange={handleChange} />}
         label={<BooleanText msg={data.options?.[0]?.label?.[lang] || Label.true[lang]} />}
       />
       <BooleanLabel
-        type={false}
+        value={false}
         isHorizontal={isHorizontal}
-        isDisabled={uiSetting.rule?.readonly ?? false}
-        control={<BoolearnRadio type={false} curValue={field.value} onChange={handleChange} />}
+        disabled={!!uiSetting.rule?.readonly}
+        control={<BoolearnRadio value={false} curValue={field.value} onChange={handleChange} />}
         label={<BooleanText msg={data.options?.[1]?.label?.[lang] || Label.false[lang]} />}
       />
     </RadioGroup>
