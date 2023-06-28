@@ -1,4 +1,4 @@
-import { FormUICondition } from '@/models/FormUI/FormUICondition';
+import { FormUICondition } from 'fe-modules/models/FormUI/FormUICondition';
 
 export default function isReady(conditions: Array<FormUICondition> | undefined, watch: any) {
   let hideButton = false;

@@ -1,4 +1,4 @@
-import { mainUrl } from './url';
+import { mainUrl } from 'fe-modules/apis/client/url';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 

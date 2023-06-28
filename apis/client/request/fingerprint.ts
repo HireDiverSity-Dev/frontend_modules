@@ -1,4 +1,4 @@
-import client from '..';
+import client from 'fe-modules/apis/client';
 
 interface Fingerprint {
   reservationDate: string;

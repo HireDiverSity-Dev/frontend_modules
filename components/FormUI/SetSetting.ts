@@ -1,4 +1,4 @@
-import { FormUISetting, FormUIUseFormReturn } from '@/models/FormUI/FormUI';
+import { FormUISetting, FormUIUseFormReturn } from 'fe-modules/models/FormUI/FormUI';
 import React from 'react';
 import { useWatch } from 'react-hook-form';
 import { FieldValues, UseFormReturn } from 'react-hook-form';

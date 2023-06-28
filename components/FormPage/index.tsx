@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import FormUI from '@/components/FormUI';
-import { Lang } from '@/models/lang';
-import { FormPageProps } from '@/models/FormPage/FormPage';
-import { FormUISetting } from '@/models/FormUI/FormUI';
-import PageController from '@/components/FormPage/PageController';
-import FormSubmitButton from '@/components/FormPage/submit/SubmitButton';
+import FormUI from 'fe-modules/components/FormUI';
+import { Lang } from 'fe-modules/models/lang';
+import { FormPageProps } from 'fe-modules/models/FormPage/FormPage';
+import { FormUISetting } from 'fe-modules/models/FormUI/FormUI';
+import PageController from 'fe-modules/components/FormPage/PageController';
+import FormSubmitButton from 'fe-modules/components/FormPage/submit/SubmitButton';
 import { useTranslation } from 'next-i18next';
-import { Auth } from '@/models/auth';
+import { Auth } from 'fe-modules/models/auth';
 
 function getEndPage(forms: Array<FormUISetting>): number {
   return forms[forms.length - 1].page;

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button, Typography } from '@mui/material';
 import { useTranslation } from 'next-i18next';
-import { useModal } from '@/hooks/useModal';
-import FlexBox from '@/components/basic/FlexBox';
+import { useModal } from 'fe-modules/hooks/useModal';
+import FlexBox from 'fe-modules/components/basic/FlexBox';
 
 interface SubmitModalProps {
   title?: string | undefined;

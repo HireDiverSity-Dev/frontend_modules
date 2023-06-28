@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { Button, CircularProgress } from '@mui/material';
 import { useTranslation } from 'next-i18next';
-import SubmitModal from './SubmitModal';
-import getRedirect from './getRedirect';
-import isReady from './isReady';
-import onSubmitForm from './onSubmitForm';
-import { useModal } from '@/hooks/useModal';
-import { Lang } from '@/models/lang';
-import { FormUIUseFormReturn } from '@/models/FormUI/FormUI';
-import { Auth } from '@/models/auth';
-import { FormPageProps } from '@/models/FormPage/FormPage';
+import SubmitModal from 'fe-modules/components/FormPage/submit/SubmitModal';
+import getRedirect from 'fe-modules/components/FormPage/submit/getRedirect';
+import isReady from 'fe-modules/components/FormPage/submit/isReady';
+import onSubmitForm from 'fe-modules/components/FormPage/submit/onSubmitForm';
+import { useModal } from 'fe-modules/hooks/useModal';
+import { Lang } from 'fe-modules/models/lang';
+import { FormUIUseFormReturn } from 'fe-modules/models/FormUI/FormUI';
+import { Auth } from 'fe-modules/models/auth';
+import { FormPageProps } from 'fe-modules/models/FormPage/FormPage';
 
 interface Props {
   form: FormUIUseFormReturn;

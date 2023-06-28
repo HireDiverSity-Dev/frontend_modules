@@ -1,10 +1,10 @@
 import { FieldValues, UseFormReturn } from 'react-hook-form';
-import { FormUIData } from '@/models/FormUI/FormUIData';
-import { Lang } from '@/models/lang';
-import { FormUIRule } from '@/models/FormUI/FormUIRule';
-import { FormUICondition } from '@/models/FormUI/FormUICondition';
-import { FormUIValue } from '@/models/FormUI/FormUIValue';
-import { Auth } from '@/models/auth';
+import { FormUIData } from 'fe-modules/models/FormUI/FormUIData';
+import { Lang } from 'fe-modules/models/lang';
+import { FormUIRule } from 'fe-modules/models/FormUI/FormUIRule';
+import { FormUICondition } from 'fe-modules/models/FormUI/FormUICondition';
+import { FormUIValue } from 'fe-modules/models/FormUI/FormUIValue';
+import { Auth } from 'fe-modules/models/auth';
 
 export interface FormUIProps {
   form: FormUIUseFormReturn;

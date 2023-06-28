@@ -1,12 +1,12 @@
 import React from 'react';
-import { FormUIProps } from '@/models/FormUI/FormUI';
-import SetSetting from './SetSetting';
-import FormBody from '@/components/FormUI/_elements/FormBody';
-import FormSemiTitle from '@/components/FormUI/_elements/FormSemiTitle';
-import FormTitle from '@/components/FormUI/_elements/FormTitle';
-import FormError from '@/components/FormUI/_elements/FormError';
-import FormBox from '@/components/FormUI/_elements/FormBox';
-import { Translation } from '@/models/lang';
+import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
+import SetSetting from 'fe-modules/components/FormUI/SetSetting';
+import FormBody from 'fe-modules/components/FormUI/_elements/FormBody';
+import FormSemiTitle from 'fe-modules/components/FormUI/_elements/FormSemiTitle';
+import FormTitle from 'fe-modules/components/FormUI/_elements/FormTitle';
+import FormError from 'fe-modules/components/FormUI/_elements/FormError';
+import FormBox from 'fe-modules/components/FormUI/_elements/FormBox';
+import { Translation } from 'fe-modules/models/lang';
 
 function FormUI({ form, uiSetting, lang, auth }: FormUIProps) {
   const newSetting = SetSetting(form, uiSetting);

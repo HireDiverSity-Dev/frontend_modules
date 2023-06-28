@@ -1,4 +1,4 @@
-import { FormUIValue } from '@/models/FormUI/FormUIValue';
+import { FormUIValue } from 'fe-modules/models/FormUI/FormUIValue';
 
 export interface FormUICondition {
   triggers: Array<Trigger>;

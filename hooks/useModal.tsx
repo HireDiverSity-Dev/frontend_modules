@@ -14,7 +14,7 @@ interface ModalContextType {
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
-const useModal = () => {
+const useModalImplement = () => {
   const [modal, setModal] = useState<React.ReactNode | null>(null);
   const [closeCallback, setCloseCallback] = useState<() => void | undefined>();
 
@@ -59,7 +59,7 @@ const useModal = () => {
 };
 
 const ModalProvider = ({ children }: ModalProps) => {
-  const modal = useModal();
+  const modal = useModalImplement();
 
   return (
     <ModalContext.Provider value={modal}>
@@ -71,7 +71,7 @@ const ModalProvider = ({ children }: ModalProps) => {
   );
 };
 
-const useModalContext = () => {
+const useModal = () => {
   const context = useContext(ModalContext);
   if (!context) {
     throw new Error('useModalContext must be used within a ModalProvider');
@@ -79,4 +79,4 @@ const useModalContext = () => {
   return context;
 };
 
-export { ModalProvider, useModalContext as useModal };
+export { ModalProvider, useModal };

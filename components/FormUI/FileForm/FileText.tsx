@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material';
-import { Lang, Translation } from '@/models/lang';
+import { Lang, Translation } from 'fe-modules/models/lang';
 
 interface FileTextProps {
   lang: Lang;

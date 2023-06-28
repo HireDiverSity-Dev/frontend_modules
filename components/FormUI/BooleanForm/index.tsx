@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { RadioGroup } from '@mui/material';
 import { useController } from 'react-hook-form';
-import { FormUIProps } from '@/models/FormUI/FormUI';
-import { Boolean_FormUIData } from '@/models/FormUI/FormUIData';
-import BooleanLabel from './BooleanLabel';
-import BooleanText from './BooleanText';
-import BoolearnRadio from './BooleanRadio';
+import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
+import { Boolean_FormUIData } from 'fe-modules/models/FormUI/FormUIData';
+import BooleanLabel from 'fe-modules/components/FormUI/BooleanForm/BooleanLabel';
+import BooleanText from 'fe-modules/components/FormUI/BooleanForm/BooleanText';
+import BoolearnRadio from 'fe-modules/components/FormUI/BooleanForm/BooleanRadio';
 
 function BooleanForm({ form, uiSetting, lang }: FormUIProps) {
   const data = uiSetting.data as Boolean_FormUIData;

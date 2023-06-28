@@ -1,4 +1,4 @@
-import getDynamoDBClient from '..';
+import getDynamoDBClient from 'fe-modules/apis/dynamoDB';
 import { GetItemCommand, GetItemCommandInput, ScanCommand, ScanCommandInput } from '@aws-sdk/client-dynamodb';
 
 async function getScanCommandOutputFromDynamoDB(params: ScanCommandInput) {

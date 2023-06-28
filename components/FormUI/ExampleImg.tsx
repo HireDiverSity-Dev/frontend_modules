@@ -1,6 +1,6 @@
 import { Button, Typography } from '@mui/material';
-import { useModal } from '@/hooks/useModal';
-import FlexBox from '../basic/FlexBox';
+import { useModal } from 'fe-modules/hooks/useModal';
+import FlexBox from 'fe-modules/components/basic/FlexBox';
 
 const ExampleImg = ({ imgSrc }: { imgSrc: string }) => {
   const { openModal } = useModal();

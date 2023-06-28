@@ -1,16 +1,16 @@
 import React, { ChangeEventHandler, useCallback, useEffect, useRef, useState } from 'react';
 import { Box } from '@mui/material';
 import { useController } from 'react-hook-form';
-import { File_FormUIData } from '@/models/FormUI/FormUIData';
-import ExampleImg from '../ExampleImg';
-import { getFileType } from '../utils';
-import { FormUIProps } from '@/models/FormUI/FormUI';
-import { Auth } from '@/models/auth';
-import FileUploadedImg from './FileUploadedImg';
-import FileBrowse from './FileBrowse';
-import FileText from './FileText';
-import { postFileToS3 } from '@/apis/s3/request/file';
-import { getCurrentDate } from '@/utils/date';
+import { File_FormUIData } from 'fe-modules/models/FormUI/FormUIData';
+import ExampleImg from 'fe-modules/components/FormUI/ExampleImg';
+import { getFileType } from 'fe-modules/components/FormUI/utils';
+import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
+import { Auth } from 'fe-modules/models/auth';
+import FileUploadedImg from 'fe-modules/components/FormUI/FileForm/FileUploadedImg';
+import FileBrowse from 'fe-modules/components/FormUI/FileForm/FileBrowse';
+import FileText from 'fe-modules/components/FormUI/FileForm/FileText';
+import { postFileToS3 } from 'fe-modules/apis/s3/request/file';
+import { getCurrentDate } from 'fe-modules/utils/date';
 
 interface FormOption {
   exampleImg?: boolean;

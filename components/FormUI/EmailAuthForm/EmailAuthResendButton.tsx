@@ -1,4 +1,4 @@
-import FlexBox from '@/components/basic/FlexBox';
+import FlexBox from 'fe-modules/components/basic/FlexBox';
 import { Button } from '@mui/material';
 import { useTranslation } from 'next-i18next';
 

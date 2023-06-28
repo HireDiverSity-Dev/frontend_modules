@@ -1,4 +1,4 @@
-import client from '..';
+import client from 'fe-modules/apis/client';
 
 export async function SendVerificationEmail(email: string, lang: string) {
   const config = {

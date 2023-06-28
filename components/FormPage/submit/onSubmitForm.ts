@@ -1,12 +1,12 @@
 import { FieldValues } from 'react-hook-form';
-import { Auth } from '@/models/auth';
-import { FormUISetting } from '@/models/FormUI/FormUI';
-import { FormUIValue } from '@/models/FormUI/FormUIValue';
-import { File_FormUIData } from '@/models/FormUI/FormUIData';
-import postFormToAirtable from '@/apis/airtable/request/form';
-import { postFileToS3 } from '@/apis/s3/request/file';
-import { getCurrentDate } from '@/utils/date';
-import { base64ToFile } from '@/utils/encoding';
+import { Auth } from 'fe-modules/models/auth';
+import { FormUISetting } from 'fe-modules/models/FormUI/FormUI';
+import { FormUIValue } from 'fe-modules/models/FormUI/FormUIValue';
+import { File_FormUIData } from 'fe-modules/models/FormUI/FormUIData';
+import postFormToAirtable from 'fe-modules/apis/airtable/request/form';
+import { postFileToS3 } from 'fe-modules/apis/s3/request/file';
+import { getCurrentDate } from 'fe-modules/utils/date';
+import { base64ToFile } from 'fe-modules/utils/encoding';
 
 interface AirtableProps {
   base: string;

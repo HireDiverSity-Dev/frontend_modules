@@ -1,6 +1,6 @@
-import { FormUISetting } from '@/models/FormUI/FormUI';
-import { FormUICondition } from '@/models/FormUI/FormUICondition';
-import { Translation } from '@/models/lang';
+import { FormUISetting } from 'fe-modules/models/FormUI/FormUI';
+import { FormUICondition } from 'fe-modules/models/FormUI/FormUICondition';
+import { Translation } from 'fe-modules/models/lang';
 
 export interface FormPageProps {
   path: string;

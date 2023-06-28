@@ -1,5 +1,5 @@
-import { getAccessToken } from '@/apis/client/token';
-import { mainUrl } from '@/apis/client/url';
+import { getAccessToken } from 'fe-modules/apis/client/token';
+import { mainUrl } from 'fe-modules/apis/client/url';
 import axios, { AxiosError } from 'axios';
 
 const client = axios.create({

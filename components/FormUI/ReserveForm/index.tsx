@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles';
 import { CalendarPicker, CalendarPickerSkeleton, PickersDay } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
 import { useController, UseControllerProps } from 'react-hook-form';
-import { ReservationTime } from '@/models/FormUI/FormUIData';
+import { ReservationTime } from 'fe-modules/models/FormUI/FormUIData';
 
 const CustomPickersDay = styled(PickersDay)(({ theme }) => ({
   color: theme.palette.primary.main,

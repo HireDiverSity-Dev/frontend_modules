@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { Box } from '@mui/material';
 import { useController } from 'react-hook-form';
-import { FormUIProps } from '@/models/FormUI/FormUI';
-import RateStar from '@/components/FormUI/RateForm/RateStar';
+import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
+import RateStar from 'fe-modules/components/FormUI/RateForm/RateStar';
 
 function RateForm({ form, uiSetting }: FormUIProps) {
   const { field } = useController({

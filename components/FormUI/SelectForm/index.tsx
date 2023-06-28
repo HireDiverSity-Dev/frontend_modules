@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { FormGroup } from '@mui/material';
 import { useController } from 'react-hook-form';
-import { FormUIProps } from '@/models/FormUI/FormUI';
-import { Select_FormUIData } from '@/models/FormUI/FormUIData';
-import SelectLabel from './SelectLabel';
-import SelectText from '@/components/FormUI/SelectForm/SelectText';
-import SelectCheckbox from '@/components/FormUI/SelectForm/SelectCheckbox';
+import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
+import { Select_FormUIData } from 'fe-modules/models/FormUI/FormUIData';
+import SelectLabel from 'fe-modules/components/FormUI/SelectForm/SelectLabel';
+import SelectText from 'fe-modules/components/FormUI/SelectForm/SelectText';
+import SelectCheckbox from 'fe-modules/components/FormUI/SelectForm/SelectCheckbox';
 
 export default function SelectForm({ form, uiSetting, lang, multiple }: FormUIProps & { multiple?: boolean }) {
   const formData = uiSetting.data as Select_FormUIData;

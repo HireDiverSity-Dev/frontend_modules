@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useController } from 'react-hook-form';
-import { FormUIProps } from '@/models/FormUI/FormUI';
-import FlexBox from '@/components/basic/FlexBox';
-import TextInput from '@/components/FormUI/TextForm/TextInput';
-import TextError from '@/components/FormUI/TextForm/TextError';
+import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
+import FlexBox from 'fe-modules/components/basic/FlexBox';
+import TextInput from 'fe-modules/components/FormUI/TextForm/TextInput';
+import TextError from 'fe-modules/components/FormUI/TextForm/TextError';
 
 function TextForm({ form, uiSetting, lang, multiline }: FormUIProps & { multiline?: boolean }) {
   let { field, fieldState } = useController({

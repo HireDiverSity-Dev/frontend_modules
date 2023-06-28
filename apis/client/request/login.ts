@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
-import { LangServer } from '@/models/lang';
-import client from '..';
+import { LangServer } from 'fe-modules/models/lang';
+import client from 'fe-modules/apis/client';
 
 export interface LogInParams {
   email: string;

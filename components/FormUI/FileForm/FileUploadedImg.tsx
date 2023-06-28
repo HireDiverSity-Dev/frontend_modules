@@ -1,7 +1,7 @@
 import React from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Box, CircularProgress, Typography } from '@mui/material';
-import { ImageObj } from '.';
+import { ImageObj } from 'fe-modules/components/FormUI/FileForm';
 
 interface Props {
   data: ImageObj;

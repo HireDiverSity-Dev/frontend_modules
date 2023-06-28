@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Box, Checkbox } from '@mui/material';
-import { FormUIProps } from '@/models/FormUI/FormUI';
+import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
 import { useController } from 'react-hook-form';
-import FlexBox from '@/components/basic/FlexBox';
-import EmailAuthButton from './EmailAuthButton';
-import EmailAuthResendButton from './EmailAuthResendButton';
-import EmailAuthCode from './EmailAuthCode';
-import TextInput from '@/components/FormUI/TextForm/TextInput';
-import TextError from '@/components/FormUI/TextForm/TextError';
-import { ConfirmVerificationCode, SendVerificationEmail } from '@/apis/client/request/verify';
+import FlexBox from 'fe-modules/components/basic/FlexBox';
+import EmailAuthButton from 'fe-modules/components/FormUI/EmailAuthForm/EmailAuthButton';
+import EmailAuthResendButton from 'fe-modules/components/FormUI/EmailAuthForm/EmailAuthResendButton';
+import EmailAuthCode from 'fe-modules/components/FormUI/EmailAuthForm/EmailAuthCode';
+import TextInput from 'fe-modules/components/FormUI/TextForm/TextInput';
+import TextError from 'fe-modules/components/FormUI/TextForm/TextError';
+import { ConfirmVerificationCode, SendVerificationEmail } from 'fe-modules/apis/client/request/verify';
 
 function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
   const name = uiSetting.formKey;

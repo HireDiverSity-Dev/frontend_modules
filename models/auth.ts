@@ -1,4 +1,4 @@
-import { LangServer } from '@/models/lang';
+import { LangServer } from 'fe-modules/models/lang';
 
 export const enum Status {
   VALID = 'valid',

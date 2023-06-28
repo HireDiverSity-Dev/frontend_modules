@@ -1,4 +1,4 @@
-import SupplementInfo from './SupplementInfo.json';
+import SupplementInfo from 'fe-modules/models/SupplementInfo.json';
 
 export interface ProgressProps {
   data: AirTableRecord;

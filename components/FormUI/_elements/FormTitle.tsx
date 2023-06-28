@@ -1,6 +1,6 @@
 import React from 'react';
-import { FormUISetting } from '@/models/FormUI/FormUI';
-import { Lang } from '@/models/lang';
+import { FormUISetting } from 'fe-modules/models/FormUI/FormUI';
+import { Lang } from 'fe-modules/models/lang';
 import { Typography } from '@mui/material';
 
 interface FormTitleProps {
