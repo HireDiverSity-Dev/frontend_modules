@@ -1,10 +1,12 @@
 import { FieldValues } from 'react-hook-form';
-import { UploadFileApi } from '@/remotes/form';
-import { base64ToFile, getCurrentDate } from '@/utils/function';
 import { Auth } from '@/models/auth';
 import { FormUISetting } from '@/models/FormUI/FormUI';
 import { FormUIValue } from '@/models/FormUI/FormUIValue';
 import { File_FormUIData } from '@/models/FormUI/FormUIData';
+import postFormToAirtable from '@/apis/airtable/request/form';
+import { postFileToS3 } from '@/apis/s3/request/file';
+import { getCurrentDate } from '@/utils/date';
+import { base64ToFile } from '@/utils/encoding';
 
 interface AirtableProps {
   base: string;
@@ -19,14 +21,12 @@ interface SubmitFormProps {
 
 async function preProcessData(curData: FieldValues, uiSettings: Array<FormUISetting>, auth: Auth) {
   const curDate = getCurrentDate();
-  // 후가공: 서명, 이메일 인증
   const sendData: Array<SubmitFormProps> = await Promise.all(
     Object.entries(curData)
       .filter(([key, value]) => value)
       .map(async ([key, value]) => {
         const formData = uiSettings?.filter((val) => val.formKey === key)?.[0]?.data;
         let processedValue = value;
-        //서명 s3업로드
         if (formData) {
           if (formData.type === 'signature') {
             const signFile = base64ToFile(curData[key], (formData as File_FormUIData).s3path);
@@ -34,7 +34,7 @@ async function preProcessData(curData: FieldValues, uiSettings: Array<FormUISett
               ':',
               '',
             )}_signature`;
-            await UploadFileApi(path, signFile);
+            await postFileToS3(path, signFile);
             processedValue = [path];
           } else if (formData.type === 'emailAuth') {
             const val = value as { email: string; verified: boolean };
@@ -60,11 +60,7 @@ async function onSubmitForm(curData: FieldValues, uiSettings: Array<FormUISettin
 
   const sendData = await preProcessData(curData, uiSettings, auth);
   console.log('processed data:', sendData);
-
-  const res = await fetch('/api/airtable/form/submit', {
-    method: 'POST',
-    body: JSON.stringify(sendData),
-  });
+  const res = await postFormToAirtable(JSON.stringify(sendData));
   return res;
 }
 

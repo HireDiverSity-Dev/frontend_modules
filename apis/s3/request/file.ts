@@ -1,6 +1,6 @@
 import s3 from '..';
 
-export const postFileToS3 = async (path: string, file: File, callbackFunc?: (() => void) | undefined) => {
+const postFileToS3 = async (path: string, file: File, callbackFunc?: (() => void) | undefined) => {
   const body = {
     name: path,
     type: file.type,
@@ -24,3 +24,5 @@ export const postFileToS3 = async (path: string, file: File, callbackFunc?: (() 
     console.log(err);
   }
 };
+
+export { postFileToS3 };

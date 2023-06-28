@@ -1,16 +1,13 @@
 'use client';
 import { useState } from 'react';
-import {
-  getItemCommandOutputFromDynamoDB,
-  getScanCommandOutputFromDynamoDB,
-} from '@/apis/dynamoDB/getDataFromDynamoDB';
-import { parseRecord, parseRecords } from '@/apis/dynamoDB/parse';
+import { parseRecord, parseRecords } from '@/apis/dynamoDB/request/parse';
 import { FormPageProps } from '@/models/FormPage/FormPage';
 import { Auth, DefaultAuth, Status } from '@/models/auth';
 import FormPage from '@/components/FormPage/index';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { getItemCommandOutputFromDynamoDB, getScanCommandOutputFromDynamoDB } from '@/apis/dynamoDB/request/getOutput';
 
 export default function testform({ data }: { data: FormPageProps }) {
   const [auth, setAuth] = useState<Auth>({ ...DefaultAuth, status: Status.VALID, email: '' });

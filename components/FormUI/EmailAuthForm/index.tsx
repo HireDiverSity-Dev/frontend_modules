@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Box, Checkbox } from '@mui/material';
 import { FormUIProps } from '@/models/FormUI/FormUI';
-import { set, useController } from 'react-hook-form';
+import { useController } from 'react-hook-form';
 import FlexBox from '@/components/basic/FlexBox';
-import { ConfirmVerificationCode, SendVerificationEmail } from '@/remotes/form';
 import EmailAuthButton from './EmailAuthButton';
 import EmailAuthResendButton from './EmailAuthResendButton';
 import EmailAuthCode from './EmailAuthCode';
 import TextInput from '@/components/FormUI/TextForm/TextInput';
 import TextError from '@/components/FormUI/TextForm/TextError';
+import { ConfirmVerificationCode, SendVerificationEmail } from '@/apis/client/request/verify';
 
 function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
   const name = uiSetting.formKey;

@@ -2,8 +2,6 @@ import React, { ChangeEventHandler, useCallback, useEffect, useRef, useState } f
 import { Box } from '@mui/material';
 import { useController } from 'react-hook-form';
 import { File_FormUIData } from '@/models/FormUI/FormUIData';
-import { UploadFileApi } from '@/remotes/form';
-import { getCurrentDate } from '@/utils/function';
 import ExampleImg from '../ExampleImg';
 import { getFileType } from '../utils';
 import { FormUIProps } from '@/models/FormUI/FormUI';
@@ -11,6 +9,8 @@ import { Auth } from '@/models/auth';
 import FileUploadedImg from './FileUploadedImg';
 import FileBrowse from './FileBrowse';
 import FileText from './FileText';
+import { postFileToS3 } from '@/apis/s3/request/file';
+import { getCurrentDate } from '@/utils/date';
 
 interface FormOption {
   exampleImg?: boolean;
@@ -96,7 +96,7 @@ function FileForm({ form, uiSetting, options = { exampleImg: true }, lang, auth 
           loading: false,
         };
 
-        UploadFileApi(imageObj.s3Path, file, () => {
+        postFileToS3(imageObj.s3Path, file, () => {
           uploadComplete(imageObj.name);
         });
 
