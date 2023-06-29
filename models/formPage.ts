@@ -1,6 +1,4 @@
-import { Attachment as AirtableAttachment } from 'airtable';
 import { Translation } from 'fe-modules/models/lang';
-import { FormObj } from 'fe-modules/models/FormUI/FormUIData';
 
 export interface PageSettings {
   path: string;

@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, Button, Collapse, Grid, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { CalendarPicker, CalendarPickerSkeleton, PickersDay } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
 import { useController, UseControllerProps } from 'react-hook-form';
-import { ReservationTime } from 'fe-modules/models/FormUI/FormUIData';
 
 const CustomPickersDay = styled(PickersDay)(({ theme }) => ({
   color: theme.palette.primary.main,
@@ -12,15 +11,11 @@ const CustomPickersDay = styled(PickersDay)(({ theme }) => ({
 }));
 
 interface FormProps extends UseControllerProps {
-  times: ReservationTime;
+  times: any;
 }
 
 const ReserveForm = ({ name, control, rules, times }: FormProps) => {
-  const {
-    field,
-    fieldState: { invalid, isTouched, isDirty },
-    formState: { touchedFields, dirtyFields },
-  } = useController({
+  const { field } = useController({
     name,
     control,
     rules,

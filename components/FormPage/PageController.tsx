@@ -9,7 +9,7 @@ interface Props {
   endPage: number;
 }
 
-function prevPage({ page, setPage, endPage }: Props) {
+function prevPage({ page, setPage }: Props) {
   if (page > 1) {
     setPage(page - 1);
   }

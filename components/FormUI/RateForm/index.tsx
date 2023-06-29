@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Box } from '@mui/material';
-import { useController } from 'react-hook-form';
-import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
 import RateStar from 'fe-modules/components/FormUI/RateForm/RateStar';
+import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
+import { useController } from 'react-hook-form';
 
 function RateForm({ form, uiSetting }: FormUIProps) {
   const { field } = useController({
@@ -27,7 +27,7 @@ function RateForm({ form, uiSetting }: FormUIProps) {
 
   return (
     <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', fontSize: '50px' }}>
-      {[1, 2, 3, 4, 5].map((value, index) => (
+      {[1, 2, 3, 4, 5].map((value) => (
         <RateStar curValue={field?.value ? (field.value as number) : 0} value={value} onClick={onClickHandler} />
       ))}
     </Box>

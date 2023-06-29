@@ -1,7 +1,7 @@
 import React from 'react';
+import { Typography } from '@mui/material';
 import { FormUISetting } from 'fe-modules/models/FormUI/FormUI';
 import { Lang } from 'fe-modules/models/lang';
-import { Typography } from '@mui/material';
 
 interface FormSemiTitleProps {
   uiSetting: FormUISetting;

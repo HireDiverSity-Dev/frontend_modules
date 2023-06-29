@@ -1,5 +1,5 @@
-import { Lang, Translation } from 'fe-modules/models/lang';
 import { Button } from '@mui/material';
+import { Lang, Translation } from 'fe-modules/models/lang';
 
 const SignatureClearLabel = {
   clear: {

@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import { Box, Checkbox } from '@mui/material';
-import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
-import { useController } from 'react-hook-form';
+import { ConfirmVerificationCode, SendVerificationEmail } from 'fe-modules/apis/client/request/verify';
 import FlexBox from 'fe-modules/components/basic/FlexBox';
 import EmailAuthButton from 'fe-modules/components/FormUI/EmailAuthForm/EmailAuthButton';
-import EmailAuthResendButton from 'fe-modules/components/FormUI/EmailAuthForm/EmailAuthResendButton';
 import EmailAuthCode from 'fe-modules/components/FormUI/EmailAuthForm/EmailAuthCode';
-import TextInput from 'fe-modules/components/FormUI/TextForm/TextInput';
+import EmailAuthResendButton from 'fe-modules/components/FormUI/EmailAuthForm/EmailAuthResendButton';
 import TextError from 'fe-modules/components/FormUI/TextForm/TextError';
-import { ConfirmVerificationCode, SendVerificationEmail } from 'fe-modules/apis/client/request/verify';
+import TextInput from 'fe-modules/components/FormUI/TextForm/TextInput';
+import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
+import { useController } from 'react-hook-form';
 
 function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
   const name = uiSetting.formKey;
 
-  const [email, setEmail] = useState('');
+  const [, setEmail] = useState('');
   const [code, setCode] = useState('');
   const [isSented, setIsSented] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
@@ -45,9 +45,9 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
   };
 
   const onVerify = async () => {
-    const email = field.value;
-    setEmail(email);
-    await SendVerificationEmail(email, lang).then((res) => {
+    const emailValue = field.value;
+    setEmail(emailValue);
+    await SendVerificationEmail(emailValue, lang).then((res) => {
       if (res.status === 200) {
         setIsSented(true);
       } else {
@@ -57,13 +57,13 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
   };
 
   const onConfirm = async (input: string) => {
-    const email = field.value;
-    setEmail(email);
-    await ConfirmVerificationCode(email, input).then((res) => {
+    const emailValue = field.value;
+    setEmail(emailValue);
+    await ConfirmVerificationCode(emailValue, input).then((res) => {
       console.log(res);
       if (res.status === 200) {
         setIsVerified(true);
-        field.onChange(email);
+        field.onChange(emailValue);
         verifyField.onChange(true);
       }
     });

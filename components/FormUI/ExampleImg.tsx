@@ -1,6 +1,6 @@
 import { Button, Typography } from '@mui/material';
-import { useModal } from 'fe-modules/hooks/useModal';
 import FlexBox from 'fe-modules/components/basic/FlexBox';
+import { useModal } from 'fe-modules/hooks/useModal';
 
 const ExampleImg = ({ imgSrc }: { imgSrc: string }) => {
   const { openModal } = useModal();
@@ -41,7 +41,7 @@ const ExampleImg = ({ imgSrc }: { imgSrc: string }) => {
     <FlexBox sx={{ mb: '10px' }}>
       <a href={imgSrc} target="_blank">
         <div style={{ position: 'relative', width: 'auto', cursor: 'pointer' }}>
-          <img src={imgSrc} style={{ height: 200, objectFit: 'contain' }} />
+          <img src={imgSrc} style={{ height: 200, objectFit: 'contain' }} onClick={onClick} />
           <Typography
             variant="caption"
             sx={{

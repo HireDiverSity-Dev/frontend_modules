@@ -9,7 +9,7 @@ function getRedirect(curData: FieldValues, redirect: string) {
       console.log(Object.entries(curData));
       let redirectUrl = redirect;
       Object.entries(curData)
-        .filter(([key, value]) => value)
+        .filter(([, value]) => value)
         .forEach(([key, value]) => {
           console.log(key, value);
           if (redirectUrl.indexOf(`{{${key}}}`) >= 0) {

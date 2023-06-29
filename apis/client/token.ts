@@ -1,5 +1,5 @@
-import { mainUrl } from 'fe-modules/apis/client/url';
 import axios from 'axios';
+import { mainUrl } from 'fe-modules/apis/client/url';
 import jwt_decode from 'jwt-decode';
 
 interface Token {

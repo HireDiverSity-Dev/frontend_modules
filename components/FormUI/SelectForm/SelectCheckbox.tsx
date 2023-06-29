@@ -1,8 +1,8 @@
-import { Checkbox } from '@mui/material';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
+import { Checkbox } from '@mui/material';
 
 interface SelectCheckboxProps {
   value: number;

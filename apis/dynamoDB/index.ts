@@ -1,5 +1,4 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import exp from 'constants';
 let dynamoDBClient: DynamoDBClient;
 
 const getDynamoDBClient = () => {

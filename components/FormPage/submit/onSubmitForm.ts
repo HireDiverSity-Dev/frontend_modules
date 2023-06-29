@@ -1,12 +1,12 @@
-import { FieldValues } from 'react-hook-form';
-import { Auth } from 'fe-modules/models/auth';
-import { FormUISetting } from 'fe-modules/models/FormUI/FormUI';
-import { FormUIValue } from 'fe-modules/models/FormUI/FormUIValue';
-import { File_FormUIData } from 'fe-modules/models/FormUI/FormUIData';
 import postFormToAirtable from 'fe-modules/apis/airtable/request/form';
 import { postFileToS3 } from 'fe-modules/apis/s3/request/file';
+import { Auth } from 'fe-modules/models/auth';
+import { FormUISetting } from 'fe-modules/models/FormUI/FormUI';
+import { File_FormUIData } from 'fe-modules/models/FormUI/FormUIData';
+import { FormUIValue } from 'fe-modules/models/FormUI/FormUIValue';
 import { getCurrentDate } from 'fe-modules/utils/date';
 import { base64ToFile } from 'fe-modules/utils/encoding';
+import { FieldValues } from 'react-hook-form';
 
 interface AirtableProps {
   base: string;
@@ -23,7 +23,7 @@ async function preProcessData(curData: FieldValues, uiSettings: Array<FormUISett
   const curDate = getCurrentDate();
   const sendData: Array<SubmitFormProps> = await Promise.all(
     Object.entries(curData)
-      .filter(([key, value]) => value)
+      .filter(([, value]) => value)
       .map(async ([key, value]) => {
         const formData = uiSettings?.filter((val) => val.formKey === key)?.[0]?.data;
         let processedValue = value;

@@ -1,6 +1,6 @@
+import axios, { AxiosError } from 'axios';
 import { getAccessToken } from 'fe-modules/apis/client/token';
 import { mainUrl } from 'fe-modules/apis/client/url';
-import axios, { AxiosError } from 'axios';
 
 const client = axios.create({
   baseURL: mainUrl,

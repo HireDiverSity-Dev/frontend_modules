@@ -1,5 +1,5 @@
-import FlexBox from 'fe-modules/components/basic/FlexBox';
 import { Button } from '@mui/material';
+import FlexBox from 'fe-modules/components/basic/FlexBox';
 import { useTranslation } from 'next-i18next';
 
 export default function EmailAuthResentButton({ onVerify }: { onVerify: () => void }) {

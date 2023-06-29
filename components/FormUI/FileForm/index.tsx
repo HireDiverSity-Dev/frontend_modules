@@ -1,16 +1,16 @@
 import React, { ChangeEventHandler, useCallback, useEffect, useRef, useState } from 'react';
 import { Box } from '@mui/material';
-import { useController } from 'react-hook-form';
-import { File_FormUIData } from 'fe-modules/models/FormUI/FormUIData';
+import { postFileToS3 } from 'fe-modules/apis/s3/request/file';
 import ExampleImg from 'fe-modules/components/FormUI/ExampleImg';
-import { getFileType } from 'fe-modules/components/FormUI/utils';
-import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
-import { Auth } from 'fe-modules/models/auth';
-import FileUploadedImg from 'fe-modules/components/FormUI/FileForm/FileUploadedImg';
 import FileBrowse from 'fe-modules/components/FormUI/FileForm/FileBrowse';
 import FileText from 'fe-modules/components/FormUI/FileForm/FileText';
-import { postFileToS3 } from 'fe-modules/apis/s3/request/file';
+import FileUploadedImg from 'fe-modules/components/FormUI/FileForm/FileUploadedImg';
+import { getFileType } from 'fe-modules/components/FormUI/utils';
+import { Auth } from 'fe-modules/models/auth';
+import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
+import { File_FormUIData } from 'fe-modules/models/FormUI/FormUIData';
 import { getCurrentDate } from 'fe-modules/utils/date';
+import { useController } from 'react-hook-form';
 
 interface FormOption {
   exampleImg?: boolean;
@@ -55,7 +55,7 @@ function FileForm({ form, uiSetting, options = { exampleImg: true }, lang, auth 
   const uploadComplete = useCallback(
     (fileName: string) => {
       setImageList((prevState) => {
-        const updatedList = prevState.map((val, index) => {
+        const updatedList = prevState.map((val) => {
           if (val.name !== fileName) {
             return val;
           } else {

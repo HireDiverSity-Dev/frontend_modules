@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
-import { useController } from 'react-hook-form';
-import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
-import SignatureCanvas from 'react-signature-canvas';
 import SignBoard from 'fe-modules/components/FormUI/SignForm/SignBoard';
 import SignSubmit from 'fe-modules/components/FormUI/SignForm/SignSubmit';
+import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
+import { useController } from 'react-hook-form';
+import SignatureCanvas from 'react-signature-canvas';
 
 const SignForm = ({ form, uiSetting, lang }: FormUIProps) => {
   const { field } = useController({

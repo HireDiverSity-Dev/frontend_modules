@@ -1,5 +1,5 @@
-import { Box, Typography } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { Box, Typography } from '@mui/material';
 import { Lang, Translation } from 'fe-modules/models/lang';
 
 interface FileBrowseProps {

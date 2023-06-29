@@ -1,14 +1,14 @@
 import React from 'react';
-import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
+import { Divider } from '@mui/material';
 import BooleanForm from 'fe-modules/components/FormUI/BooleanForm';
 import EmailAuthForm from 'fe-modules/components/FormUI/EmailAuthForm';
 import FileForm from 'fe-modules/components/FormUI/FileForm';
+import ParagraphForm from 'fe-modules/components/FormUI/ParagraphForm/index';
 import RateForm from 'fe-modules/components/FormUI/RateForm';
 import SelectForm from 'fe-modules/components/FormUI/SelectForm';
 import SignForm from 'fe-modules/components/FormUI/SignForm';
 import TextForm from 'fe-modules/components/FormUI/TextForm';
-import ParagraphForm from 'fe-modules/components/FormUI/ParagraphForm/index';
-import { Divider } from '@mui/material';
+import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
 
 function FormBody(props: FormUIProps) {
   const type = props.uiSetting.data.type;
