@@ -1,4 +1,4 @@
-import s3 from 'fe-modules/apis/s3';
+import { getS3Client } from '../network';
 
 const postFileToS3 = async (path: string, file: File, callbackFunc?: (() => void) | undefined) => {
   const body = {

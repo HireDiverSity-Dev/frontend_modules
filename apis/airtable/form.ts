@@ -1,4 +1,4 @@
-import airtable from 'fe-modules/apis/airtable';
+import { airtable } from '../network';
 
 const postFormToAirtable = async (sendData: string) => {
   const res = airtable.post('/form/submit', sendData);

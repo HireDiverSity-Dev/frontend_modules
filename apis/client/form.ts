@@ -1,4 +1,4 @@
-import client from '../network';
+import { client } from '../network';
 
 export async function SendVerificationEmail(email: string, lang: string) {
   const config = {

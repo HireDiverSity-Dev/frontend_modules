@@ -6,7 +6,7 @@ import {
   ScanCommand,
   ScanCommandInput,
 } from '@aws-sdk/client-dynamodb';
-import getDynamoDBClient from 'fe-modules/apis/dynamoDB';
+import { getDynamoDBClient } from '../network';
 
 async function getScanCommandOutputFromDynamoDB(params: ScanCommandInput) {
   const client = getDynamoDBClient();

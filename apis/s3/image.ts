@@ -1,4 +1,4 @@
-import { PrivateS3Client, PublicS3Client } from '@/utils/network';
+import { getS3Client } from '../network';
 
 export const UploadFilePublicApi = async (path: string, file: File, callbackFunc?: (() => void) | undefined) => {
   const body = {

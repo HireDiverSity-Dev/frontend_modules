@@ -1,9 +1,6 @@
 import { marshall } from '@aws-sdk/util-dynamodb';
-import {
-  getScanCommandOutputFromDynamoDB,
-  putItemCommandOutputFromDynamoDB,
-} from 'fe-modules/apis/dynamoDB/request/getOutput';
-import { parseRecord, parseRecords } from 'fe-modules/apis/dynamoDB/request/parse';
+import { getScanCommandOutputFromDynamoDB, putItemCommandOutputFromDynamoDB } from 'fe-modules/apis/dynamoDB/getOutput';
+import { parseRecord, parseRecords } from 'fe-modules/apis/dynamoDB/parse';
 
 async function getFormItemListFromDynamoDB() {
   const params = {
