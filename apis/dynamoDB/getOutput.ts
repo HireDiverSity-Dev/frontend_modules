@@ -1,4 +1,11 @@
-import { GetItemCommand, GetItemCommandInput, ScanCommand, ScanCommandInput } from '@aws-sdk/client-dynamodb';
+import {
+  GetItemCommand,
+  GetItemCommandInput,
+  PutItemCommand,
+  PutItemCommandInput,
+  ScanCommand,
+  ScanCommandInput,
+} from '@aws-sdk/client-dynamodb';
 import getDynamoDBClient from 'fe-modules/apis/dynamoDB';
 
 async function getScanCommandOutputFromDynamoDB(params: ScanCommandInput) {
@@ -17,4 +24,12 @@ async function getItemCommandOutputFromDynamoDB(params: GetItemCommandInput) {
   return data;
 }
 
-export { getItemCommandOutputFromDynamoDB, getScanCommandOutputFromDynamoDB };
+async function putItemCommandOutputFromDynamoDB(params: PutItemCommandInput) {
+  const client = getDynamoDBClient();
+
+  const command = new PutItemCommand(params);
+  const data = await client.send(command);
+  return data;
+}
+
+export { getItemCommandOutputFromDynamoDB, getScanCommandOutputFromDynamoDB, putItemCommandOutputFromDynamoDB };
