@@ -2,12 +2,12 @@ import { AxiosResponse } from 'axios';
 import { LangServer } from 'fe-modules/models/lang';
 import { client } from '../network';
 
-export interface LogInParams {
+export interface loginParams {
   email: string;
   password: string;
 }
 
-export interface LogInResult {
+export interface loginResult {
   recordId: string;
   accessToken: string;
   refreshToken: string;
@@ -16,10 +16,6 @@ export interface LogInResult {
   userVisaStatus: 'NEW' | 'EXTENSION' | 'CHANGE';
 }
 
-export async function LogInApi(params: LogInParams): Promise<AxiosResponse<LogInResult>> {
+export async function postLoginClient(params: loginParams): Promise<AxiosResponse<loginResult>> {
   return await client.post('/login', params);
-}
-
-export async function resetPasswordApi(email: string) {
-  return await client.post('/resetPw/send', {}, { params: { email } });
 }
