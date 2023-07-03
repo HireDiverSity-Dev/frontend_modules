@@ -4,6 +4,8 @@ export const enum Lang {
   CHN = 'zh',
 }
 
+export const LangList = [Lang.KOR, Lang.ENG, Lang.CHN];
+
 export const enum LangServer {
   KOR = '한국어',
   ENG = '영어',
