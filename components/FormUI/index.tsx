@@ -19,7 +19,6 @@ function FormUI({ form, uiSetting, lang, auth }: FormUIProps) {
       subtitle: SignatureLabel.subtitle,
     };
   }
-  console.log('FormUI', newSetting);
   return (
     <FormBox>
       <FormTitle uiSetting={newSetting} lang={lang} />
