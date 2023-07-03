@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Checkbox } from '@mui/material';
-import { ConfirmVerificationCode, SendVerificationEmail } from 'fe-modules/apis/client/request/verify';
+import { ConfirmVerificationCode, SendVerificationEmail } from 'fe-modules/apis/client/verify';
 import FlexBox from 'fe-modules/components/basic/FlexBox';
 import EmailAuthButton from 'fe-modules/components/FormUI/EmailAuthForm/EmailAuthButton';
 import EmailAuthCode from 'fe-modules/components/FormUI/EmailAuthForm/EmailAuthCode';

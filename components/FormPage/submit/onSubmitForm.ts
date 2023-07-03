@@ -1,5 +1,5 @@
-import postFormToAirtable from 'fe-modules/apis/airtable/request/form';
-import { postFileToS3 } from 'fe-modules/apis/s3/request/file';
+import postFormToAirtable from 'fe-modules/apis/airtable/form';
+import { postFileToS3 } from 'fe-modules/apis/s3/file';
 import { Auth } from 'fe-modules/models/auth';
 import { FormUISetting } from 'fe-modules/models/FormUI/FormUI';
 import { File_FormUIData } from 'fe-modules/models/FormUI/FormUIData';
