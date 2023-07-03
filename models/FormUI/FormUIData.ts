@@ -1,6 +1,6 @@
 import { Translation } from 'fe-modules/models/lang';
 
-const DataTypeList = {
+const FormUIDataTypes = {
   text: 'text',
   longtext: 'longtext',
   file: 'file',
@@ -13,11 +13,25 @@ const DataTypeList = {
   paragraph: 'paragraph',
   divider: 'divider',
 };
-export type DataType = keyof typeof DataTypeList;
+export type FormUIDataType = keyof typeof FormUIDataTypes;
+
+export const CanDisableFormUIDataTypeList = [
+  FormUIDataTypes.text,
+  FormUIDataTypes.longtext,
+  FormUIDataTypes.multiselect,
+  FormUIDataTypes.singleselect,
+  FormUIDataTypes.boolean,
+  FormUIDataTypes.emailAuth,
+];
+export const TitlelessFormUIDataTypeList = [
+  FormUIDataTypes.divider,
+  FormUIDataTypes.paragraph,
+  FormUIDataTypes.signature,
+];
 
 export interface FormUIData {
   _id: string; // primary key
-  type: DataType;
+  type: FormUIDataType;
   title: Translation;
   subtitle?: Translation;
   placeholder?: Translation;
