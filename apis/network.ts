@@ -44,9 +44,14 @@ const getS3Client = () => {
   if (!s3Client) {
     s3Client = new S3Client({
       region: process.env.REGION,
-      credentials: { accessKeyId: process.env.ACCESS_KEY_ID!, secretAccessKey: process.env.SECRET_ACCESS_KEY! },
+      credentials: {
+        accessKeyId: process.env.ACCESS_KEY_ID!,
+        secretAccessKey: process.env.SECRET_ACCESS_KEY!,
+      },
     });
   }
+
+  return s3Client;
 };
 
 const getDynamoDBClient = () => {

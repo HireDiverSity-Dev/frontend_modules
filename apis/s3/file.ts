@@ -1,14 +1,10 @@
-import { getS3Client } from '../network';
+import privateHandler from 'fe-modules/apis/s3/privateHandler';
+import publicHandler from 'fe-modules/apis/s3/publicHandler';
 
-const postFileToS3 = async (path: string, file: File, callbackFunc?: (() => void) | undefined) => {
-  const body = {
-    name: path,
-    type: file.type,
-  };
-
+export const uploadFileToPublicS3 = async (path: string, file: File, callbackFunc?: (() => void) | undefined) => {
   try {
-    const urlRes = await s3.post('/signedUrl', body);
-    const signedUrl = urlRes.data;
+    const signedUrl = await publicHandler(path, file.type);
+    console.log(signedUrl);
 
     await fetch(signedUrl, {
       method: 'PUT',
@@ -25,4 +21,22 @@ const postFileToS3 = async (path: string, file: File, callbackFunc?: (() => void
   }
 };
 
-export { postFileToS3 };
+export const uploadFileToPrivateS3 = async (path: string, file: File, callbackFunc?: (() => void) | undefined) => {
+  try {
+    const signedUrl = await privateHandler(path, file.type);
+    console.log(signedUrl);
+
+    await fetch(signedUrl, {
+      method: 'PUT',
+      body: file,
+      headers: {
+        'Content-type': file.type,
+      },
+    });
+    if (callbackFunc) {
+      callbackFunc();
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
