@@ -55,6 +55,7 @@ export default function SelectForm({ form, uiSetting, lang, multiple }: FormUIPr
     <FormGroup row={formData?.style === 'horizontal' ? true : false} sx={{ mx: 1 }}>
       {formData.options.map((option, index) => (
         <SelectLabel
+          key={index}
           control={
             <SelectCheckbox value={index} isChecked={!!state[index]} multiple={!!multiple} onChange={handleChange} />
           }

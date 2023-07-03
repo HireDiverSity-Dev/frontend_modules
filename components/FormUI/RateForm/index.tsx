@@ -27,8 +27,13 @@ function RateForm({ form, uiSetting }: FormUIProps) {
 
   return (
     <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', fontSize: '50px' }}>
-      {[1, 2, 3, 4, 5].map((value) => (
-        <RateStar curValue={field?.value ? (field.value as number) : 0} value={value} onClick={onClickHandler} />
+      {[1, 2, 3, 4, 5].map((value, index) => (
+        <RateStar
+          curValue={field?.value ? (field.value as number) : 0}
+          value={value}
+          onClick={onClickHandler}
+          key={index}
+        />
       ))}
     </Box>
   );
