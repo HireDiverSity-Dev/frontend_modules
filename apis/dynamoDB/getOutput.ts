@@ -5,6 +5,8 @@ import {
   PutItemCommandInput,
   ScanCommand,
   ScanCommandInput,
+  UpdateItemCommand,
+  UpdateItemCommandInput,
 } from '@aws-sdk/client-dynamodb';
 import { getDynamoDBClient } from '../network';
 
@@ -32,4 +34,17 @@ async function putItemCommandOutputFromDynamoDB(params: PutItemCommandInput) {
   return data;
 }
 
-export { getItemCommandOutputFromDynamoDB, getScanCommandOutputFromDynamoDB, putItemCommandOutputFromDynamoDB };
+async function patchItemCommandOutputFromDynamoDB(params: UpdateItemCommandInput) {
+  const client = getDynamoDBClient();
+
+  const command = new UpdateItemCommand(params);
+  const data = await client.send(command);
+  return data;
+}
+
+export {
+  getItemCommandOutputFromDynamoDB,
+  getScanCommandOutputFromDynamoDB,
+  patchItemCommandOutputFromDynamoDB,
+  putItemCommandOutputFromDynamoDB,
+};

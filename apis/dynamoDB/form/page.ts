@@ -1,5 +1,9 @@
 import { marshall } from '@aws-sdk/util-dynamodb';
-import { getScanCommandOutputFromDynamoDB, putItemCommandOutputFromDynamoDB } from 'fe-modules/apis/dynamoDB/getOutput';
+import {
+  getScanCommandOutputFromDynamoDB,
+  patchItemCommandOutputFromDynamoDB,
+  putItemCommandOutputFromDynamoDB,
+} from 'fe-modules/apis/dynamoDB/getOutput';
 import { parseRecord, parseRecords } from 'fe-modules/apis/dynamoDB/parse';
 
 async function getFormPageListFromDynamoDB() {
@@ -30,4 +34,13 @@ async function putFormPageFromDynamoDB(item: any) {
   await putItemCommandOutputFromDynamoDB(params);
 }
 
-export { getFormPageFromDynamoDB, getFormPageListFromDynamoDB, putFormPageFromDynamoDB };
+async function patchFormPageFromDynamoDB(key: any, updates: any) {
+  const params = {
+    TableName: 'FormPage',
+    Key: marshall(key),
+    AttributeUpdates: updates,
+  };
+  await patchItemCommandOutputFromDynamoDB(params);
+}
+
+export { getFormPageFromDynamoDB, getFormPageListFromDynamoDB, patchFormPageFromDynamoDB, putFormPageFromDynamoDB };
