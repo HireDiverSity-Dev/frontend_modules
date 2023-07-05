@@ -68,12 +68,12 @@ function SetSetting(form: FormUIUseFormReturn, uiSetting: FormUISetting): FormUI
           }
           break;
         case 'greaterThan':
-          if (typeof value === 'number' && trigger.val && value <= trigger.val) {
+          if (typeof value === 'number' && typeof trigger.val === 'number' && value <= trigger.val) {
             satisfied = false;
           }
           break;
         case 'lessorThan':
-          if (typeof value === 'number' && trigger.val && value >= trigger.val) {
+          if (typeof value === 'number' && typeof trigger.val === 'number' && value >= trigger.val) {
             satisfied = false;
           }
           break;

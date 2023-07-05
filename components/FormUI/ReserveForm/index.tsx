@@ -51,7 +51,8 @@ const ReserveForm = ({ name, control, rules, times }: FormProps) => {
             {!!date && times[date] && (
               <Grid container columns={{ xs: 4, sm: 6 }} spacing={2} px={3}>
                 {times[date][0]
-                  .sort((a, b) => {
+                  .sort((a: any, b: any) => {
+                    // Todo: type 명확히 정의
                     if (a.reservationTime < b.reservationTime) {
                       return -1;
                     } else if (a.reservationTime == b.reservationTime) {
@@ -60,7 +61,8 @@ const ReserveForm = ({ name, control, rules, times }: FormProps) => {
                       return 1;
                     }
                   })
-                  .map((selectedDate, index) => (
+                  .map((selectedDate: any, index: number) => (
+                    // Todo: type 명확히 정의
                     <Grid item xs={2} key={index}>
                       <Button
                         variant={selectedDate.reservationTime === time ? 'contained' : 'outlined'}
