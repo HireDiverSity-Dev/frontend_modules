@@ -1,9 +1,12 @@
-import privateHandler from 'fe-modules/apis/s3/privateHandler';
-import publicHandler from 'fe-modules/apis/s3/publicHandler';
+import { aws } from 'fe-modules/apis/network';
 
 export const uploadFileToPublicS3 = async (path: string, file: File, callbackFunc?: (() => void) | undefined) => {
   try {
-    const signedUrl = await publicHandler(path, file.type);
+    const res = await aws.post('/s3/public/signedUrl', {
+      key: path,
+      type: file.type,
+    });
+    const signedUrl = res.data.signedUrl;
     console.log(signedUrl);
 
     await fetch(signedUrl, {
@@ -23,7 +26,11 @@ export const uploadFileToPublicS3 = async (path: string, file: File, callbackFun
 
 export const uploadFileToPrivateS3 = async (path: string, file: File, callbackFunc?: (() => void) | undefined) => {
   try {
-    const signedUrl = await privateHandler(path, file.type);
+    const res = await aws.post('/s3/private/signedUrl', {
+      key: path,
+      type: file.type,
+    });
+    const signedUrl = res.data.signedUrl;
     console.log(signedUrl);
 
     await fetch(signedUrl, {
