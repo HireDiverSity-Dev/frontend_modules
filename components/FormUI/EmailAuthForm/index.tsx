@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Checkbox } from '@mui/material';
-import { ConfirmVerificationCode, SendVerificationEmail } from 'fe-modules/apis/client/verify';
+import { getVerificationConfirmClient, postVerificationSendClient } from 'fe-modules/apis/client/verification';
 import FlexBox from 'fe-modules/components/basic/FlexBox';
 import EmailAuthButton from 'fe-modules/components/FormUI/EmailAuthForm/EmailAuthButton';
 import EmailAuthCode from 'fe-modules/components/FormUI/EmailAuthForm/EmailAuthCode';
@@ -47,7 +47,7 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
   const onVerify = async () => {
     const emailValue = field.value;
     setEmail(emailValue);
-    await SendVerificationEmail(emailValue, lang).then((res) => {
+    await postVerificationSendClient(emailValue, lang).then((res) => {
       if (res.status === 200) {
         setIsSented(true);
       } else {
@@ -59,7 +59,7 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
   const onConfirm = async (input: string) => {
     const emailValue = field.value;
     setEmail(emailValue);
-    await ConfirmVerificationCode(emailValue, input).then((res) => {
+    await getVerificationConfirmClient(emailValue, input).then((res) => {
       console.log(res);
       if (res.status === 200) {
         setIsVerified(true);
