@@ -7,9 +7,8 @@ const adminUrl = 'https://admin.api.hirevisa.com/';
 const clientUrl = 'https://api.hirevisa.com/';
 const airtableUrl = 'https://api.hirevisa.com/api/airtable';
 const lambdaUrl = 'https://sdiazawpj5.execute-api.ap-northeast-2.amazonaws.com';
-
-let dynamoDBClient: DynamoDBClient;
-let s3Client: S3Client;
+const awsUrl = 'https://main.ds23a3oqfeslh.amplifyapp.com/api';
+const testUrl = 'http://localhost:3009/api';
 
 const admin = axios.create({
   baseURL: adminUrl,
@@ -40,32 +39,11 @@ const lambda = axios.create({
   },
 });
 
-const getS3Client = () => {
-  if (!s3Client) {
-    s3Client = new S3Client({
-      region: process.env.REGION,
-      credentials: {
-        accessKeyId: process.env.ACCESS_KEY_ID!,
-        secretAccessKey: process.env.SECRET_ACCESS_KEY!,
-      },
-    });
-  }
+const aws = axios.create({
+  baseURL: awsUrl,
+  validateStatus: (status) => {
+    return status < 400;
+  },
+});
 
-  return s3Client;
-};
-
-const getDynamoDBClient = () => {
-  if (!dynamoDBClient) {
-    dynamoDBClient = new DynamoDBClient({
-      region: process.env.REGION,
-      credentials: {
-        accessKeyId: process.env.ACCESS_KEY_ID!,
-        secretAccessKey: process.env.SECRET_ACCESS_KEY!,
-      },
-    });
-  }
-
-  return dynamoDBClient;
-};
-
-export { admin, airtable, client, getDynamoDBClient, getS3Client, lambda };
+export { admin, airtable, aws, client, lambda };
