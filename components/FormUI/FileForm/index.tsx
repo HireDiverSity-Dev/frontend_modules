@@ -1,6 +1,6 @@
-import React, { ChangeEventHandler, useCallback, useEffect, useRef, useState } from 'react';
+import { ChangeEventHandler, useCallback, useEffect, useRef, useState } from 'react';
 import { Box } from '@mui/material';
-import { postFileToS3 } from 'fe-modules/apis/s3/file';
+import { uploadFileToPrivateS3 } from 'fe-modules/apis/s3/file';
 import ExampleImg from 'fe-modules/components/FormUI/ExampleImg';
 import FileBrowse from 'fe-modules/components/FormUI/FileForm/FileBrowse';
 import FileText from 'fe-modules/components/FormUI/FileForm/FileText';
@@ -96,7 +96,7 @@ function FileForm({ form, uiSetting, options = { exampleImg: true }, lang, auth 
           loading: false,
         };
 
-        postFileToS3(imageObj.s3Path, file, () => {
+        uploadFileToPrivateS3(imageObj.s3Path, file, () => {
           uploadComplete(imageObj.name);
         });
 

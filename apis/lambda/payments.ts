@@ -1,4 +1,4 @@
-import { lambda } from 'fe-modules/apis/lambda';
+import { lambda } from '../network';
 
 export async function postPaypalOrderToLambda(data: string) {
   try {

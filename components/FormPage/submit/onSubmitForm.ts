@@ -1,5 +1,5 @@
 import postFormToAirtable from 'fe-modules/apis/airtable/form';
-import { postFileToS3 } from 'fe-modules/apis/s3/file';
+import { uploadFileToPrivateS3 } from 'fe-modules/apis/s3/file';
 import { Auth } from 'fe-modules/models/auth';
 import { FormUISetting } from 'fe-modules/models/FormUI/FormUI';
 import { File_FormUIData } from 'fe-modules/models/FormUI/FormUIData';
@@ -34,7 +34,7 @@ async function preProcessData(curData: FieldValues, uiSettings: Array<FormUISett
               ':',
               '',
             )}_signature`;
-            await postFileToS3(path, signFile);
+            await uploadFileToPrivateS3(path, signFile);
             processedValue = [path];
           } else if (formData.type === 'emailAuth') {
             const val = value as { email: string; verified: boolean };
