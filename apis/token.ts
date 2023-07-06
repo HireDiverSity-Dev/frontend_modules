@@ -39,8 +39,8 @@ const getAuth = () => {
 };
 
 const clientSetToken = (client: AxiosInstance) => {
-  client.interceptors.request.use(
-    async function (config) {
+  client.interceptors.request.use(async function (config) {
+    try {
       if (typeof document !== 'undefined') {
         const auth = getAuth();
         let accessToken = await getAccessToken(auth);
@@ -51,28 +51,11 @@ const clientSetToken = (client: AxiosInstance) => {
         }
         config.headers.set('access_token', accessToken);
       }
-      return config;
-    },
-    function (error) {
-      return Promise.reject(error);
-    },
-  );
-
-  client.interceptors.response.use(
-    function (response) {
-      return response;
-    },
-    function (error: AxiosError) {
-      if (error?.response?.status) {
-        const status = error?.response?.status;
-        if (status && status < 500) {
-          console.log(error.response);
-          return error.response;
-        }
-      }
-      return Promise.reject(error);
-    },
-  );
+    } catch (err) {
+      console.log(err);
+    }
+    return config;
+  });
 };
 
 export { clientSetToken };
