@@ -19,3 +19,16 @@ export const languagePreprocess = (text: string) => {
   };
 };
 export const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+export function generateSubsets<T>(array: T[]): T[][] {
+  const subsets: T[][] = [[]]; // 초기 부분집합은 빈 배열 하나
+  for (let i = 0; i < array.length; i++) {
+    const current = array[i];
+    const subsetCount = subsets.length;
+    for (let j = 0; j < subsetCount; j++) {
+      const subset = subsets[j];
+      subsets.push([...subset, current]);
+    }
+  }
+  return subsets.slice(1);
+}
