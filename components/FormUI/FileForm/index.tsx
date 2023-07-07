@@ -32,7 +32,6 @@ export interface ImageObj {
 
 function FileForm({ form, uiSetting, options = { exampleImg: true }, lang, auth }: FileFormProps) {
   const formData = uiSetting.data as File_FormUIData;
-  const curDate = getCurrentDate();
 
   const [imageList, setImageList] = useState<Array<ImageObj>>([]);
   const [imgCnt, setImgCnt] = useState(0);
@@ -85,6 +84,7 @@ function FileForm({ form, uiSetting, options = { exampleImg: true }, lang, auth 
           return;
         }
         const objectUrl = URL.createObjectURL(file);
+        const curDate = getCurrentDate();
         const path = `temp/${auth.email}/${formData.s3path}/${curDate}_file${imgCnt + cnt}`;
 
         const imageObj: ImageObj = {
