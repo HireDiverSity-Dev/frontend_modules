@@ -1,4 +1,4 @@
-import postFormToAirtable from 'fe-modules/apis/airtable/form';
+import formSubmit from 'fe-modules/apis/lambda/formSubmit';
 import { uploadFileToPrivateS3 } from 'fe-modules/apis/s3/file';
 import { Auth } from 'fe-modules/models/auth';
 import { FormUISetting } from 'fe-modules/models/FormUI/FormUI';
@@ -20,7 +20,6 @@ interface SubmitFormProps {
 }
 
 async function preProcessData(curData: FieldValues, uiSettings: Array<FormUISetting>, auth: Auth) {
-  const curDate = getCurrentDate();
   const sendData: Array<SubmitFormProps> = await Promise.all(
     Object.entries(curData)
       .filter(([, value]) => value)
@@ -29,6 +28,7 @@ async function preProcessData(curData: FieldValues, uiSettings: Array<FormUISett
         let processedValue = value;
         if (formData) {
           if (formData.type === 'signature') {
+            const curDate = getCurrentDate();
             const signFile = base64ToFile(curData[key], (formData as File_FormUIData).s3path);
             const path = `temp/${auth.email}/${(formData as File_FormUIData).s3path}/${curDate.replace(
               ':',
@@ -60,7 +60,7 @@ async function onSubmitForm(curData: FieldValues, uiSettings: Array<FormUISettin
 
   const sendData = await preProcessData(curData, uiSettings, auth);
   console.log('processed data:', sendData);
-  const res = await postFormToAirtable(JSON.stringify(sendData));
+  const res = await formSubmit(JSON.stringify(sendData));
   return res;
 }
 
