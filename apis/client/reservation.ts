@@ -15,27 +15,28 @@ export async function patchFingerprintClient(params: fingerprintRegisterParams, 
 }
 
 interface receiveRegisterParams {
-  appDownloadCheck: boolean;
-  appNotDownloadReason: string[];
-  appNotDownloadReasonRemark: string;
-  appUserWantFunction: string;
-  arcProcessConvenient: string[];
-  arcProcessConvenientRemark: string;
-  arcProcessInconvenient: string[];
-  arcProcessInconvenientRemark: string;
-  groupReceptionSatisfaction: number;
-  hirevisaId: string;
-  koreaLivingInconvenient: string;
-  notArcInconvenience: string[];
-  notArcInconvenienceRemark: string;
-  researchCheck: boolean;
+  appDownloadCheck?: boolean;
+  appNotDownloadReason?: string[];
+  appNotDownloadReasonRemark?: string;
+  appUserWantFunction?: string;
+  arcProcessConvenient?: string[];
+  arcProcessConvenientRemark?: string;
+  arcProcessInconvenient?: string[];
+  arcProcessInconvenientRemark?: string;
+  groupReceptionSatisfaction?: number;
+  hirevisaId?: string;
+  koreaLivingInconvenient?: string;
+  notArcInconvenience?: string[];
+  notArcInconvenienceRemark?: string;
+  researchCheck?: boolean;
   reservationDate: string;
   reservationTime: string;
-  universityPolicySatisfaction: boolean;
-  universityPolicySatisfactionContent: string;
-  universitySatisfaction: number;
-  usimPurchase: string;
-  usimPurchaseRemark: string;
+  imgUrl?: string;
+  universityPolicySatisfaction?: boolean;
+  universityPolicySatisfactionContent?: string;
+  universitySatisfaction?: number;
+  usimPurchase?: string;
+  usimPurchaseRemark?: string;
 }
 
 export async function postReceiveRegisterClient(params: receiveRegisterParams) {
