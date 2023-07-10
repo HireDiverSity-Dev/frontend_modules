@@ -1,13 +1,14 @@
 import { Button } from '@mui/material';
-import { useTranslation } from 'next-i18next';
+import { Translation } from 'fe-modules/models/lang';
+import { Lang } from '@/types/user/UserType';
 
 interface EmailAuthButtonProps {
   isVerified: boolean;
   onVerify: () => void;
+  lang: Lang;
 }
 
-export default function EmailAuthButton({ isVerified, onVerify }: EmailAuthButtonProps) {
-  const { t } = useTranslation(['customForm']);
+export default function EmailAuthButton({ isVerified, onVerify, lang }: EmailAuthButtonProps) {
   return (
     <Button
       variant="outlined"
@@ -16,7 +17,20 @@ export default function EmailAuthButton({ isVerified, onVerify }: EmailAuthButto
       onClick={isVerified ? () => {} : onVerify}
       sx={{ height: '56px' }}
     >
-      {isVerified ? t(`폼.이메일인증.인증완료`) : t(`폼.이메일인증.인증전`)}
+      {isVerified ? Label.인증완료[lang as keyof Translation] : Label.인증전[lang as keyof Translation]}
     </Button>
   );
 }
+
+const Label: { [key: string]: Translation } = {
+  인증완료: {
+    kr: '인증완료!',
+    zh: '认证成功',
+    en: 'Verified!',
+  },
+  인증전: {
+    kr: '인증하기',
+    zh: '进行认证',
+    en: 'Verify',
+  },
+};
