@@ -37,8 +37,8 @@ async function preProcessData(curData: FieldValues, uiSettings: Array<FormUISett
             await uploadFileToPrivateS3(path, signFile);
             processedValue = [path];
           } else if (formData.type === 'emailAuth') {
-            const val = value as { email: string; verified: boolean };
-            processedValue = val?.verified ? val.email : '';
+            const val = value as { email: string; isVerified: boolean };
+            processedValue = val?.isVerified ? val.email : '';
           }
         }
         return {

@@ -12,14 +12,29 @@ import { useController } from 'react-hook-form';
 
 function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
   const name = uiSetting.formKey;
+  let langApi: string; // API 발송용 언어
+  switch (lang) {
+    case 'kr':
+      langApi = 'korean';
+      break;
+    case 'en':
+      langApi = 'english';
+      break;
+    case 'zh':
+      langApi = 'chinese';
+      break;
+    default:
+      langApi = 'english';
+  }
 
   const [, setEmail] = useState('');
   const [code, setCode] = useState('');
   const [isSented, setIsSented] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
+  const [server, setServer] = useState({ invalid: false, msg: '' });
 
-  const { field, fieldState } = useController({
-    name: `${name}`,
+  const { field: emailField, fieldState: emailFieldState } = useController({
+    name: `${name}.email` as string,
     control: form.control,
     rules: {
       required: uiSetting.rule?.required,
@@ -40,33 +55,36 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
   });
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    field.onChange(e.target.value);
+    emailField.onChange(e.target.value);
     verifyField.onChange(false);
   };
 
   const onVerify = async () => {
-    const emailValue = field.value;
+    const emailValue = emailField.value;
     setEmail(emailValue);
-    await postVerificationSendClient(emailValue, lang).then((res) => {
-      if (res.status === 200) {
-        setIsSented(true);
-      } else {
-        setIsSented(false);
-      }
-    });
+    try {
+      await postVerificationSendClient(emailValue, langApi);
+      setIsSented(true);
+      setServer({ invalid: false, msg: '' });
+    } catch (error) {
+      setIsSented(false);
+      setServer({ invalid: true, msg: 'email verification failed' });
+    }
   };
 
   const onConfirm = async (input: string) => {
-    const emailValue = field.value;
+    const emailValue = emailField.value;
     setEmail(emailValue);
-    await getVerificationConfirmClient(emailValue, input).then((res) => {
-      console.log(res);
-      if (res.status === 200) {
-        setIsVerified(true);
-        field.onChange(emailValue);
-        verifyField.onChange(true);
-      }
-    });
+    try {
+      await getVerificationConfirmClient(emailValue, input);
+      setIsVerified(true);
+      emailField.onChange(emailValue);
+      verifyField.onChange(true);
+      setServer({ invalid: false, msg: '' });
+    } catch (error) {
+      setIsVerified(false);
+      setServer({ invalid: true, msg: 'email confirm failed' });
+    }
   };
 
   return (
@@ -75,17 +93,20 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
       <Box sx={style.box}>
         <FlexBox sx={{ flexDirection: 'column', width: '100' }}>
           <TextInput
-            field={field}
+            field={emailField}
             multiline={false}
             disabled={uiSetting.rule?.readonly ?? false}
             onCustomChange={onChange}
           />
-          {fieldState.invalid && <TextError msg={fieldState.error?.message ?? ''} />}
+          {emailFieldState.invalid && <TextError msg={emailFieldState.error?.message ?? ''} />}
+          {server.invalid && <TextError msg={server.msg} />}
         </FlexBox>
-        <EmailAuthButton isVerified={isVerified} onVerify={onVerify} />
-        {isSented && !isVerified && <EmailAuthCode name={name} code={code} setCode={setCode} onConfirm={onConfirm} />}
+        <EmailAuthButton isVerified={isVerified} onVerify={onVerify} lang={lang} />
+        {isSented && !isVerified && (
+          <EmailAuthCode name={name} code={code} setCode={setCode} onConfirm={onConfirm} lang={lang} />
+        )}
       </Box>
-      {isSented && !isVerified && <EmailAuthResendButton onVerify={onVerify} />}
+      {isSented && !isVerified && <EmailAuthResendButton onVerify={onVerify} lang={lang} />}
     </FlexBox>
   );
 }
