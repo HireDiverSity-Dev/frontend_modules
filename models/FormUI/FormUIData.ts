@@ -1,6 +1,6 @@
 import { Translation } from 'fe-modules/models/lang';
 
-const FormUIDataTypes = {
+export const FormUIDataTypes = {
   text: 'text',
   longtext: 'longtext',
   file: 'file',
