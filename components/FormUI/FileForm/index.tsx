@@ -78,10 +78,12 @@ function FileForm({ form, uiSetting, options = { exampleImg: true }, lang, auth 
     if (e?.target?.files?.length) {
       let cnt = 0;
 
-      const newImage = Array.from(e?.target?.files, (file) => {
+      let newImage: ImageObj[] = [];
+      for (let i = 0; i < e.target.files.length; i++) {
+        const file = e.target.files[i];
         const fileType = getFileType(file);
         if (fileType === 'other') {
-          return;
+          continue;
         }
         const objectUrl = URL.createObjectURL(file);
         const curDate = getCurrentDate();
@@ -100,11 +102,10 @@ function FileForm({ form, uiSetting, options = { exampleImg: true }, lang, auth 
           uploadComplete(imageObj.name);
         });
 
-        cnt++;
-        return imageObj;
-      });
+        newImage.push(imageObj);
+      }
 
-      setImageList(imageList.concat(newImage as Array<ImageObj>));
+      setImageList(imageList.concat(newImage));
       setImgCnt(imgCnt + cnt);
     }
   };
