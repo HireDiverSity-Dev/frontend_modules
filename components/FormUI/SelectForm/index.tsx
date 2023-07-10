@@ -40,15 +40,24 @@ export default function SelectForm({ form, uiSetting, lang, multiple }: FormUIPr
       newState = Array<boolean>(formData.options.length).fill(false);
       newState[num] = true;
     }
-    setState(newState);
 
-    const data: string[] = [];
-    newState.map((value, index) => {
-      if (value) {
-        data.push(formData.options[index]?.name);
-      }
-    });
-    field.onChange(data);
+    if (multiple) {
+      const datas = newState.reduce((prev: string[], cur, index) => {
+        if (cur) {
+          const options = formData.options[index];
+          prev.push(options.name);
+        }
+        return prev;
+      }, []);
+      field.onChange(datas);
+    } else {
+      let data = '';
+      newState.forEach((cur, index) => {
+        if (cur) data = formData.options[index].name;
+      });
+      field.onChange(data);
+    }
+    setState(newState);
   };
 
   return (
