@@ -1,7 +1,6 @@
 import { Button } from '@mui/material';
 import FlexBox from 'fe-modules/components/basic/FlexBox';
-import { Translation } from 'fe-modules/models/lang';
-import { Lang } from '@/types/user/UserType';
+import { Lang, Translation } from 'fe-modules/models/lang';
 
 export default function EmailAuthResentButton({ onVerify, lang }: { onVerify: () => void; lang: Lang }) {
   return (

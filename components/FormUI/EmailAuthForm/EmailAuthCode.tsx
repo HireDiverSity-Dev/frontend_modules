@@ -1,6 +1,5 @@
 import { Button, TextField } from '@mui/material';
-import { Translation } from 'fe-modules/models/lang';
-import { Lang } from '@/types/user/UserType';
+import { Lang, Translation } from 'fe-modules/models/lang';
 
 interface EmailAuthCodeProps {
   name: string;
