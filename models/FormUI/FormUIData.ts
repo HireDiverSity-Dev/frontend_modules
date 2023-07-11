@@ -42,9 +42,9 @@ export interface FormUIData {
   };
 
   airtable?: {
-    base: number;
-    table: number;
-    col: number;
+    base: string;
+    table: string;
+    col: string;
   };
   server?: string;
 }
