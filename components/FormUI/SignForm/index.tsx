@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
-import SignBoard from 'fe-modules/components/FormUI/SignForm/SignBoard';
-import SignSubmit from 'fe-modules/components/FormUI/SignForm/SignSubmit';
+import { Box } from '@mui/material';
+import SignClear from 'fe-modules/components/FormUI/SignForm/SignClear';
 import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
 import { useController } from 'react-hook-form';
 import SignatureCanvas from 'react-signature-canvas';
@@ -14,7 +14,7 @@ const SignForm = ({ form, uiSetting, lang }: FormUIProps) => {
     },
   });
 
-  const sigCanvas = useRef<SignatureCanvas>(null);
+  const sigCanvas = useRef() as React.MutableRefObject<SignatureCanvas>;
 
   const onChangeHandler = () => {
     if (sigCanvas.current) {
@@ -32,8 +32,20 @@ const SignForm = ({ form, uiSetting, lang }: FormUIProps) => {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
-      <SignBoard ref={sigCanvas} onChange={onChangeHandler} />
-      <SignSubmit lang={lang} onClick={clearSignature} />
+      <Box sx={{ width: 300 }}>
+        <Box sx={{ bgcolor: '#00000010' }}>
+          <SignatureCanvas
+            ref={sigCanvas}
+            backgroundColor="#00000000"
+            canvasProps={{
+              width: 300,
+              height: 150,
+            }}
+            onEnd={onChangeHandler}
+          />
+        </Box>
+      </Box>
+      <SignClear lang={lang} onClick={clearSignature} />
     </div>
   );
 };

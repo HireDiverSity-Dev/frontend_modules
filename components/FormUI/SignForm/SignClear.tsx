@@ -14,7 +14,7 @@ interface SignSubmitProps {
   onClick: () => void;
 }
 
-export default function SignSubmit({ lang, onClick }: SignSubmitProps) {
+export default function SignClear({ lang, onClick }: SignSubmitProps) {
   return (
     <Button sx={{ float: 'right', color: 'grey' }} onClick={onClick}>
       {SignatureClearLabel.clear[lang as keyof Translation]}

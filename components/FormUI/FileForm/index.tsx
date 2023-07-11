@@ -98,7 +98,7 @@ function FileForm({ form, uiSetting, options = { exampleImg: true }, lang, auth 
           loading: false,
         };
 
-        uploadFileToPrivateS3(imageObj.s3Path, file, () => {
+        await uploadFileToPrivateS3(imageObj.s3Path, file, () => {
           uploadComplete(imageObj.name);
         });
 
