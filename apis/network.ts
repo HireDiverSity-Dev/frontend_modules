@@ -4,7 +4,7 @@ import { clientSetToken } from 'fe-modules/apis/token';
 const adminUrl = 'https://admin.api.hirevisa.com';
 const clientUrl = 'https://api.hirevisa.com';
 const lambdaUrl = 'https://sdiazawpj5.execute-api.ap-northeast-2.amazonaws.com/v1';
-const awsUrl = 'http://aws.hirevisa.com/api';
+const awsUrl = '//aws.hirevisa.com/api';
 const testUrl = 'http://localhost:3009/api';
 
 const admin = axios.create({
