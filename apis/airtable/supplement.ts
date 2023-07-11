@@ -1,9 +1,9 @@
 import { aws } from 'fe-modules/apis/network';
 
-async function postNewSupplement(recordId: string, images: any) {
+async function postNewSupplement(recordId: string, docs: any) {
   const body = {
     recordId,
-    images,
+    docs,
   };
   return await aws.post('/airtable/new/supplement', body);
 }
