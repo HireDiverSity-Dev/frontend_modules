@@ -14,6 +14,13 @@ const admin = axios.create({
   },
 });
 
+const clientRefresh = axios.create({
+  baseURL: clientUrl,
+  validateStatus: (status) => {
+    return status < 500;
+  },
+});
+
 const client = axios.create({
   baseURL: clientUrl,
   validateStatus: (status) => {
@@ -36,4 +43,4 @@ const aws = axios.create({
   },
 });
 
-export { admin, aws, client, lambda };
+export { admin, aws, client, clientRefresh, lambda };
