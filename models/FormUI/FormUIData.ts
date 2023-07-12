@@ -22,11 +22,11 @@ export const CanDisableFormUIDataTypeList = [
   FormUIDataTypes.longtext,
   FormUIDataTypes.multiselect,
   FormUIDataTypes.singleselect,
-  FormUIDataTypes.checkbox,
   FormUIDataTypes.boolean,
   FormUIDataTypes.emailAuth,
 ];
 export const TitlelessFormUIDataTypeList = [
+  FormUIDataTypes.checkbox,
   FormUIDataTypes.divider,
   FormUIDataTypes.paragraph,
   FormUIDataTypes.signature,
@@ -35,7 +35,7 @@ export const TitlelessFormUIDataTypeList = [
 export interface FormUIData {
   _id: string; // primary key
   type: FormUIDataType;
-  title: Translation;
+  title?: Translation;
   subtitle?: Translation;
   placeholder?: Translation;
   pattern?: {
@@ -92,6 +92,7 @@ export interface Checkbox_FormUIData extends FormUIData {
       id?: string;
     };
   };
+  link?: string;
 }
 
 export interface Paragraph_FormUIData extends FormUIData {
