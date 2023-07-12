@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { RadioGroup } from '@mui/material';
 import BooleanLabel from 'fe-modules/components/FormUI/BooleanForm/BooleanLabel';
-import BoolearnRadio from 'fe-modules/components/FormUI/BooleanForm/BooleanRadio';
+import BooleanRadio from 'fe-modules/components/FormUI/BooleanForm/BooleanRadio';
 import BooleanText from 'fe-modules/components/FormUI/BooleanForm/BooleanText';
 import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
 import { Boolean_FormUIData } from 'fe-modules/models/FormUI/FormUIData';
@@ -34,14 +34,14 @@ function BooleanForm({ form, uiSetting, lang }: FormUIProps) {
         value={true}
         isHorizontal={isHorizontal}
         disabled={!!uiSetting.rule?.readonly}
-        control={<BoolearnRadio value={true} curValue={field.value} onChange={handleChange} />}
+        control={<BooleanRadio value={true} curValue={field.value} onChange={handleChange} />}
         label={<BooleanText msg={data.options?.[0]?.label?.[lang] || Label.true[lang]} />}
       />
       <BooleanLabel
         value={false}
         isHorizontal={isHorizontal}
         disabled={!!uiSetting.rule?.readonly}
-        control={<BoolearnRadio value={false} curValue={field.value} onChange={handleChange} />}
+        control={<BooleanRadio value={false} curValue={field.value} onChange={handleChange} />}
         label={<BooleanText msg={data.options?.[1]?.label?.[lang] || Label.false[lang]} />}
       />
     </RadioGroup>
