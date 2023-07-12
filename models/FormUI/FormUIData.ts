@@ -1,5 +1,5 @@
-import { Checkbox } from '@mui/material';
 import { Translation } from 'fe-modules/models/lang';
+import { UseFormReturn } from 'react-hook-form';
 
 export const FormUIDataTypes = {
   text: 'text',
@@ -98,3 +98,10 @@ export interface Paragraph_FormUIData extends FormUIData {
   type: 'paragraph';
   text: Translation;
 }
+
+export type FormUIDataUseFormReturn = UseFormReturn<FormUIData>;
+export type File_FormUIDataUseFormReturn = UseFormReturn<File_FormUIData>;
+export type Boolean_FormUIDataUseFormReturn = UseFormReturn<Boolean_FormUIData>;
+export type Select_FormUIDataUseFormReturn = UseFormReturn<Select_FormUIData>;
+export type Checkbox_FormUIDataUseFormReturn = UseFormReturn<Checkbox_FormUIData>;
+export type Paragraph_FormUIDataUseFormReturn = UseFormReturn<Paragraph_FormUIData>;
