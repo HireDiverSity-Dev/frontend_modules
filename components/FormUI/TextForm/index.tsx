@@ -12,7 +12,7 @@ function TextForm({ form, uiSetting, multiline }: FormUIProps & { multiline?: bo
     rules: {
       required: uiSetting.rule?.required,
       pattern: uiSetting.data.pattern && {
-        value: uiSetting.data.pattern.value,
+        value: RegExp(uiSetting.data.pattern.value),
         message: uiSetting.data.pattern.message,
       },
     },
