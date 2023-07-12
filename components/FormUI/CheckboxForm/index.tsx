@@ -15,7 +15,10 @@ function CheckboxForm({ form, uiSetting, lang }: FormUIProps) {
     name: uiSetting.formKey,
     control: form.control,
     rules: {
-      required: uiSetting.rule?.required,
+      validate: (value) => {
+        if (uiSetting.rule?.required) return value === data.options.true.name;
+        else return true;
+      },
     },
   });
 
