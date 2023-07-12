@@ -38,7 +38,7 @@ export interface FormUIData {
   pattern?: {
     label: string;
     message: string;
-    value: RegExp;
+    value: string;
   };
 
   airtable?: {
