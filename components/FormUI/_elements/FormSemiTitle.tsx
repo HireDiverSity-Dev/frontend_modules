@@ -9,6 +9,7 @@ interface FormSemiTitleProps {
 }
 
 function FormSemiTitle({ uiSetting, lang }: FormSemiTitleProps) {
+  if (uiSetting.data?.subtitle === undefined) return <></>;
   return (
     <Typography
       variant="body1"

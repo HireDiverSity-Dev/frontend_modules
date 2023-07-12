@@ -13,6 +13,7 @@ function Star() {
 }
 
 function FormTitle({ uiSetting, lang }: FormTitleProps) {
+  if (uiSetting.data?.title === undefined) return <></>;
   return (
     <Typography variant="subtitle2" mb={1}>
       {uiSetting.data?.title?.[lang]}
