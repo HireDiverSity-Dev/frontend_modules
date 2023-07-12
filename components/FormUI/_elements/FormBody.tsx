@@ -1,6 +1,7 @@
 import React from 'react';
 import { Divider } from '@mui/material';
 import BooleanForm from 'fe-modules/components/FormUI/BooleanForm';
+import CheckboxForm from 'fe-modules/components/FormUI/CheckboxForm/index';
 import EmailAuthForm from 'fe-modules/components/FormUI/EmailAuthForm';
 import FileForm from 'fe-modules/components/FormUI/FileForm';
 import ParagraphForm from 'fe-modules/components/FormUI/ParagraphForm/index';
@@ -28,6 +29,9 @@ function FormBody(props: FormUIProps) {
       break;
     case 'boolean':
       body = <BooleanForm {...props} />;
+      break;
+    case 'checkbox':
+      body = <CheckboxForm {...props} />;
       break;
     case 'singleselect':
       body = <SelectForm {...props} />;

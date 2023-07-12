@@ -1,3 +1,4 @@
+import { Checkbox } from '@mui/material';
 import { Translation } from 'fe-modules/models/lang';
 
 export const FormUIDataTypes = {
@@ -7,6 +8,7 @@ export const FormUIDataTypes = {
   multiselect: 'multiselect',
   singleselect: 'singleselect',
   boolean: 'boolean',
+  checkbox: 'checkbox',
   signature: 'signature',
   rate: 'rate',
   emailAuth: 'emailAuth',
@@ -20,6 +22,7 @@ export const CanDisableFormUIDataTypeList = [
   FormUIDataTypes.longtext,
   FormUIDataTypes.multiselect,
   FormUIDataTypes.singleselect,
+  FormUIDataTypes.checkbox,
   FormUIDataTypes.boolean,
   FormUIDataTypes.emailAuth,
 ];
@@ -74,6 +77,21 @@ export interface Select_FormUIData extends FormUIData {
     id?: string;
     label: Translation;
   }>;
+}
+
+export interface Checkbox_FormUIData extends FormUIData {
+  type: 'checkbox';
+  label: Translation;
+  options: {
+    true: {
+      name: string;
+      id?: string;
+    };
+    false: {
+      name: string;
+      id?: string;
+    };
+  };
 }
 
 export interface Paragraph_FormUIData extends FormUIData {
