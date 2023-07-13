@@ -16,14 +16,15 @@ export default function SelectForm({ form, uiSetting, lang, multiple }: FormUIPr
       required: uiSetting.rule?.required,
     },
   });
+  const [state, setState] = useState(Array<boolean>(formData.options.length).fill(false));
 
   useEffect(() => {
     if (uiSetting.rule?.default && uiSetting.defaultValue) {
       setState(formData.options.map((val) => (uiSetting.defaultValue as string[]).includes(val!.name)));
     }
+    if (field.value !== undefined)
+      setState(formData.options.map((val) => (field.value as string[]).includes(val!.name)));
   }, [uiSetting.rule?.default, uiSetting.defaultValue]);
-
-  const [state, setState] = useState(Array<boolean>(formData.options.length).fill(false));
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const num = parseInt(event.target.value);
