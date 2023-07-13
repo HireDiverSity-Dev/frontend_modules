@@ -22,7 +22,9 @@ function FormUI({ form, uiSetting, lang, auth }: FormUIProps) {
   return (
     <FormBox>
       <FormTitle uiSetting={newSetting} lang={lang} />
-      {form.formState.errors[newSetting.formKey] && <FormError msg={'check your answer'} />}
+      {form.formState.errors[newSetting.formKey] && uiSetting.data.type !== 'checkbox' && (
+        <FormError msg={'check your answer'} />
+      )}
       <FormSemiTitle uiSetting={newSetting} lang={lang} />
       <FormBody form={form} uiSetting={newSetting} lang={lang} auth={auth} />
     </FormBox>
