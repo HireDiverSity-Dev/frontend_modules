@@ -11,7 +11,7 @@ function CheckboxForm({ form, uiSetting, lang }: FormUIProps) {
 
   const [state, setState] = useState(false);
 
-  const { field } = useController({
+  const { field, fieldState } = useController({
     name: uiSetting.formKey,
     control: form.control,
     rules: {
@@ -44,8 +44,14 @@ function CheckboxForm({ form, uiSetting, lang }: FormUIProps) {
   return (
     <FormGroup sx={{ justifyContent: 'space-evenly', mx: 1, width: '100%' }}>
       <CheckboxLabel
-        control={<Checkbox checked={state} onChange={handleChange} sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }} />}
-        label={<CheckboxText msg={data.label?.[lang] ?? ''} link={data.link} />}
+        control={
+          <Checkbox
+            checked={state}
+            onChange={handleChange}
+            sx={{ '& .MuiSvgIcon-root': { fontSize: 28 }, color: fieldState.invalid ? 'red' : '' }}
+          />
+        }
+        label={<CheckboxText msg={data.label?.[lang] ?? ''} link={data.link} required={uiSetting.rule?.required} />}
         disabled={!!uiSetting.rule?.readonly}
       />
     </FormGroup>
