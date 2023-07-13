@@ -92,7 +92,7 @@ export interface Checkbox_FormUIData extends FormUIData {
       id?: string;
     };
   };
-  link?: string;
+  link?: Translation;
 }
 
 export interface Paragraph_FormUIData extends FormUIData {
