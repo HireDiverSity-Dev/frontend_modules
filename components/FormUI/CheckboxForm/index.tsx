@@ -45,7 +45,7 @@ function CheckboxForm({ form, uiSetting, lang }: FormUIProps) {
     <FormGroup sx={{ justifyContent: 'space-evenly', mx: 1, width: '100%' }}>
       <CheckboxLabel
         control={<Checkbox checked={state} onChange={handleChange} sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }} />}
-        label={<CheckboxText msg={data.label?.[lang] ?? ''} link={data.link} />}
+        label={<CheckboxText msg={data.label?.[lang] ?? ''} link={data.link?.[lang] ?? ''} />}
         disabled={!!uiSetting.rule?.readonly}
       />
     </FormGroup>
