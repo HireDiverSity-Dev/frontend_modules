@@ -74,11 +74,12 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
     }
   };
 
-  const onConfirm = async (input: string) => {
+  const onConfirm = async () => {
     const emailValue = emailField.value;
     setEmail(emailValue);
     try {
-      await getVerificationConfirmClient(emailValue, input);
+      const res = await getVerificationConfirmClient(emailValue, code);
+      if (res.status !== 200) throw new Error('email confirm failed');
       setIsVerified(true);
       emailField.onChange(emailValue);
       verifyField.onChange(true);
