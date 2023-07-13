@@ -85,7 +85,13 @@ function FormPage({ props, auth }: { props: FormPageProps; auth: Auth }) {
             return <FormUI form={form} uiSetting={uiSetting} lang={i18n.language as Lang} auth={auth} key={index} />;
         })}
       </Box>
-      <PageController page={page} setPage={setPage} endPage={getEndPage(props.forms)} />
+      <PageController
+        form={form}
+        uiSettings={props.forms}
+        page={page}
+        setPage={setPage}
+        endPage={getEndPage(props.forms)}
+      />
       {getEndPage(props.forms) === page ? <FormSubmitButton form={form} page={props} auth={auth} /> : <></>}
     </>
   );

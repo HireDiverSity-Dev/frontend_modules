@@ -1,5 +1,6 @@
 import formSubmit from 'fe-modules/apis/lambda/formSubmit';
 import { uploadFileToPrivateS3 } from 'fe-modules/apis/s3/file';
+import { ImageObj } from 'fe-modules/components/FormUI/FileForm/index';
 import { Auth } from 'fe-modules/models/auth';
 import { FormUISetting } from 'fe-modules/models/FormUI/FormUI';
 import { File_FormUIData } from 'fe-modules/models/FormUI/FormUIData';
@@ -26,8 +27,11 @@ async function preProcessData(curData: FieldValues, uiSettings: Array<FormUISett
       .map(async ([key, value]) => {
         const formData = uiSettings?.filter((val) => val.formKey === key)?.[0]?.data;
         let processedValue = value;
-        if (formData) {
-          if (formData.type === 'signature') {
+        switch (formData.type) {
+          case 'file':
+            processedValue = value.map((val: ImageObj) => val.s3Path);
+            break;
+          case 'signature':
             const curDate = getCurrentDate();
             const signFile = base64ToFile(curData[key], (formData as File_FormUIData).s3path);
             const path = `temp/${auth.email}/${(formData as File_FormUIData).s3path}/${curDate.replace(
@@ -36,10 +40,13 @@ async function preProcessData(curData: FieldValues, uiSettings: Array<FormUISett
             )}_signature`;
             await uploadFileToPrivateS3(path, signFile);
             processedValue = [path];
-          } else if (formData.type === 'emailAuth') {
+            break;
+          case 'emailAuth':
             const val = value as { email: string; isVerified: boolean };
             processedValue = val?.isVerified ? val.email : '';
-          }
+            break;
+          default:
+            break;
         }
         return {
           value: processedValue as FormUIValue,

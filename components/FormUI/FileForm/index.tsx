@@ -33,9 +33,6 @@ export interface ImageObj {
 function FileForm({ form, uiSetting, options = { exampleImg: true }, lang, auth }: FileFormProps) {
   const formData = uiSetting.data as File_FormUIData;
 
-  const [imageList, setImageList] = useState<Array<ImageObj>>([]);
-  const [imgCnt, setImgCnt] = useState(0);
-
   const { field } = useController({
     control: form.control,
     name: uiSetting.formKey,
@@ -43,6 +40,9 @@ function FileForm({ form, uiSetting, options = { exampleImg: true }, lang, auth 
       required: uiSetting.rule?.required,
     },
   });
+
+  const [imageList, setImageList] = useState<Array<ImageObj>>([]);
+  const [imgCnt, setImgCnt] = useState(0);
 
   //input ref 관련
   const photoInput = useRef<HTMLInputElement>(null);
@@ -67,9 +67,13 @@ function FileForm({ form, uiSetting, options = { exampleImg: true }, lang, auth 
     [imageList],
   );
 
+  useEffect(() => {
+    setImageList(field.value ?? []);
+  }, []);
+
   // react-hook-form 등록
   useEffect(() => {
-    field.onChange(imageList.map((val) => val.s3Path));
+    field.onChange(imageList);
   }, [imageList]);
 
   // input 클릭 시 이미지 업로드
