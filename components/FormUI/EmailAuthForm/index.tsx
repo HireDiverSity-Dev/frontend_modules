@@ -57,6 +57,8 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     emailField.onChange(e.target.value);
     verifyField.onChange(false);
+    setIsVerified(false);
+    setIsSented(false);
   };
 
   const onVerify = async () => {
