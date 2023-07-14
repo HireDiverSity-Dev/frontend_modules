@@ -8,7 +8,7 @@ import { FormUIRule } from 'fe-modules/models/FormUI/FormUIRule';
 function isMovable(
   form: FormUIUseFormReturn,
   settings: FormUISetting[],
-  pageConditions: Array<FormUICondition>,
+  pageConditions: Array<FormUICondition> | undefined,
   watch: Record<string, any>,
 ) {
   let tempMoveNext = true;
@@ -20,7 +20,7 @@ function isMovable(
     }
   });
 
-  if (tempMoveNext) {
+  if (tempMoveNext && pageConditions && pageConditions.length > 0) {
     let pageRule: FormUIRule = {
       invisible: false,
     };

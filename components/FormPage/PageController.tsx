@@ -5,12 +5,14 @@ import { Button } from '@mui/material';
 import isMovable from 'fe-modules/components/FormPage/isMovable';
 import SetSetting from 'fe-modules/components/FormUI/SetSetting';
 import { FormUISetting, FormUIUseFormReturn } from 'fe-modules/models/FormUI/FormUI';
+import { FormUICondition } from 'fe-modules/models/FormUI/FormUICondition';
 import { useTranslation } from 'next-i18next';
 import { useWatch } from 'react-hook-form';
 
 interface Props {
   form: FormUIUseFormReturn;
   uiSettings: FormUISetting[];
+  pageConditions: Array<FormUICondition> | undefined;
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
   endPage: number;
@@ -32,7 +34,7 @@ function nextPage({ page, setPage, endPage }: Props) {
 
 function PageController(props: Props) {
   const { t } = useTranslation('customForm');
-  const { form, uiSettings, page, endPage } = props;
+  const { form, uiSettings, pageConditions, page, endPage } = props;
   const newSettings = uiSettings.map((uiSetting) => {
     const newSetting = SetSetting(form, uiSetting);
     return newSetting;
@@ -44,11 +46,11 @@ function PageController(props: Props) {
     const tempMoveNext = isMovable(
       form,
       newSettings.filter((newSetting) => newSetting.page === page),
-      form.watch(`pages.${page}.conditions`),
+      pageConditions,
       watch,
     );
     setCanMoveNext(tempMoveNext);
-  }, [page, uiSettings, form.watch()]);
+  }, [page, uiSettings, pageConditions, form.watch()]);
 
   return (
     <div style={{ width: '100%', flex: 0, display: 'flex', justifyContent: 'space-between' }}>

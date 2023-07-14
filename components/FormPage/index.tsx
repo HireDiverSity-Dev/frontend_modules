@@ -88,6 +88,7 @@ function FormPage({ props, auth }: { props: FormPageProps; auth: Auth }) {
       <PageController
         form={form}
         uiSettings={props.forms}
+        pageConditions={props.pages[page - 1]?.conditions}
         page={page}
         setPage={setPage}
         endPage={getEndPage(props.forms)}
