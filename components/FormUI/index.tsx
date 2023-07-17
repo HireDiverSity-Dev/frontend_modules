@@ -13,13 +13,15 @@ function FormUI({ form, uiSetting, lang, auth }: FormUIProps) {
   const watch = useWatch({ control: form.control });
   const newSetting = getNewSetting(uiSetting, watch);
 
-  if (newSetting.rule?.invisible) return <></>;
   if (newSetting.data.type === 'signature') {
     newSetting.data = {
       ...newSetting.data,
       title: SignatureLabel.title,
       subtitle: SignatureLabel.subtitle,
     };
+  }
+  if (newSetting.rule?.invisible) {
+    return <FormBody form={form} uiSetting={newSetting} lang={lang} auth={auth} />;
   }
   return (
     <FormBox>

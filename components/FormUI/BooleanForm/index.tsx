@@ -29,7 +29,10 @@ function BooleanForm({ form, uiSetting, lang }: FormUIProps) {
 
   const isHorizontal = data.style === 'horizontal';
   return (
-    <RadioGroup row={isHorizontal} sx={{ justifyContent: 'space-evenly', mx: 2 }}>
+    <RadioGroup
+      row={isHorizontal}
+      sx={{ justifyContent: 'space-evenly', mx: 2, display: uiSetting.rule?.invisible ? 'none' : '' }}
+    >
       <BooleanLabel
         value={true}
         isHorizontal={isHorizontal}

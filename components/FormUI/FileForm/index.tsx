@@ -108,7 +108,7 @@ function FileForm({ form, uiSetting, lang, auth, options = { exampleImg: true } 
   };
 
   return (
-    <Box sx={{ width: '100%', mt: 2 }}>
+    <Box sx={{ width: '100%', mt: 2, display: uiSetting.rule?.invisible ? 'none' : '' }}>
       {formData.imgSrc &&
         options.exampleImg &&
         formData.imgSrc.map((img: string, index: number) => {

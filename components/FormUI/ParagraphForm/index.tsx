@@ -4,6 +4,14 @@ import { Paragraph_FormUIData } from 'fe-modules/models/FormUI/FormUIData';
 
 function ParagraphForm({ uiSetting, lang }: FormUIProps) {
   const formData = uiSetting.data as Paragraph_FormUIData;
-  return <div className="paragraph" dangerouslySetInnerHTML={{ __html: formData.text[lang] ?? '' }} />;
+  return (
+    <div
+      className="paragraph"
+      dangerouslySetInnerHTML={{ __html: formData.text[lang] ?? '' }}
+      style={{
+        display: uiSetting.rule?.invisible ? 'none' : '',
+      }}
+    />
+  );
 }
 export default ParagraphForm;

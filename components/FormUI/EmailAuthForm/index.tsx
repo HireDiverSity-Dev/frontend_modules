@@ -97,7 +97,7 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
   };
 
   return (
-    <FlexBox sx={{ flexDirection: 'column', gap: 2 }}>
+    <FlexBox sx={{ flexDirection: 'column', gap: 2, display: uiSetting.rule?.invisible ? 'none' : '' }}>
       <Checkbox sx={{ display: 'none' }} name={`${name}.isVerified`} checked={isVerified} />
       <Box sx={style.box}>
         <FlexBox sx={{ flexDirection: 'column', width: '100' }}>

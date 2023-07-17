@@ -25,7 +25,7 @@ function TextForm({ form, uiSetting, multiline }: FormUIProps & { multiline?: bo
   }, [uiSetting.rule?.default, uiSetting.defaultValue]);
 
   return (
-    <FlexBox sx={{ flexDirection: 'column', width: '100' }}>
+    <FlexBox sx={{ flexDirection: 'column', width: '100', display: uiSetting.rule?.invisible ? 'none' : '' }}>
       <TextInput field={field} multiline={multiline ?? false} disabled={uiSetting.rule?.readonly ?? false} />
       {fieldState.invalid && <TextError msg={fieldState.error?.message ?? ''} />}
     </FlexBox>

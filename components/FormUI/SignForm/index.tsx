@@ -31,7 +31,13 @@ const SignForm = ({ form, uiSetting, lang }: FormUIProps) => {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
+    <div
+      style={{
+        justifyContent: 'center',
+        overflow: 'hidden',
+        display: uiSetting.rule?.invisible ? 'none' : 'flex',
+      }}
+    >
       <Box sx={{ width: 300 }}>
         <Box sx={{ bgcolor: '#00000010' }}>
           <SignatureCanvas

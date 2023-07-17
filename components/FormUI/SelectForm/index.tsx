@@ -20,7 +20,13 @@ export default function SelectForm({ form, uiSetting, lang, multiple }: FormUIPr
 
   useEffect(() => {
     if (uiSetting.rule?.default && uiSetting.defaultValue) {
-      setState(formData.options.map((val) => (uiSetting.defaultValue as string[]).includes(val!.name)));
+      const defaultState = formData.options.map((val) => (uiSetting.defaultValue as string[]).includes(val!.name));
+      setState(defaultState);
+      defaultState.forEach((val, index) => {
+        if (val) {
+          handleChange({ target: { value: index.toString() } } as React.ChangeEvent<HTMLInputElement>);
+        }
+      });
     }
     if (field.value !== undefined)
       setState(formData.options.map((val) => (field.value as string[]).includes(val!.name)));
@@ -62,7 +68,10 @@ export default function SelectForm({ form, uiSetting, lang, multiple }: FormUIPr
   };
 
   return (
-    <FormGroup row={formData?.style === 'horizontal' ? true : false} sx={{ mx: 1 }}>
+    <FormGroup
+      row={formData?.style === 'horizontal' ? true : false}
+      sx={{ mx: 1, display: uiSetting.rule?.invisible ? 'none' : '' }}
+    >
       {formData.options.map((option, index) => (
         <SelectLabel
           key={index}
