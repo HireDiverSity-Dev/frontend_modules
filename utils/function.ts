@@ -32,3 +32,12 @@ export function generateSubsets<T>(array: T[]): T[][] {
   }
   return subsets.slice(1);
 }
+
+export const getRandomString = (length: number = 10) => {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let text = '';
+  for (var i = 0; i < length; i++) {
+    text += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return text;
+};
