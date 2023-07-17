@@ -85,9 +85,9 @@ function FileForm({ form, uiSetting, lang, auth, options = { exampleImg: true } 
         try {
           let filePath = '';
           const saveDir = form.getValues('saveDir');
-          if (saveDir) filePath = saveDir + '/';
-          if (auth.email) filePath = auth.email + '/';
-          if (formData.s3path) filePath += formData.s3path;
+          if (saveDir) filePath = '/' + saveDir;
+          if (auth.email) filePath = '/' + auth.email;
+          if (formData.s3path) filePath += '/' + formData.s3path;
           const imageObj = await fileUploadRequest(e.target.files[i], filePath, imgCnt + cnt);
           uploadComplete(imageObj.name);
           newImage.push(imageObj);
