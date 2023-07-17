@@ -1,15 +1,17 @@
 import React from 'react';
+import getNewSetting from 'fe-modules/components/FormUI/_checkFormUI/getNewSetting';
 import FormBody from 'fe-modules/components/FormUI/_elements/FormBody';
 import FormBox from 'fe-modules/components/FormUI/_elements/FormBox';
 import FormError from 'fe-modules/components/FormUI/_elements/FormError';
 import FormSemiTitle from 'fe-modules/components/FormUI/_elements/FormSemiTitle';
 import FormTitle from 'fe-modules/components/FormUI/_elements/FormTitle';
-import SetSetting from 'fe-modules/components/FormUI/SetSetting';
 import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
 import { Translation } from 'fe-modules/models/lang';
+import { useWatch } from 'react-hook-form';
 
 function FormUI({ form, uiSetting, lang, auth }: FormUIProps) {
-  const newSetting = SetSetting(form, uiSetting);
+  const watch = useWatch({ control: form.control });
+  const newSetting = getNewSetting(uiSetting, watch);
 
   if (newSetting.rule?.invisible) return <></>;
   if (newSetting.data.type === 'signature') {

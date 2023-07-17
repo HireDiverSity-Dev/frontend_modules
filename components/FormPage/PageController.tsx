@@ -3,7 +3,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Button } from '@mui/material';
 import isMovable from 'fe-modules/components/FormPage/isMovable';
-import SetSetting from 'fe-modules/components/FormUI/SetSetting';
+import getNewSetting from 'fe-modules/components/FormUI/_checkFormUI/getNewSetting';
 import { FormUISetting, FormUIUseFormReturn } from 'fe-modules/models/FormUI/FormUI';
 import { FormUICondition } from 'fe-modules/models/FormUI/FormUICondition';
 import { useTranslation } from 'next-i18next';
@@ -35,12 +35,13 @@ function nextPage({ page, setPage, endPage }: Props) {
 function PageController(props: Props) {
   const { t } = useTranslation('customForm');
   const { form, uiSettings, pageConditions, page, endPage } = props;
+  const watch = useWatch({ control: form.control });
+
   const newSettings = uiSettings.map((uiSetting) => {
-    const newSetting = SetSetting(form, uiSetting);
+    const newSetting = getNewSetting(uiSetting, watch);
     return newSetting;
   });
 
-  const watch = useWatch({ control: form.control });
   const [canMoveNext, setCanMoveNext] = useState(false);
   useEffect(() => {
     const tempMoveNext = isMovable(

@@ -1,4 +1,4 @@
-import makeNewRule from 'fe-modules/components/FormUI/makeNewRule';
+import makeNewRule from 'fe-modules/components/FormUI/getNewRule';
 import { FormUISetting, FormUIUseFormReturn } from 'fe-modules/models/FormUI/FormUI';
 import { FormUICondition } from 'fe-modules/models/FormUI/FormUICondition';
 import { FormUIRule } from 'fe-modules/models/FormUI/FormUIRule';

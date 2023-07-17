@@ -1,7 +1,7 @@
-import applyAction from 'fe-modules/components/FormUI/applyAction';
-import isConditionSatisfied from 'fe-modules/components/FormUI/isConditionSatisfied';
 import { FormUICondition } from 'fe-modules/models/FormUI/FormUICondition';
 import { FormUIRule } from 'fe-modules/models/FormUI/FormUIRule';
+import applyAction from './applyAction';
+import isConditionSatisfied from './isConditionSatisfied';
 
 function makeNewRule(conditions: Array<FormUICondition>, rule: FormUIRule, watch: Record<string, any>) {
   conditions.forEach((condition) => {
