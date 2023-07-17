@@ -21,6 +21,8 @@ interface SubmitFormProps {
 }
 
 async function preProcessData(curData: FieldValues, uiSettings: Array<FormUISetting>, auth: Auth) {
+  const saveDir = curData?.saveDir;
+  delete curData?.saveDir;
   const sendData: Array<SubmitFormProps> = await Promise.all(
     Object.entries(curData)
       .filter(([, value]) => value)
@@ -32,12 +34,13 @@ async function preProcessData(curData: FieldValues, uiSettings: Array<FormUISett
             processedValue = value.map((val: ImageObj) => val.s3Path);
             break;
           case 'signature':
-            const curDate = getCurrentDate();
+            let filePath = '';
+            if (saveDir) filePath = saveDir + '/';
+            if (auth.email) filePath = auth.email + '/';
+            if ((formData as File_FormUIData).s3path) filePath += (formData as File_FormUIData).s3path;
             const signFile = base64ToFile(curData[key], (formData as File_FormUIData).s3path);
-            const path = `temp/${auth.email}/${(formData as File_FormUIData).s3path}/${curDate.replace(
-              ':',
-              '',
-            )}_signature`;
+            const curDate = getCurrentDate();
+            const path = `temp/${filePath}/${curDate.replace(':', '')}_signature`;
             await uploadFileToPrivateS3(path, signFile);
             processedValue = [path];
             break;

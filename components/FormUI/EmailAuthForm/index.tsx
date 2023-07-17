@@ -33,6 +33,11 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
   const [isVerified, setIsVerified] = useState(false);
   const [server, setServer] = useState({ invalid: false, msg: '' });
 
+  const { field: saveDirField } = useController({
+    name: `saveDir`,
+    control: form.control,
+  });
+
   const { field: emailField, fieldState: emailFieldState } = useController({
     name: `${name}.email` as string,
     control: form.control,
@@ -83,6 +88,7 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
       setIsVerified(true);
       emailField.onChange(emailValue);
       verifyField.onChange(true);
+      saveDirField.onChange(emailValue);
       setServer({ invalid: false, msg: '' });
     } catch (error) {
       setIsVerified(false);
@@ -98,7 +104,7 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
           <TextInput
             field={emailField}
             multiline={false}
-            disabled={uiSetting.rule?.readonly ?? false}
+            disabled={(uiSetting.rule?.readonly ?? false) || isVerified}
             onCustomChange={onChange}
           />
           {emailFieldState.invalid && <TextError msg={emailFieldState.error?.message ?? ''} />}

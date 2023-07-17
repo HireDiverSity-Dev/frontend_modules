@@ -1,15 +1,14 @@
 import { ChangeEventHandler, useCallback, useEffect, useRef, useState } from 'react';
 import { Box } from '@mui/material';
-import { uploadFileToPrivateS3 } from 'fe-modules/apis/s3/file';
-import { getFileType } from 'fe-modules/components/FormUI/_checkFormUI/getFileType';
+import SubmitModal from 'fe-modules/components/FormPage/submit/SubmitModal';
 import ExampleImg from 'fe-modules/components/FormUI/ExampleImg';
 import FileBrowse from 'fe-modules/components/FormUI/FileForm/FileBrowse';
 import FileText from 'fe-modules/components/FormUI/FileForm/FileText';
 import FileUploadedImg from 'fe-modules/components/FormUI/FileForm/FileUploadedImg';
-import { Auth } from 'fe-modules/models/auth';
+import fileUploadRequest from 'fe-modules/components/FormUI/FileForm/fileUploadRequest';
+import { useModal } from 'fe-modules/hooks/useModal';
 import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
 import { File_FormUIData } from 'fe-modules/models/FormUI/FormUIData';
-import { getCurrentDate } from 'fe-modules/utils/date';
 import { useController } from 'react-hook-form';
 
 interface FormOption {
@@ -18,7 +17,6 @@ interface FormOption {
 
 interface FileFormProps extends FormUIProps {
   options?: FormOption;
-  auth: Auth;
 }
 
 export interface ImageObj {
@@ -30,10 +28,11 @@ export interface ImageObj {
   loading: boolean;
 }
 
-function FileForm({ form, uiSetting, options = { exampleImg: true }, lang, auth }: FileFormProps) {
+function FileForm({ form, uiSetting, lang, auth, options = { exampleImg: true } }: FileFormProps) {
   const formData = uiSetting.data as File_FormUIData;
+  const { openModal } = useModal();
 
-  const { field, formState } = useController({
+  const { field } = useController({
     control: form.control,
     name: uiSetting.formKey,
     rules: {
@@ -81,34 +80,23 @@ function FileForm({ form, uiSetting, options = { exampleImg: true }, lang, auth 
     // input element의 onchange 결과값에서 target.file은 Array가 아닌 유사배열 객체
     if (e?.target?.files?.length) {
       let cnt = 0;
-
       let newImage: ImageObj[] = [];
       for (let i = 0; i < e.target.files.length; i++) {
-        const file = e.target.files[i];
-        const fileType = getFileType(file);
-        if (fileType === 'other') {
-          continue;
-        }
-        const objectUrl = URL.createObjectURL(file);
-        const curDate = getCurrentDate();
-        const path = `temp/${auth.email}/${formData.s3path}/${curDate}_file${imgCnt + cnt}`;
-
-        const imageObj: ImageObj = {
-          localPath: objectUrl,
-          s3Path: path,
-          name: file.name,
-          type: fileType,
-          size: file.size,
-          loading: false,
-        };
-
-        await uploadFileToPrivateS3(imageObj.s3Path, file, () => {
+        try {
+          let filePath = '';
+          const saveDir = form.getValues('saveDir');
+          if (saveDir) filePath = saveDir + '/';
+          if (auth.email) filePath = auth.email + '/';
+          if (formData.s3path) filePath += formData.s3path;
+          const imageObj = await fileUploadRequest(e.target.files[i], filePath, imgCnt + cnt);
           uploadComplete(imageObj.name);
-        });
-
-        newImage.push(imageObj);
+          newImage.push(imageObj);
+          cnt++;
+        } catch (error) {
+          openModal(<SubmitModal preset="실패" title="이미지 업로드 실패" body={error as string} button="닫기" />);
+          console.error(error);
+        }
       }
-
       setImageList(imageList.concat(newImage));
       setImgCnt(imgCnt + cnt);
     }
