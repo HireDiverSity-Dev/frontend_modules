@@ -37,21 +37,18 @@ function PageController(props: Props) {
   const { form, uiSettings, pageConditions, page, endPage } = props;
   const watch = useWatch({ control: form.control });
 
-  const newSettings = uiSettings.map((uiSetting) => {
-    const newSetting = getNewSetting(uiSetting, watch);
-    return newSetting;
-  });
+  const newSettings = uiSettings
+    .filter((uiSetting) => uiSetting.page === page)
+    .map((uiSetting) => {
+      const newSetting = getNewSetting(uiSetting, watch);
+      return newSetting;
+    });
 
   const [canMoveNext, setCanMoveNext] = useState(false);
   useEffect(() => {
-    const tempMoveNext = isMovable(
-      form,
-      newSettings.filter((newSetting) => newSetting.page === page),
-      pageConditions,
-      watch,
-    );
+    const tempMoveNext = isMovable(form, newSettings, pageConditions, watch);
     setCanMoveNext(tempMoveNext);
-  }, [page, uiSettings, pageConditions, form.watch()]);
+  }, [page, newSettings, pageConditions, form.watch()]);
 
   return (
     <div style={{ width: '100%', flex: 0, display: 'flex', justifyContent: 'space-between' }}>
