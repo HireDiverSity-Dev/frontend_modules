@@ -33,7 +33,7 @@ export interface ImageObj {
 function FileForm({ form, uiSetting, options = { exampleImg: true }, lang, auth }: FileFormProps) {
   const formData = uiSetting.data as File_FormUIData;
 
-  const { field } = useController({
+  const { field, formState } = useController({
     control: form.control,
     name: uiSetting.formKey,
     rules: {
@@ -73,7 +73,7 @@ function FileForm({ form, uiSetting, options = { exampleImg: true }, lang, auth 
 
   // react-hook-form 등록
   useEffect(() => {
-    field.onChange(imageList);
+    if (imageList.length != 0) field.onChange(imageList);
   }, [imageList]);
 
   // input 클릭 시 이미지 업로드
