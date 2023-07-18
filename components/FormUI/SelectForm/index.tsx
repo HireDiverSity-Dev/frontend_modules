@@ -70,7 +70,7 @@ export default function SelectForm({ form, uiSetting, lang, multiple }: FormUIPr
   return (
     <FormGroup
       row={formData?.style === 'horizontal' ? true : false}
-      sx={{ mx: 1, display: uiSetting.rule?.invisible ? 'none' : '' }}
+      sx={{ display: uiSetting.rule?.invisible ? 'none' : '' }}
     >
       {formData.options.map((option, index) => (
         <SelectLabel

@@ -26,9 +26,7 @@ function DateForm({ form, uiSetting }: FormUIProps) {
   }, [uiSetting.rule?.default, uiSetting.defaultValue]);
 
   return (
-    <FormGroup
-      sx={{ justifyContent: 'space-evenly', mx: 1, width: '100%', display: uiSetting.rule?.invisible ? 'none' : '' }}
-    >
+    <FormGroup sx={{ justifyContent: 'space-evenly', width: '100%', display: uiSetting.rule?.invisible ? 'none' : '' }}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DatePicker
           value={date}

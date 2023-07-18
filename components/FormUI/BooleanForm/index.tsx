@@ -31,7 +31,7 @@ function BooleanForm({ form, uiSetting, lang }: FormUIProps) {
   return (
     <RadioGroup
       row={isHorizontal}
-      sx={{ justifyContent: 'space-evenly', mx: 2, display: uiSetting.rule?.invisible ? 'none' : '' }}
+      sx={{ justifyContent: 'space-evenly', display: uiSetting.rule?.invisible ? 'none' : '' }}
     >
       <BooleanLabel
         value={true}

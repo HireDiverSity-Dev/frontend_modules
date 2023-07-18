@@ -42,9 +42,7 @@ function CheckboxForm({ form, uiSetting, lang }: FormUIProps) {
   };
 
   return (
-    <FormGroup
-      sx={{ justifyContent: 'space-evenly', mx: 1, width: '100%', display: uiSetting.rule?.invisible ? 'none' : '' }}
-    >
+    <FormGroup sx={{ justifyContent: 'space-evenly', width: '100%', display: uiSetting.rule?.invisible ? 'none' : '' }}>
       <CheckboxLabel
         control={
           <Checkbox

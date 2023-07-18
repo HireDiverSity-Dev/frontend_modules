@@ -99,7 +99,7 @@ function FileForm({ form, uiSetting, lang, auth }: FormUIProps) {
   };
 
   return (
-    <Box sx={{ width: '100%', mt: 2, display: uiSetting.rule?.invisible ? 'none' : '' }}>
+    <Box sx={{ width: '100%', display: uiSetting.rule?.invisible ? 'none' : '' }}>
       <input type="file" multiple style={{ display: 'none' }} ref={photoInput} onChange={uploadFile} />
       <FileBrowse lang={lang} onClick={imgOnClick} />
       <FileText lang={lang} />
