@@ -9,6 +9,7 @@ export const FormUIDataTypes = {
   singleselect: 'singleselect',
   boolean: 'boolean',
   checkbox: 'checkbox',
+  date: 'date',
   signature: 'signature',
   rate: 'rate',
   emailAuth: 'emailAuth',
@@ -24,6 +25,7 @@ export const CanDisableFormUIDataTypeList = [
   FormUIDataTypes.singleselect,
   FormUIDataTypes.boolean,
   FormUIDataTypes.emailAuth,
+  FormUIDataTypes.date,
 ];
 export const TitlelessFormUIDataTypeList = [
   FormUIDataTypes.checkbox,
