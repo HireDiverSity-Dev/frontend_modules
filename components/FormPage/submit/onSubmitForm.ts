@@ -37,8 +37,8 @@ async function preProcessData(curData: FieldValues, uiSettings: Array<FormUISett
             let filePath = '';
             if (saveDir) filePath = saveDir + '/';
             if (auth.email) filePath = auth.email + '/';
-            if ((formData as File_FormUIData).s3path) filePath += (formData as File_FormUIData).s3path;
-            const signFile = base64ToFile(curData[key], (formData as File_FormUIData).s3path);
+            if ((formData as File_FormUIData).s3Path) filePath += (formData as File_FormUIData).s3Path;
+            const signFile = base64ToFile(curData[key], (formData as File_FormUIData).s3Path);
             const curDate = getCurrentDate();
             const path = `temp/${filePath}/${curDate.replace(':', '')}_signature`;
             await uploadFileToPrivateS3(path, signFile);

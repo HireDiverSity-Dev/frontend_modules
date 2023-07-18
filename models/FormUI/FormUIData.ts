@@ -55,13 +55,14 @@ export interface FormUIData {
   };
   server?: string;
 
-  s3path?: string;
+  s3PublicPath?: string;
   imgSrc?: Array<string>;
 }
 
 export interface File_FormUIData extends FormUIData {
   type: 'file';
 
+  s3Path: string;
   resubmit?: {
     table: string;
     col: string;
