@@ -8,6 +8,7 @@ import EmailAuthResendButton from 'fe-modules/components/FormUI/EmailAuthForm/Em
 import TextError from 'fe-modules/components/FormUI/TextForm/TextError';
 import TextInput from 'fe-modules/components/FormUI/TextForm/TextInput';
 import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
+import { Translation } from 'fe-modules/models/lang';
 import { useController } from 'react-hook-form';
 
 function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
@@ -31,7 +32,7 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
   const [code, setCode] = useState('');
   const [isSented, setIsSented] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
-  const [server, setServer] = useState({ invalid: false, msg: '' });
+  const [isInvalid, setIsInvalid] = useState(false);
 
   const { field: saveDirField } = useController({
     name: `saveDir`,
@@ -72,10 +73,10 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
     try {
       await postVerificationSendClient(emailValue, langApi);
       setIsSented(true);
-      setServer({ invalid: false, msg: '' });
+      setIsInvalid(false);
     } catch (error) {
       setIsSented(false);
-      setServer({ invalid: true, msg: 'email verification failed' });
+      setIsInvalid(true);
     }
   };
 
@@ -89,10 +90,10 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
       emailField.onChange(emailValue);
       verifyField.onChange(true);
       saveDirField.onChange(emailValue);
-      setServer({ invalid: false, msg: '' });
+      setIsInvalid(false);
     } catch (error) {
       setIsVerified(false);
-      setServer({ invalid: true, msg: 'email confirm failed' });
+      setIsInvalid(true);
     }
   };
 
@@ -107,14 +108,22 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
             disabled={(uiSetting.rule?.readonly ?? false) || isVerified}
             onCustomChange={onChange}
           />
-          {emailFieldState.invalid && <TextError msg={emailFieldState.error?.message ?? ''} />}
-          {server.invalid && <TextError msg={server.msg} />}
         </FlexBox>
         <EmailAuthButton isVerified={isVerified} onVerify={onVerify} lang={lang} />
         {isSented && !isVerified && (
           <EmailAuthCode name={name} code={code} setCode={setCode} onConfirm={onConfirm} lang={lang} />
         )}
       </Box>
+      {emailFieldState.invalid && (
+        <Box>
+          <TextError msg={emailFieldState.error?.message ?? ''} />
+        </Box>
+      )}
+      {isInvalid && (
+        <Box>
+          <TextError msg={Label.인증실패[lang as keyof Translation] ?? ''} />
+        </Box>
+      )}
       {isSented && !isVerified && <EmailAuthResendButton onVerify={onVerify} lang={lang} />}
     </FlexBox>
   );
@@ -128,5 +137,13 @@ const style = {
     gridTemplateColumns: 'auto max-content',
     width: '100%',
     gap: 1,
+  },
+};
+
+const Label: { [key: string]: Translation } = {
+  인증실패: {
+    kr: '이메일 인증 실패',
+    zh: '邮箱验证失败',
+    en: 'email verification failed',
   },
 };

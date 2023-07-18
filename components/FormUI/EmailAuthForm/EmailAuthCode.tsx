@@ -29,8 +29,8 @@ export default function EmailAuthCode({ name, code, setCode, onConfirm, lang }: 
 
 const Label: { [key: string]: Translation } = {
   인증버튼: {
-    zh: '请输入验证码',
-    kr: '인증번호 입력',
-    en: 'Enter code',
+    zh: '发送验证码',
+    kr: '인증하기',
+    en: 'Verify',
   },
 };

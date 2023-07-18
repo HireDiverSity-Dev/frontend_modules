@@ -28,8 +28,8 @@ const Label: { [key: string]: Translation } = {
     en: 'Verified!',
   },
   인증전: {
-    kr: '인증하기',
-    zh: '进行认证',
-    en: 'Verify',
+    kr: '코드발송',
+    zh: '发送验证码',
+    en: 'Send code',
   },
 };
