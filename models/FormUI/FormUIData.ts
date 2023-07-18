@@ -40,6 +40,8 @@ export interface FormUIData {
   title?: Translation;
   subtitle?: Translation;
   placeholder?: Translation;
+
+  // for Regexp validation and Date validation
   pattern?: {
     label: string;
     message: string;
@@ -52,13 +54,14 @@ export interface FormUIData {
     col: string;
   };
   server?: string;
+
+  s3path?: string;
+  imgSrc?: Array<string>;
 }
 
 export interface File_FormUIData extends FormUIData {
   type: 'file';
-  imgSrc?: Array<string>;
 
-  s3path: string;
   resubmit?: {
     table: string;
     col: string;
