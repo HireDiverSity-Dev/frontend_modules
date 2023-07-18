@@ -5,6 +5,7 @@ import FormBox from 'fe-modules/components/FormUI/_elements/FormBox';
 import FormError from 'fe-modules/components/FormUI/_elements/FormError';
 import FormSemiTitle from 'fe-modules/components/FormUI/_elements/FormSemiTitle';
 import FormTitle from 'fe-modules/components/FormUI/_elements/FormTitle';
+import ExampleImg from 'fe-modules/components/FormUI/ExampleImg';
 import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
 import { Translation } from 'fe-modules/models/lang';
 import { useWatch } from 'react-hook-form';
@@ -30,6 +31,10 @@ function FormUI({ form, uiSetting, lang, auth }: FormUIProps) {
         <FormError msg={'check your answer'} />
       )}
       <FormSemiTitle uiSetting={newSetting} lang={lang} />
+      {newSetting.data.imgSrc &&
+        newSetting.data.imgSrc.map((img: string, index: number) => {
+          return <ExampleImg imgSrc={img} key={index} />;
+        })}
       <FormBody form={form} uiSetting={newSetting} lang={lang} auth={auth} />
     </FormBox>
   );

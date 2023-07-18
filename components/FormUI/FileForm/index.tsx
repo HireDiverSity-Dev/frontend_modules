@@ -1,7 +1,6 @@
 import { ChangeEventHandler, useCallback, useEffect, useRef, useState } from 'react';
 import { Box } from '@mui/material';
 import SubmitModal from 'fe-modules/components/FormPage/submit/SubmitModal';
-import ExampleImg from 'fe-modules/components/FormUI/ExampleImg';
 import FileBrowse from 'fe-modules/components/FormUI/FileForm/FileBrowse';
 import FileText from 'fe-modules/components/FormUI/FileForm/FileText';
 import FileUploadedImg from 'fe-modules/components/FormUI/FileForm/FileUploadedImg';
@@ -10,14 +9,6 @@ import { useModal } from 'fe-modules/hooks/useModal';
 import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
 import { File_FormUIData } from 'fe-modules/models/FormUI/FormUIData';
 import { useController } from 'react-hook-form';
-
-interface FormOption {
-  exampleImg?: boolean;
-}
-
-interface FileFormProps extends FormUIProps {
-  options?: FormOption;
-}
 
 export interface ImageObj {
   localPath: string;
@@ -28,7 +19,7 @@ export interface ImageObj {
   loading: boolean;
 }
 
-function FileForm({ form, uiSetting, lang, auth, options = { exampleImg: true } }: FileFormProps) {
+function FileForm({ form, uiSetting, lang, auth }: FormUIProps) {
   const formData = uiSetting.data as File_FormUIData;
   const { openModal } = useModal();
 
@@ -109,11 +100,6 @@ function FileForm({ form, uiSetting, lang, auth, options = { exampleImg: true } 
 
   return (
     <Box sx={{ width: '100%', mt: 2, display: uiSetting.rule?.invisible ? 'none' : '' }}>
-      {formData.imgSrc &&
-        options.exampleImg &&
-        formData.imgSrc.map((img: string, index: number) => {
-          return <ExampleImg imgSrc={img} key={index} />;
-        })}
       <input type="file" multiple style={{ display: 'none' }} ref={photoInput} onChange={uploadFile} />
       <FileBrowse lang={lang} onClick={imgOnClick} />
       <FileText lang={lang} />
