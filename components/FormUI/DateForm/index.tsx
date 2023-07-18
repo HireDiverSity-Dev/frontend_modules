@@ -6,7 +6,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
 import { useController } from 'react-hook-form';
 
-function CheckboxForm({ form, uiSetting, lang }: FormUIProps) {
+function DateForm({ form, uiSetting }: FormUIProps) {
   const [date, setDate] = useState<Dayjs | null>(null);
 
   const { field } = useController({
@@ -44,4 +44,4 @@ function CheckboxForm({ form, uiSetting, lang }: FormUIProps) {
   );
 }
 
-export default CheckboxForm;
+export default DateForm;
