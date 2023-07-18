@@ -78,7 +78,7 @@ function FileForm({ form, uiSetting, lang, auth }: FormUIProps) {
           const saveDir = form.getValues('saveDir');
           if (saveDir) filePath = '/' + saveDir;
           if (auth.email) filePath = '/' + auth.email;
-          if (formData.s3path) filePath += '/' + formData.s3path;
+          if (formData.s3Path) filePath += '/' + formData.s3Path;
           const imageObj = await fileUploadRequest(e.target.files[i], filePath, imgCnt + cnt);
           uploadComplete(imageObj.name);
           newImage.push(imageObj);
