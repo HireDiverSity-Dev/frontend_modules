@@ -3,6 +3,7 @@ import { Divider } from '@mui/material';
 import BooleanForm from 'fe-modules/components/FormUI/BooleanForm';
 import CheckboxForm from 'fe-modules/components/FormUI/CheckboxForm/index';
 import DateForm from 'fe-modules/components/FormUI/DateForm';
+import DropdownForm from 'fe-modules/components/FormUI/DropdownForm/index';
 import EmailAuthForm from 'fe-modules/components/FormUI/EmailAuthForm';
 import FileForm from 'fe-modules/components/FormUI/FileForm';
 import ParagraphForm from 'fe-modules/components/FormUI/ParagraphForm/index';
@@ -43,6 +44,9 @@ function FormBody(props: FormUIProps) {
     case 'multiselect':
       body = <SelectForm {...props} multiple />;
       break;
+    case 'dropdown':
+      body = <DropdownForm {...props} />;
+      break;
     case 'signature':
       body = <SignForm {...props} />;
       break;
@@ -56,7 +60,7 @@ function FormBody(props: FormUIProps) {
       body = <Divider sx={{ my: 3 }} />;
       break;
     default:
-      body = <>test</>;
+      body = <>Rendering Error</>;
       break;
   }
   return body;

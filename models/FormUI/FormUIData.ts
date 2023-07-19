@@ -8,6 +8,7 @@ export const FormUIDataTypes = {
   multiselect: 'multiselect',
   singleselect: 'singleselect',
   boolean: 'boolean',
+  dropdown: 'dropdown',
   checkbox: 'checkbox',
   date: 'date',
   signature: 'signature',
@@ -26,6 +27,7 @@ export const CanDisableFormUIDataTypeList = [
   FormUIDataTypes.boolean,
   FormUIDataTypes.emailAuth,
   FormUIDataTypes.date,
+  FormUIDataTypes.dropdown,
 ];
 export const TitlelessFormUIDataTypeList = [
   FormUIDataTypes.checkbox,
@@ -78,6 +80,15 @@ export interface Boolean_FormUIData extends FormUIData {
 export interface Select_FormUIData extends FormUIData {
   type: 'multiselect' | 'singleselect';
   style: 'horizontal' | 'vertical';
+  options: Array<{
+    name: string;
+    id?: string;
+    label: Translation;
+  }>;
+}
+
+export interface Dropdown_FormUIData extends FormUIData {
+  type: 'dropdown';
   options: Array<{
     name: string;
     id?: string;
