@@ -79,9 +79,11 @@ function FileForm({ form, uiSetting, lang, auth }: FormUIProps) {
           const fileType = getFileType(file);
           if (fileType === 'other') throw new Error("Can't upload this file type");
           let filePath = '';
-          const saveDir = form.getValues('saveDir');
-          if (saveDir) filePath = '/' + saveDir;
-          if (auth.email) filePath = '/' + auth.email;
+          if (auth.email) filePath = '/' + auth.email; // 1순위 : 로그인 된 이메일
+          else {
+            const saveDir = form.getValues('saveDir'); // 2순위 : 인증된 이메일 / 3순슁 : 저장 경로
+            if (saveDir) filePath = '/' + saveDir;
+          }
           if (formData.s3Path) filePath += '/' + formData.s3Path;
           const imageObj = await fileUploadRequest(e.target.files[i], filePath, imgCnt + cnt);
           uploadComplete(imageObj.name);

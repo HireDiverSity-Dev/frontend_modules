@@ -38,11 +38,12 @@ function FormPage({ props, auth }: { props: FormPageProps; auth: Auth }) {
 
   // Todo: 함수 분리
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem('form') ?? '{}');
-    const preFills = new URLSearchParams(location.search);
-
     // 프리필 항목 설정: 자동저장 불러오기 -> url query -> 기본 세팅값 -> undefined 순
     let newDefaultValues: any = {};
+    newDefaultValues.saveDir = props.directory;
+
+    const saved = JSON.parse(localStorage.getItem('form') ?? '{}');
+    const preFills = new URLSearchParams(location.search);
     props.forms.forEach((formUI) => {
       // url encode 여부 확인
       const keys: string[] = [

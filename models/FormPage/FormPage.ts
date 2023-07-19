@@ -5,6 +5,7 @@ import { UseFormReturn } from 'react-hook-form';
 
 export interface FormPageProps {
   path: string;
+  directory?: string;
   title: Translation;
   submit: {
     conditions: Array<FormUICondition>;
