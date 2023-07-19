@@ -1,11 +1,7 @@
 import { ChangeEventHandler, useCallback, useEffect, useRef, useState } from 'react';
 import { Box } from '@mui/material';
 import SubmitModal from 'fe-modules/components/FormPage/submit/SubmitModal';
-<<<<<<< HEAD
-=======
 import { getFileType } from 'fe-modules/components/FormUI/_checkFormUI/getFileType';
-import ExampleImg from 'fe-modules/components/FormUI/ExampleImg';
->>>>>>> origin/test-build
 import FileBrowse from 'fe-modules/components/FormUI/FileForm/FileBrowse';
 import FileText from 'fe-modules/components/FormUI/FileForm/FileText';
 import FileUploadedImg from 'fe-modules/components/FormUI/FileForm/FileUploadedImg';
