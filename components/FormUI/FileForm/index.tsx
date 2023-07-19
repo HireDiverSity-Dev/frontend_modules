@@ -1,6 +1,7 @@
 import { ChangeEventHandler, useCallback, useEffect, useRef, useState } from 'react';
 import { Box } from '@mui/material';
 import SubmitModal from 'fe-modules/components/FormPage/submit/SubmitModal';
+import { getFileType } from 'fe-modules/components/FormUI/_checkFormUI/getFileType';
 import ExampleImg from 'fe-modules/components/FormUI/ExampleImg';
 import FileBrowse from 'fe-modules/components/FormUI/FileForm/FileBrowse';
 import FileText from 'fe-modules/components/FormUI/FileForm/FileText';
@@ -83,17 +84,24 @@ function FileForm({ form, uiSetting, lang, auth, options = { exampleImg: true } 
       let newImage: ImageObj[] = [];
       for (let i = 0; i < e.target.files.length; i++) {
         try {
+          const file = e.target.files[i];
+          const fileType = getFileType(file);
+          if (fileType === 'other') throw new Error("Can't upload this file type");
           let filePath = '';
           const saveDir = form.getValues('saveDir');
           if (saveDir) filePath = '/' + saveDir;
           if (auth.email) filePath = '/' + auth.email;
           if (formData.s3path) filePath += '/' + formData.s3path;
-          const imageObj = await fileUploadRequest(e.target.files[i], filePath, imgCnt + cnt);
+          const imageObj = await fileUploadRequest(file, filePath, imgCnt + cnt);
           uploadComplete(imageObj.name);
           newImage.push(imageObj);
           cnt++;
-        } catch (error) {
-          openModal(<SubmitModal preset="실패" title="이미지 업로드 실패" body={error as string} button="닫기" />);
+        } catch (error: any) {
+          try {
+            openModal(
+              <SubmitModal preset="실패" title="File upload Failed" body={error.message as string} button="Close" />,
+            );
+          } catch (modalError) {}
           console.error(error);
         }
       }
