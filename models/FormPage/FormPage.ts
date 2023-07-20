@@ -10,7 +10,7 @@ export interface FormPageProps {
     conditions: Array<FormUICondition>;
     label: Translation;
   };
-  pages: Array<{ conditions: Array<FormUICondition> } | null>;
+  pages?: Array<{ conditions: Array<FormUICondition> } | null>;
   forms: Array<FormUISetting>;
   isCompleted: boolean;
   isDeployed: boolean;
