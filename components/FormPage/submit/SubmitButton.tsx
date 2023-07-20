@@ -27,13 +27,14 @@ function FormSubmitButton({ form, page, auth }: Props) {
   const submitSuccess = async () => {
     setLoading(true);
     const curData = watch();
-    const res = await onSubmitForm(curData, page.forms, auth);
-    if (res.status === 200) {
+    try {
+      const res = await onSubmitForm(curData, page.forms, auth);
+      if (res.status !== 200) throw new Error(res.data.message);
       localStorage.removeItem(page.path);
       const onRedirect = getRedirect(curData, page.redirect as string);
       openModal(<SubmitModal onClick={onRedirect} preset="성공" translation={t} />, { width: '60%' });
-    } else {
-      console.log(res);
+    } catch (error) {
+      console.log(error);
       openModal(<SubmitModal preset="실패" translation={t} />, { width: '60%' });
     }
     reset(curData, {
@@ -54,7 +55,7 @@ function FormSubmitButton({ form, page, auth }: Props) {
     <Button
       variant="contained"
       sx={{ width: '100%', mt: 3, display: isReady(page.submit.conditions, watch) ? 'none' : undefined }}
-      disabled={(!formState.isValid || loading) && false}
+      disabled={!formState.isValid || loading}
       onClick={async (e) => {
         console.log('[Submissions]\n', form.watch());
         console.log('[Settings]\n', page.forms);
