@@ -109,19 +109,21 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
             onCustomChange={onChange}
           />
         </FlexBox>
-        <EmailAuthButton isVerified={isVerified} onVerify={onVerify} lang={lang} />
+        <EmailAuthButton isVerified={isVerified} isSented={isSented} onVerify={onVerify} lang={lang} />
         {isSented && !isVerified && (
-          <EmailAuthCode name={name} code={code} setCode={setCode} onConfirm={onConfirm} lang={lang} />
+          <EmailAuthCode
+            name={name}
+            code={code}
+            setCode={setCode}
+            onConfirm={onConfirm}
+            isInvalid={isInvalid}
+            lang={lang}
+          />
         )}
       </Box>
       {emailFieldState.invalid && (
         <Box>
           <TextError msg={emailFieldState.error?.message ?? ''} />
-        </Box>
-      )}
-      {isInvalid && (
-        <Box>
-          <TextError msg={Label.인증실패[lang as keyof Translation] ?? ''} />
         </Box>
       )}
       {isSented && !isVerified && <EmailAuthResendButton onVerify={onVerify} lang={lang} />}

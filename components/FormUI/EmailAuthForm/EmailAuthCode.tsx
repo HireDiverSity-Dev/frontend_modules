@@ -6,10 +6,11 @@ interface EmailAuthCodeProps {
   code: string;
   setCode: (code: string) => void;
   onConfirm: (code: string) => void;
+  isInvalid?: boolean;
   lang: Lang;
 }
 
-export default function EmailAuthCode({ name, code, setCode, onConfirm, lang }: EmailAuthCodeProps) {
+export default function EmailAuthCode({ name, code, setCode, onConfirm, isInvalid, lang }: EmailAuthCodeProps) {
   return (
     <>
       <TextField
@@ -19,6 +20,7 @@ export default function EmailAuthCode({ name, code, setCode, onConfirm, lang }: 
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setCode(event.target.value);
         }}
+        error={isInvalid}
       />
       <Button variant="outlined" size="small" onClick={() => onConfirm(code)}>
         {Label.인증버튼[lang as keyof Translation]}

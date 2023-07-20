@@ -3,13 +3,15 @@ import { Lang, Translation } from 'fe-modules/models/lang';
 
 interface EmailAuthButtonProps {
   isVerified: boolean;
+  isSented: boolean;
   onVerify: () => void;
   lang: Lang;
 }
 
-export default function EmailAuthButton({ isVerified, onVerify, lang }: EmailAuthButtonProps) {
+export default function EmailAuthButton({ isVerified, isSented, onVerify, lang }: EmailAuthButtonProps) {
   return (
     <Button
+      disabled={isSented && !isVerified}
       variant="outlined"
       size="small"
       color={isVerified ? 'success' : 'primary'}
