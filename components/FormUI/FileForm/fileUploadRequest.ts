@@ -10,7 +10,7 @@ async function fileUploadRequest(file: File, filePath: string, fileNumber: numbe
   const objectUrl = URL.createObjectURL(file);
   const curDate = getCurrentDate();
   const tag = getRandomString();
-  const path = `temp${filePath}/${curDate}_file_${tag}_${String(fileNumber).padStart(2, '0')}`;
+  const path = `temp/${filePath}/${curDate}_file_${tag}_${String(fileNumber).padStart(2, '0')}`;
 
   const imageObj: ImageObj = {
     localPath: objectUrl,

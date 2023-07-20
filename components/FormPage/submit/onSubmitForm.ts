@@ -21,32 +21,36 @@ interface SubmitFormProps {
 }
 
 async function preProcessData(curData: FieldValues, uiSettings: Array<FormUISetting>, auth: Auth) {
-  const saveDir = curData?.saveDir;
+  const saveDirFormKey = curData?.saveDir;
   delete curData?.saveDir;
   const sendData: Array<SubmitFormProps> = await Promise.all(
     Object.entries(curData)
-      .filter(([, value]) => value)
+      .filter(([, value]) => value !== undefined && value !== null && value !== '')
       .map(async ([key, value]) => {
         const formData = uiSettings?.filter((val) => val.formKey === key)?.[0]?.data;
         let processedValue = value;
-        switch (formData.type) {
+        switch (formData?.type) {
           case 'file':
             processedValue = value.map((val: ImageObj) => val.s3Path);
             break;
           case 'signature':
             let filePath = '';
-            if (saveDir) filePath = saveDir + '/';
-            if (auth.email) filePath = auth.email + '/';
+            if (auth.email) filePath = auth.email; // 1순위 : 로그인 된 이메일
+            else {
+              const saveDir = curData?.[saveDirFormKey];
+              if (saveDir?.email) filePath = saveDir.email; // 2순위 : 인증된 이메일
+              else if (saveDir) filePath = saveDir; // 3순위 : 저장 경로
+            }
             if ((formData as File_FormUIData).s3Path) filePath += (formData as File_FormUIData).s3Path;
             const signFile = base64ToFile(curData[key], (formData as File_FormUIData).s3Path);
             const curDate = getCurrentDate();
-            const path = `temp/${filePath}/${curDate.replace(':', '')}_signature`;
+            const path = `temp/${filePath}/sign/${curDate.replace(':', '')}_signature`;
             await uploadFileToPrivateS3(path, signFile);
             processedValue = [path];
             break;
           case 'emailAuth':
             const val = value as { email: string; isVerified: boolean };
-            processedValue = val?.isVerified ? val.email : '';
+            processedValue = val?.isVerified ? val?.email : '';
             break;
           default:
             break;

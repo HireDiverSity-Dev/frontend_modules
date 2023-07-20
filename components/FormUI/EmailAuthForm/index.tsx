@@ -89,7 +89,7 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
       setIsVerified(true);
       emailField.onChange(emailValue);
       verifyField.onChange(true);
-      saveDirField.onChange(emailValue);
+      saveDirField.onChange(name);
       setIsInvalid(false);
     } catch (error) {
       setIsVerified(false);
