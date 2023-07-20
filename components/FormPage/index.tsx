@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import PageController from 'fe-modules/components/FormPage/PageController';
+import PageProgress from 'fe-modules/components/FormPage/PageProgress';
 import FormSubmitButton from 'fe-modules/components/FormPage/submit/SubmitButton';
 import FormUI from 'fe-modules/components/FormUI';
 import { Auth } from 'fe-modules/models/auth';
@@ -77,7 +78,10 @@ function FormPage({ props, auth }: { props: FormPageProps; auth: Auth }) {
 
   return (
     <>
-      <Typography variant="subtitle1" sx={{ mb: 2, textAlign: 'center' }}>
+      <Box sx={{ position: 'fixed', top: '48px', width: '100%' }}>
+        <PageProgress page={page} endPage={getEndPage(props.forms)} />
+      </Box>
+      <Typography variant="subtitle1" sx={{ my: 2, textAlign: 'center' }}>
         {props.title[i18n.language as Lang]}
       </Typography>
       <Box sx={{ width: '100%', flex: 1 }}>
