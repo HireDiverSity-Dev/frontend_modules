@@ -78,7 +78,7 @@ function FileForm({ form, uiSetting, lang, auth }: FormUIProps) {
           const file = e.target.files[i];
           const fileType = getFileType(file);
           if (fileType === 'other') throw new Error("Can't upload this file type");
-          let filePath = '';
+          let filePath = '/';
           if (auth.email) filePath = '/' + auth.email; // 1순위 : 로그인 된 이메일
           else {
             const saveDir = form.getValues('saveDir'); // 2순위 : 인증된 이메일 / 3순슁 : 저장 경로
