@@ -87,7 +87,7 @@ function FileForm({ form, uiSetting, lang, auth, options = { exampleImg: true } 
           const file = e.target.files[i];
           const fileType = getFileType(file);
           if (fileType === 'other') throw new Error("Can't upload this file type");
-          let filePath = '';
+          let filePath = '/';
           const saveDir = form.getValues('saveDir');
           if (saveDir) filePath = '/' + saveDir;
           if (auth.email) filePath = '/' + auth.email;
