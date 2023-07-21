@@ -62,6 +62,7 @@ function FormSubmitButton({ form, page, auth }: Props) {
 
         return handleSubmit(submitSuccess, () => {
           console.log('submit failed');
+          console.log(formState.errors);
         })(e);
       }}
     >

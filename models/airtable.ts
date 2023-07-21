@@ -260,6 +260,8 @@ export interface AirTableRecord {
   수령연결?: Array<string>;
   방문예약시간?: string;
   RC수령준비물?: string;
+  관납료영수번호?: string;
+  컨설팅대학교서류수령장소?: string;
 }
 
 export interface 연장_AirtableRecord {
