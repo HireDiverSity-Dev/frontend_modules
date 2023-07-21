@@ -5,6 +5,7 @@ import BooleanRadio from 'fe-modules/components/FormUI/BooleanForm/BooleanRadio'
 import BooleanText from 'fe-modules/components/FormUI/BooleanForm/BooleanText';
 import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
 import { Boolean_FormUIData } from 'fe-modules/models/FormUI/FormUIData';
+import { Translation } from 'fe-modules/models/lang';
 import { useController } from 'react-hook-form';
 
 function BooleanForm({ form, uiSetting, lang }: FormUIProps) {
@@ -38,20 +39,20 @@ function BooleanForm({ form, uiSetting, lang }: FormUIProps) {
         isHorizontal={isHorizontal}
         disabled={!!uiSetting.rule?.readonly}
         control={<BooleanRadio value={true} curValue={field.value} onChange={handleChange} />}
-        label={<BooleanText msg={data.options?.[0]?.label?.[lang] || Label.true[lang]} />}
+        label={<BooleanText msg={data.options?.[0]?.label?.[lang] || Label.true[lang] || Label.true['en']} />}
       />
       <BooleanLabel
         value={false}
         isHorizontal={isHorizontal}
         disabled={!!uiSetting.rule?.readonly}
         control={<BooleanRadio value={false} curValue={field.value} onChange={handleChange} />}
-        label={<BooleanText msg={data.options?.[1]?.label?.[lang] || Label.false[lang]} />}
+        label={<BooleanText msg={data.options?.[1]?.label?.[lang] || Label.false[lang] || Label.false['en']} />}
       />
     </RadioGroup>
   );
 }
 
-const Label = {
+const Label: { true: Translation; false: Translation } = {
   true: {
     kr: '예',
     en: 'Yes',

@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import { Lang, Translation } from 'fe-modules/models/lang';
 
-const SignatureClearLabel = {
+const SignatureClearLabel: { clear: Translation } = {
   clear: {
     kr: 'clear',
     zh: '擦除',
