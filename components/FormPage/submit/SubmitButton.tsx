@@ -29,11 +29,12 @@ function FormSubmitButton({ form, page, auth }: Props) {
     const curData = watch();
     try {
       const res = await onSubmitForm(curData, page.forms, auth);
-      if (res.status !== 200) throw new Error(res.data.message);
+      if (res.status !== 200) throw new Error(res.data?.message);
+      if (res.data.statusCode !== 200) throw new Error(res.data?.body?.error);
       localStorage.removeItem(page.path);
       const onRedirect = getRedirect(curData, page.redirect as string);
       openModal(<SubmitModal onClick={onRedirect} preset="성공" translation={t} />, { width: '60%' });
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       openModal(<SubmitModal preset="실패" translation={t} />, { width: '60%' });
     }
