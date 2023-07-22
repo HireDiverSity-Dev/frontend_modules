@@ -16,7 +16,7 @@ export interface FormUIProps {
 export type FormUIUseFormReturn = UseFormReturn<FieldValues, any>;
 
 export interface FormUISetting {
-  formKey: string;
+  FormItem_id: string;
   page: number;
   data: FormUIData;
   rule?: FormUIRule;

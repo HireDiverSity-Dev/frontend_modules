@@ -7,7 +7,7 @@ import { useController } from 'react-hook-form';
 
 function RateForm({ form, uiSetting }: FormUIProps) {
   const { field } = useController({
-    name: uiSetting.formKey,
+    name: uiSetting.FormItem_id,
     control: form.control,
     rules: {
       required: uiSetting.rule?.required,

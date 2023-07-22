@@ -13,8 +13,8 @@ function isMovable(
 ) {
   let tempMoveNext = true;
   settings.map((setting) => {
-    const value = form.watch(setting.formKey);
-    const { invalid } = form.getFieldState(setting.formKey);
+    const value = form.watch(setting.FormItem_id);
+    const { invalid } = form.getFieldState(setting.FormItem_id);
     if (!setting.rule?.invisible) {
       if ((setting.rule?.required && value === undefined) || invalid) tempMoveNext = false;
     }

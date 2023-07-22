@@ -21,13 +21,13 @@ interface SubmitFormProps {
 }
 
 async function preProcessData(curData: FieldValues, uiSettings: Array<FormUISetting>, auth: Auth) {
-  const saveDirFormKey = curData?.saveDir;
+  const saveDirFormItem_id = curData?.saveDir;
   delete curData?.saveDir;
   const sendData: Array<SubmitFormProps> = await Promise.all(
     Object.entries(curData)
       .filter(([, value]) => value !== undefined && value !== null && value !== '')
       .map(async ([key, value]) => {
-        const formData = uiSettings?.filter((val) => val.formKey === key)?.[0]?.data;
+        const formData = uiSettings?.filter((val) => val.FormItem_id === key)?.[0]?.data;
         let processedValue = value;
         switch (formData?.type) {
           case 'file':
@@ -37,7 +37,7 @@ async function preProcessData(curData: FieldValues, uiSettings: Array<FormUISett
             let filePath = '';
             if (auth.email) filePath = auth.email; // 1순위 : 로그인 된 이메일
             else {
-              const saveDir = curData?.[saveDirFormKey];
+              const saveDir = curData?.[saveDirFormItem_id];
               if (saveDir?.email) filePath = saveDir.email; // 2순위 : 인증된 이메일
               else if (saveDir) filePath = saveDir; // 3순위 : 저장 경로
             }

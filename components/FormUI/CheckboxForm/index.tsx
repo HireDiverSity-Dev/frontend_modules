@@ -12,7 +12,7 @@ function CheckboxForm({ form, uiSetting, lang }: FormUIProps) {
   const [state, setState] = useState(false);
 
   const { field, fieldState } = useController({
-    name: uiSetting.formKey,
+    name: uiSetting.FormItem_id,
     control: form.control,
     rules: {
       validate: (value) => {

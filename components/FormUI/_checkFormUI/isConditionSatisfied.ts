@@ -4,7 +4,7 @@ import { FormUIRule } from 'fe-modules/models/FormUI/FormUIRule';
 function isConditionSatisfied(triggers: Array<Trigger>, rule: FormUIRule, watch: Record<string, any>) {
   let satisfied = true;
   triggers.forEach((trigger) => {
-    const value = watch[trigger.formKey];
+    const value = watch[trigger.FormItem_id];
 
     switch (trigger.operator) {
       case 'equal':

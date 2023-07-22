@@ -12,7 +12,7 @@ import { Translation } from 'fe-modules/models/lang';
 import { useController } from 'react-hook-form';
 
 function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
-  const name = uiSetting.formKey;
+  const name = uiSetting.FormItem_id;
   let langApi: string; // API 발송용 언어
   switch (lang) {
     case 'kr':

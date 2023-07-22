@@ -11,7 +11,7 @@ export interface Action {
 }
 
 export interface Trigger {
-  formKey: string;
+  FormItem_id: string;
   operator: FormUIConditionOperator;
   val?: FormUIValue;
 }

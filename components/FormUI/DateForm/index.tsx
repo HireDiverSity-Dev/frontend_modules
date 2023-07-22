@@ -10,7 +10,7 @@ function DateForm({ form, uiSetting }: FormUIProps) {
   const [date, setDate] = useState<Dayjs | null>(null);
 
   const { field } = useController({
-    name: uiSetting.formKey,
+    name: uiSetting.FormItem_id,
     control: form.control,
     rules: {
       required: uiSetting.rule?.required,

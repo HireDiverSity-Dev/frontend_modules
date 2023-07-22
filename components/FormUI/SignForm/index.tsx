@@ -7,7 +7,7 @@ import SignatureCanvas from 'react-signature-canvas';
 
 const SignForm = ({ form, uiSetting, lang }: FormUIProps) => {
   const { field } = useController({
-    name: uiSetting.formKey,
+    name: uiSetting.FormItem_id,
     control: form.control,
     rules: {
       required: uiSetting.rule?.required,

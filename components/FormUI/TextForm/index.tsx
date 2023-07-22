@@ -7,7 +7,7 @@ import { useController } from 'react-hook-form';
 
 function TextForm({ form, uiSetting, multiline }: FormUIProps & { multiline?: boolean }) {
   let { field, fieldState } = useController({
-    name: uiSetting.formKey,
+    name: uiSetting.FormItem_id,
     control: form.control,
     rules: {
       required: uiSetting.rule?.required,

@@ -10,7 +10,7 @@ export default function isReady(conditions: Array<FormUICondition> | undefined, 
     if (!hideButton) {
       let tmp = true;
       curCondition.triggers?.forEach((trigger) => {
-        const curValue = watch(trigger.formKey);
+        const curValue = watch(trigger.FormItem_id);
         switch (trigger.operator) {
           case 'equal':
             if (`${curValue}` !== trigger.val) {

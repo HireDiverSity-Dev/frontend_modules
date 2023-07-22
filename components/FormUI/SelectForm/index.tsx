@@ -10,7 +10,7 @@ import { useController } from 'react-hook-form';
 export default function SelectForm({ form, uiSetting, lang, multiple }: FormUIProps & { multiple?: boolean }) {
   const formData = uiSetting.data as Select_FormUIData;
   const { field } = useController({
-    name: uiSetting.formKey,
+    name: uiSetting.FormItem_id,
     control: form.control,
     rules: {
       required: uiSetting.rule?.required,

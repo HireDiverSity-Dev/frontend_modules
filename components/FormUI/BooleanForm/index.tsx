@@ -11,7 +11,7 @@ import { useController } from 'react-hook-form';
 function BooleanForm({ form, uiSetting, lang }: FormUIProps) {
   const data = uiSetting.data as Boolean_FormUIData;
   const { field } = useController({
-    name: uiSetting.formKey,
+    name: uiSetting.FormItem_id,
     control: form.control,
     rules: {
       required: uiSetting.rule?.required,

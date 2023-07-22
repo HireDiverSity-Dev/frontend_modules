@@ -48,9 +48,9 @@ function FormPage({ props, auth }: { props: FormPageProps; auth: Auth }) {
     props.forms.forEach((formUI) => {
       // url encode 여부 확인
       const keys: string[] = [
-        formUI.formKey,
-        encodeURIComponent(formUI.formKey),
-        formUI.formKey.replace(/[(]/g, '%28').replace(/[)]/g, '%29'),
+        formUI.FormItem_id,
+        encodeURIComponent(formUI.FormItem_id),
+        formUI.FormItem_id.replace(/[(]/g, '%28').replace(/[)]/g, '%29'),
       ];
 
       let defaultValue = saved[keys[0]]

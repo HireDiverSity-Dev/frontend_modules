@@ -10,7 +10,7 @@ function DropdownForm({ form, uiSetting, lang }: FormUIProps) {
   const labels = data.options.map((val) => val!.label[lang]);
 
   const { field } = useController({
-    name: uiSetting.formKey,
+    name: uiSetting.FormItem_id,
     control: form.control,
     rules: {
       required: uiSetting.rule?.required,
