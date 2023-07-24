@@ -14,7 +14,7 @@ interface SubmitModalProps {
 }
 
 export function SubmitModal({ title, body, button, onClick, translation, preset }: SubmitModalProps) {
-  const t = translation || useTranslation().t;
+  const t = translation || useTranslation(['customForm', 'form', 'common']).t;
   const { closeModal } = useModal();
 
   const defaultOnClick = () => {

@@ -4,18 +4,21 @@ import { Translation } from 'fe-modules/models/lang';
 import { UseFormReturn } from 'react-hook-form';
 
 export interface FormPageProps {
+  _id: string;
   path: string;
-  directory?: string;
   title: Translation;
   submit: {
     conditions: Array<FormUICondition>;
     label: Translation;
   };
-  pages?: Array<{ conditions: Array<FormUICondition> } | null>;
   forms: Array<FormUISetting>;
   isCompleted: boolean;
   isDeployed: boolean;
   redirect: string;
+  pages?: Array<{ conditions: Array<FormUICondition> } | null>;
+  directory?: string;
+  startDate?: string;
+  endDate?: string;
 }
 
 export type FormPageUseFormReturn = UseFormReturn<FormPageProps>;
