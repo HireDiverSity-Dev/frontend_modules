@@ -6,13 +6,21 @@ import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
 import { useController } from 'react-hook-form';
 
 function TextForm({ form, uiSetting, multiline }: FormUIProps & { multiline?: boolean }) {
+  // 커스텀 패턴 전처리
+  let patternValue = uiSetting?.data?.pattern?.value;
+  if (uiSetting?.data?.pattern?.label === '커스텀') {
+    patternValue = patternValue?.replace(/#/g, '[0-9]');
+    patternValue = patternValue?.replace(/@/g, '[a-zA-Z]');
+    patternValue = patternValue?.replace(/[*]/g, '.');
+  }
+
   let { field, fieldState } = useController({
     name: uiSetting.FormItem_id,
     control: form.control,
     rules: {
       required: uiSetting.rule?.required,
       pattern: uiSetting.data.pattern && {
-        value: RegExp(uiSetting.data.pattern.value),
+        value: RegExp(patternValue as string),
         message: uiSetting.data.pattern.message,
       },
     },
