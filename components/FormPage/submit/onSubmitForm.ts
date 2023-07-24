@@ -7,6 +7,7 @@ import { FormPageProps } from 'fe-modules/models/FormPage/FormPage';
 import { FormUISetting } from 'fe-modules/models/FormUI/FormUI';
 import { File_FormUIData, FormUIData } from 'fe-modules/models/FormUI/FormUIData';
 import { FormUIValue } from 'fe-modules/models/FormUI/FormUIValue';
+import { Inbox } from 'fe-modules/models/Submission/Inbox';
 import { getCurrentDate } from 'fe-modules/utils/date';
 import { base64ToFile } from 'fe-modules/utils/encoding';
 import { getRandomString } from 'fe-modules/utils/function';
@@ -71,7 +72,13 @@ async function sendDynamoDB(formDataList: Array<FormUIData & { value: FormUIValu
     return data;
   });
   console.log('processed dynamoDBData:', sendDynamoDBData);
-  await postFromDynamoDB('Submission', { _id: getRandomString(20), FormPage_id: FormPage_id, data: sendDynamoDBData });
+  const sendInboxData: Inbox = {
+    _id: getRandomString(20),
+    FormPage_id: FormPage_id,
+    data: sendDynamoDBData,
+    createdAt: getCurrentDate(),
+  };
+  await postFromDynamoDB('Submission', sendInboxData);
 }
 
 async function sendAirtable(formDataList: Array<FormUIData & { value: FormUIValue }>) {
