@@ -4,6 +4,7 @@ import { Translation } from 'fe-modules/models/lang';
 import { UseFormReturn } from 'react-hook-form';
 
 export interface FormPageProps {
+  _id: string;
   path: string;
   directory?: string;
   title: Translation;

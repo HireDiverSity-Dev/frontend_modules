@@ -36,8 +36,10 @@ export const TitlelessFormUIDataTypeList = [
   FormUIDataTypes.signature,
 ];
 
+/** DynamoDB FormItem 테이블 구조 */
 export interface FormUIData {
   _id: string; // primary key
+  name: string;
   type: FormUIDataType;
   title?: Translation;
   subtitle?: Translation;
