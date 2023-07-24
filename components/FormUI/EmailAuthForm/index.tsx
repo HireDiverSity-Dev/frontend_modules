@@ -121,7 +121,7 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
           />
         )}
       </Box>
-      <Typography variant="caption">{'* Please press "VERIFY" button to verify your email'}</Typography>
+      <Typography variant="caption">{Label.안내문구[lang]}</Typography>
       {emailFieldState.invalid && (
         <Box>
           <TextError msg={emailFieldState.error?.message ?? ''} />
