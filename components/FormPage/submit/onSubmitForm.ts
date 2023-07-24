@@ -1,12 +1,15 @@
+import { postFromDynamoDB } from 'fe-modules/apis/dynamoDB/table';
 import formSubmit from 'fe-modules/apis/lambda/formSubmit';
 import { uploadFileToPrivateS3 } from 'fe-modules/apis/s3/file';
 import { ImageObj } from 'fe-modules/components/FormUI/FileForm/index';
 import { Auth } from 'fe-modules/models/auth';
+import { FormPageProps } from 'fe-modules/models/FormPage/FormPage';
 import { FormUISetting } from 'fe-modules/models/FormUI/FormUI';
-import { File_FormUIData } from 'fe-modules/models/FormUI/FormUIData';
+import { File_FormUIData, FormUIData } from 'fe-modules/models/FormUI/FormUIData';
 import { FormUIValue } from 'fe-modules/models/FormUI/FormUIValue';
 import { getCurrentDate } from 'fe-modules/utils/date';
 import { base64ToFile } from 'fe-modules/utils/encoding';
+import { getRandomString } from 'fe-modules/utils/function';
 import { FieldValues } from 'react-hook-form';
 
 interface AirtableProps {
@@ -23,7 +26,7 @@ interface SubmitFormProps {
 async function preProcessData(curData: FieldValues, uiSettings: Array<FormUISetting>, auth: Auth) {
   const saveDirFormItem_id = curData?.saveDir;
   delete curData?.saveDir;
-  const sendData: Array<SubmitFormProps> = await Promise.all(
+  const formDataList: Array<FormUIData & { value: FormUIValue }> = await Promise.all(
     Object.entries(curData)
       .filter(([, value]) => value !== undefined && value !== null && value !== '')
       .map(async ([key, value]) => {
@@ -55,26 +58,47 @@ async function preProcessData(curData: FieldValues, uiSettings: Array<FormUISett
           default:
             break;
         }
-        return {
-          value: processedValue as FormUIValue,
-          airtable: {
-            base: formData?.airtable?.base ? `${formData?.airtable?.base}` : undefined,
-            table: formData?.airtable?.table ? `${formData?.airtable?.table}` : undefined,
-            col: formData?.airtable?.col ? `${formData?.airtable?.col}` : undefined,
-          } as AirtableProps,
-          server: formData?.server ?? '',
-        };
+        const newFormData: FormUIData & { value: FormUIValue } = { ...formData, value: processedValue };
+        return newFormData;
       }),
   );
-  return sendData;
+  return formDataList;
 }
 
-async function onSubmitForm(curData: FieldValues, uiSettings: Array<FormUISetting>, auth: Auth) {
-  console.log('data:', curData);
+async function sendDynamoDB(formDataList: Array<FormUIData & { value: FormUIValue }>, FormPage_id: string) {
+  const sendDynamoDBData: Array<{ value: FormUIValue; FormItem_id: string }> = formDataList.map((formData) => {
+    const data = { value: formData.value, FormItem_id: formData._id };
+    return data;
+  });
+  console.log('processed dynamoDBData:', sendDynamoDBData);
+  await postFromDynamoDB('Submission', { _id: getRandomString(20), FormPage_id: FormPage_id, data: sendDynamoDBData });
+}
 
-  const sendData = await preProcessData(curData, uiSettings, auth);
-  console.log('processed data:', sendData);
-  const res = await formSubmit(JSON.stringify(sendData));
+async function sendAirtable(formDataList: Array<FormUIData & { value: FormUIValue }>) {
+  const sendAirtableData: Array<SubmitFormProps> = formDataList.map((formData) => {
+    return {
+      value: formData.value,
+      airtable: {
+        base: formData?.airtable?.base ? `${formData?.airtable?.base}` : undefined,
+        table: formData?.airtable?.table ? `${formData?.airtable?.table}` : undefined,
+        col: formData?.airtable?.col ? `${formData?.airtable?.col}` : undefined,
+      } as AirtableProps,
+      server: formData?.server ?? '',
+    };
+  });
+  console.log('processed airtableData:', sendAirtableData);
+  return await formSubmit(JSON.stringify(sendAirtableData));
+}
+
+async function onSubmitForm(curData: FieldValues, page: FormPageProps, auth: Auth) {
+  console.log('data:', curData);
+  console.log('page:', page);
+
+  const formDataList = await preProcessData(curData, page.forms, auth);
+  console.log('processed formDataList:', formDataList);
+
+  await sendDynamoDB(formDataList, page._id);
+  const res = await sendAirtable(formDataList);
   return res;
 }
 

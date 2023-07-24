@@ -28,7 +28,7 @@ function FormSubmitButton({ form, page, auth }: Props) {
     setLoading(true);
     const curData = watch();
     try {
-      const res = await onSubmitForm(curData, page.forms, auth);
+      const res = await onSubmitForm(curData, page, auth);
       if (res.status !== 200) throw new Error(res.data?.message);
       if (res.data.statusCode !== 200) throw new Error(res.data?.body?.error);
       localStorage.removeItem(page.path);
