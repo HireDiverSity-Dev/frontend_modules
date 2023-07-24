@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Checkbox } from '@mui/material';
+import { Box, Checkbox, Typography } from '@mui/material';
 import { getVerificationConfirmClient, postVerificationSendClient } from 'fe-modules/apis/client/verification';
 import FlexBox from 'fe-modules/components/basic/FlexBox';
 import EmailAuthButton from 'fe-modules/components/FormUI/EmailAuthForm/EmailAuthButton';
@@ -111,14 +111,17 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
         </FlexBox>
         <EmailAuthButton isVerified={isVerified} isSented={isSented} onVerify={onVerify} lang={lang} />
         {isSented && !isVerified && (
-          <EmailAuthCode
-            name={name}
-            code={code}
-            setCode={setCode}
-            onConfirm={onConfirm}
-            isInvalid={isInvalid}
-            lang={lang}
-          />
+          <>
+            <EmailAuthCode
+              name={name}
+              code={code}
+              setCode={setCode}
+              onConfirm={onConfirm}
+              isInvalid={isInvalid}
+              lang={lang}
+            />
+            <Typography variant="caption">{Label.인증안내[lang]}</Typography>
+          </>
         )}
       </Box>
       {emailFieldState.invalid && (
@@ -148,4 +151,9 @@ const Label: { [key: string]: Translation } = {
     zh: '邮箱验证失败',
     en: 'email verification failed',
   },
+  인증안내: {
+    kr: '* "인증하기" 버튼을 눌러 이메일을 인증해주세요.',
+    zh: '* Press "VERIFY" button to authenticate your email.',
+    en: '* Press "VERIFY" button to authenticate your email.',
+  }
 };
