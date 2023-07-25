@@ -19,7 +19,7 @@ function FormPage({ props, auth }: { props: FormPageProps; auth: Auth }) {
   const { i18n } = useTranslation(['customForm', 'form', 'common']);
 
   const form = useForm({
-    mode: 'onChange',
+    mode: 'onBlur',
     reValidateMode: 'onChange',
   });
   const { getValues, reset } = form;
