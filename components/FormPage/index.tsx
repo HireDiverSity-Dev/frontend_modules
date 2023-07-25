@@ -81,24 +81,26 @@ function FormPage({ props, auth }: { props: FormPageProps; auth: Auth }) {
       <Box sx={{ position: 'fixed', top: '48px', width: '100%' }}>
         <PageProgress page={page} endPage={getEndPage(props.forms)} />
       </Box>
-      <Typography variant="subtitle1" sx={{ my: 2, textAlign: 'center' }}>
-        {props.title[i18n.language as Lang]}
-      </Typography>
-      <Box sx={{ width: '100%', flex: 1 }}>
-        {props.forms.map((uiSetting, index) => {
-          if (uiSetting.page === page)
-            return <FormUI form={form} uiSetting={uiSetting} lang={i18n.language as Lang} auth={auth} key={index} />;
-        })}
+      <Box sx={{ width: '100%' }}>
+        <Typography variant="subtitle1" sx={{ my: 2, textAlign: 'center' }}>
+          {props.title[i18n.language as Lang]}
+        </Typography>
+        <Box sx={{ width: '100%', flex: 1 }}>
+          {props.forms.map((uiSetting, index) => {
+            if (uiSetting.page === page)
+              return <FormUI form={form} uiSetting={uiSetting} lang={i18n.language as Lang} auth={auth} key={index} />;
+          })}
+        </Box>
+        <PageController
+          form={form}
+          uiSettings={props.forms}
+          pageConditions={props.pages?.[page]?.conditions}
+          page={page}
+          setPage={setPage}
+          endPage={getEndPage(props.forms)}
+        />
+        {getEndPage(props.forms) === page ? <FormSubmitButton form={form} page={props} auth={auth} /> : <></>}
       </Box>
-      <PageController
-        form={form}
-        uiSettings={props.forms}
-        pageConditions={props.pages?.[page]?.conditions}
-        page={page}
-        setPage={setPage}
-        endPage={getEndPage(props.forms)}
-      />
-      {getEndPage(props.forms) === page ? <FormSubmitButton form={form} page={props} auth={auth} /> : <></>}
     </>
   );
 }
