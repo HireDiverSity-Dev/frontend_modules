@@ -5,7 +5,6 @@ import FlexBox from 'fe-modules/components/basic/FlexBox';
 import EmailAuthButton from 'fe-modules/components/FormUI/EmailAuthForm/EmailAuthButton';
 import EmailAuthCode from 'fe-modules/components/FormUI/EmailAuthForm/EmailAuthCode';
 import EmailAuthResendButton from 'fe-modules/components/FormUI/EmailAuthForm/EmailAuthResendButton';
-import TextError from 'fe-modules/components/FormUI/TextForm/TextError';
 import TextInput from 'fe-modules/components/FormUI/TextForm/TextInput';
 import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
 import { Translation } from 'fe-modules/models/lang';
@@ -101,15 +100,20 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
     <FlexBox sx={{ flexDirection: 'column', gap: 2, display: uiSetting.rule?.invisible ? 'none' : '' }}>
       <Checkbox sx={{ display: 'none' }} name={`${name}.isVerified`} checked={isVerified} />
       <Box sx={style.box}>
-        <FlexBox sx={{ flexDirection: 'column', width: '100' }}>
-          <TextInput
-            field={emailField}
-            multiline={false}
-            disabled={(uiSetting.rule?.readonly ?? false) || isVerified}
-            onCustomChange={onChange}
-          />
-        </FlexBox>
-        <EmailAuthButton isVerified={isVerified} isSented={isSented} onVerify={onVerify} lang={lang} />
+        <TextInput
+          field={emailField}
+          fieldState={emailFieldState}
+          multiline={false}
+          disabled={(uiSetting.rule?.readonly ?? false) || isVerified}
+          onCustomChange={onChange}
+        />
+        <EmailAuthButton
+          isInvalid={emailFieldState.invalid ?? false}
+          isVerified={isVerified}
+          isSented={isSented}
+          onVerify={onVerify}
+          lang={lang}
+        />
         {isSented && !isVerified && (
           <EmailAuthCode
             name={name}
@@ -121,12 +125,7 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
           />
         )}
       </Box>
-      <Typography variant="caption">{Label.안내문구[lang]}</Typography>
-      {emailFieldState.invalid && (
-        <Box>
-          <TextError msg={emailFieldState.error?.message ?? ''} />
-        </Box>
-      )}
+      {isSented && !isVerified && <Typography variant="caption">{Label.인증안내[lang]}</Typography>}
       {isSented && !isVerified && <EmailAuthResendButton onVerify={onVerify} lang={lang} />}
     </FlexBox>
   );
@@ -149,9 +148,9 @@ const Label: { [key: string]: Translation } = {
     zh: '邮箱验证失败',
     en: 'email verification failed',
   },
-  안내문구: {
+  인증안내: {
     kr: '* "인증하기" 버튼을 눌러 이메일을 인증해주세요.',
-    zh: '* Press "VERIFY" button to authenticate your email.',
+    zh: '* 请点击“点击验证”按钮来验证您的邮箱。',
     en: '* Press "VERIFY" button to authenticate your email.',
   },
 };

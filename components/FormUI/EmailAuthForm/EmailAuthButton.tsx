@@ -2,16 +2,17 @@ import { Button } from '@mui/material';
 import { Lang, Translation } from 'fe-modules/models/lang';
 
 interface EmailAuthButtonProps {
+  isInvalid: boolean;
   isVerified: boolean;
   isSented: boolean;
   onVerify: () => void;
   lang: Lang;
 }
 
-export default function EmailAuthButton({ isVerified, isSented, onVerify, lang }: EmailAuthButtonProps) {
+export default function EmailAuthButton({ isInvalid, isVerified, isSented, onVerify, lang }: EmailAuthButtonProps) {
   return (
     <Button
-      disabled={isSented && !isVerified}
+      disabled={(isSented && !isVerified) || isInvalid}
       variant="outlined"
       size="small"
       color={isVerified ? 'success' : 'primary'}
