@@ -380,8 +380,8 @@ export interface 자변_AirtableRecord {
   '거주지 준비 완료'?: boolean;
   '반려 서류'?: string;
   '반려 관련 코맨트'?: string;
-  전자민원접수일?: string;
-  출입국접수일?: string;
+  '전자민원 접수일'?: string;
+  '출입국 제출일'?: string;
   반려사유?: string;
   허가서?: Array<AirTableImage>;
 }
