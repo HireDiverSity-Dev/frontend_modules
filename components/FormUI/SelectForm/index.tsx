@@ -57,12 +57,14 @@ export default function SelectForm({ form, uiSetting, lang, multiple }: FormUIPr
         return prev;
       }, []);
       field.onChange(datas);
+      field.onBlur();
     } else {
       let data = '';
       newState.forEach((cur, index) => {
         if (cur) data = formData.options[index].name;
       });
       field.onChange(data);
+      field.onBlur();
     }
     setState(newState);
   };
