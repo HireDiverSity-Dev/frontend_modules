@@ -15,9 +15,10 @@ interface Props {
   form: FormUIUseFormReturn;
   page: FormPageProps;
   auth: Auth;
+  setIsSubmitted: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function FormSubmitButton({ form, page, auth }: Props) {
+function FormSubmitButton({ form, page, auth, setIsSubmitted }: Props) {
   const { t, i18n } = useTranslation(['customForm', 'form', 'common']);
   const { openModal } = useModal();
   const [loading, setLoading] = useState(false);
@@ -34,6 +35,7 @@ function FormSubmitButton({ form, page, auth }: Props) {
       localStorage.removeItem(page.path);
       const onRedirect = getRedirect(curData, page.redirect as string);
       openModal(<SubmitModal onClick={onRedirect} preset="성공" translation={t} />, { width: '60%' });
+      setIsSubmitted(true);
     } catch (error: any) {
       console.log(error);
       openModal(<SubmitModal preset="실패" translation={t} />, { width: '60%' });

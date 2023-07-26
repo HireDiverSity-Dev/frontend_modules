@@ -25,11 +25,6 @@ function getRedirect(curData: FieldValues, redirect: string) {
       // 리다이렉트
       window.location.href = redirectUrl;
     };
-  } else {
-    // 리다이렉트
-    redirectFunction = () => {
-      window.location.href = '/progress';
-    };
   }
   return redirectFunction;
 }
