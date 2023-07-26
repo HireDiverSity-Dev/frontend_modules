@@ -1,4 +1,4 @@
-import { LinearProgress, linearProgressClasses } from '@mui/material';
+import { LinearProgress } from '@mui/material';
 
 interface Props {
   page: number;
@@ -12,10 +12,6 @@ function PageProgress({ page, endPage }: Props) {
       value={((page - 1) / (endPage - 1)) * 100}
       sx={{
         height: 10,
-        borderRadius: 5,
-        [`& .${linearProgressClasses.bar}`]: {
-          borderRadius: 5,
-        },
       }}
     />
   );

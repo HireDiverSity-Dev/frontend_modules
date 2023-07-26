@@ -78,7 +78,15 @@ function FormPage({ props, auth }: { props: FormPageProps; auth: Auth }) {
 
   return (
     <>
-      <Box sx={{ position: 'fixed', top: '48px', width: '100%' }}>
+      <Box
+        sx={{
+          position: 'fixed',
+          width: '100%',
+          top: 48,
+          zIndex: 40,
+          alignItems: 'center',
+        }}
+      >
         <PageProgress page={page} endPage={getEndPage(props.forms)} />
       </Box>
       <Box sx={{ width: '100%' }}>
