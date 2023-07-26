@@ -32,7 +32,7 @@ function nextPage({ form, uiSettings, page, setPage, endPage }: Props) {
     const value = form.watch(setting.FormItem_id);
     const { invalid } = form.getFieldState(setting.FormItem_id);
     if (!setting.rule?.invisible) {
-      if ((setting.rule?.required && value === undefined) || invalid) {
+      if ((setting.rule?.required && (value === undefined || value?.length === 0)) || invalid) {
         const target = document.getElementById(setting.FormItem_id);
         const clientRect = target?.getBoundingClientRect();
         const relativeTop = clientRect?.top;

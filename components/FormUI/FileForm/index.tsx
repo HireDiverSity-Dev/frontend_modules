@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useCallback, useEffect, useRef, useState } from 'react';
+import { ChangeEventHandler, useCallback, useRef, useState } from 'react';
 import { Box } from '@mui/material';
 import SubmitModal from 'fe-modules/components/FormPage/submit/SubmitModal';
 import { getFileType } from 'fe-modules/components/FormUI/_checkFormUI/getFileType';
@@ -32,7 +32,13 @@ function FileForm({ form, uiSetting, lang, auth }: FormUIProps) {
     },
   });
 
-  const [imageList, setImageList] = useState<Array<ImageObj>>([]);
+  const [imageList, setImageList] = useState<Array<ImageObj>>(field.value ?? []);
+  const setImageListWithField = (newImageList: Array<ImageObj>) => {
+    setImageList(newImageList);
+    if (newImageList.length === 0) field.onChange(undefined);
+    else field.onChange(newImageList);
+    field.onBlur();
+  };
   const [imgCnt, setImgCnt] = useState(0);
 
   //input ref 관련
@@ -44,31 +50,17 @@ function FileForm({ form, uiSetting, lang, auth }: FormUIProps) {
   // 이미지 업로드 완료 시 loading state 변경
   const uploadComplete = useCallback(
     (fileName: string) => {
-      setImageList((prevState) => {
-        const updatedList = prevState.map((val) => {
-          if (val.name !== fileName) {
-            return val;
-          } else {
-            return { ...val, loading: false };
-          }
-        });
-        return updatedList;
+      const newImageList = imageList.map((val) => {
+        if (val.name !== fileName) {
+          return val;
+        } else {
+          return { ...val, loading: false };
+        }
       });
+      setImageListWithField(newImageList);
     },
     [imageList],
   );
-
-  useEffect(() => {
-    setImageList(field.value ?? []);
-  }, []);
-
-  // react-hook-form 등록
-  useEffect(() => {
-    if (field.value.length != 0) {
-      field.onChange(imageList);
-      field.onBlur();
-    }
-  }, [imageList]);
 
   // input 클릭 시 이미지 업로드
   const uploadFile: ChangeEventHandler<HTMLInputElement> = async (e) => {
@@ -103,14 +95,14 @@ function FileForm({ form, uiSetting, lang, auth }: FormUIProps) {
           console.error(error);
         }
       }
-      setImageList(imageList.concat(newImage));
+      setImageListWithField(imageList.concat(newImage));
       setImgCnt(imgCnt + cnt);
     }
   };
 
   //파일 삭제
   const deleteFile = (deleteKey: number): void => {
-    setImageList(imageList.filter((val, key) => key !== deleteKey));
+    setImageListWithField(imageList.filter((val, key) => key !== deleteKey));
   };
 
   return (
