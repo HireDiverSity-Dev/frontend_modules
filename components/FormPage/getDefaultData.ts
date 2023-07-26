@@ -6,7 +6,6 @@ export default function getDefaultData(props: FormPageProps, savedValues: any) {
   newDefaultValues.saveDir = props.directory;
 
   const preFills = new URLSearchParams(location.search);
-  console.log(preFills);
 
   props.forms.forEach((formUI) => {
     const _id = formUI.FormItem_id;
