@@ -25,8 +25,29 @@ function prevPage({ page, setPage }: Props) {
   }
 }
 
-function nextPage({ page, setPage, endPage }: Props) {
-  if (page < endPage) {
+function nextPage({ form, uiSettings, page, setPage, endPage }: Props) {
+  let canMoveNext = true;
+  for (let i = 0; i < uiSettings.length; i += 1) {
+    const setting = uiSettings[i];
+    const value = form.watch(setting.FormItem_id);
+    const { invalid } = form.getFieldState(setting.FormItem_id);
+    if (!setting.rule?.invisible) {
+      if ((setting.rule?.required && value === undefined) || invalid) {
+        const target = document.getElementById(setting.FormItem_id);
+        const clientRect = target?.getBoundingClientRect();
+        const relativeTop = clientRect?.top;
+        const scrolledTopLength = window.scrollY;
+        const absoluteTop = scrolledTopLength + (relativeTop ?? 0);
+        window.scrollTo(0, absoluteTop - 50);
+        form.setFocus(setting.FormItem_id);
+        form.setError(setting.FormItem_id, { type: 'required' });
+        canMoveNext = false;
+        return;
+      }
+    }
+  }
+
+  if (canMoveNext && page < endPage) {
     setPage(page + 1);
     window.scrollTo(0, 0);
   }
@@ -46,9 +67,9 @@ function PageController(props: Props) {
 
   const [canMoveNext, setCanMoveNext] = useState(false);
   useEffect(() => {
-    const tempMoveNext = isMovable(form, newSettings, pageConditions, watch);
+    const tempMoveNext = isMovable(pageConditions, watch);
     setCanMoveNext(tempMoveNext);
-  }, [page, newSettings, pageConditions, form.watch()]);
+  }, [pageConditions, form.watch()]);
 
   return (
     <div style={{ width: '100%', flex: 0, display: 'flex', justifyContent: 'space-between' }}>
@@ -56,7 +77,10 @@ function PageController(props: Props) {
         <ChevronLeftIcon />
         {t('폼.페이지이동.이전')}
       </Button>
-      <Button disabled={page === endPage || !canMoveNext} onClick={() => nextPage(props)}>
+      <Button
+        disabled={page === endPage || !canMoveNext}
+        onClick={() => nextPage({ ...props, uiSettings: newSettings })}
+      >
         {t('폼.페이지이동.다음')}
         <ChevronRightIcon />
       </Button>

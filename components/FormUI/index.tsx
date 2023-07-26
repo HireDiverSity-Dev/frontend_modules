@@ -25,7 +25,7 @@ function FormUI({ form, uiSetting, lang, auth }: FormUIProps) {
     return <FormBody form={form} uiSetting={newSetting} lang={lang} auth={auth} />;
   }
   return (
-    <FormBox>
+    <FormBox id={newSetting.FormItem_id}>
       <FormTitle uiSetting={newSetting} lang={lang} />
       {form.formState.errors[newSetting.FormItem_id] && uiSetting.data.type !== 'checkbox' && (
         <FormError msg={'check your answer'} />
