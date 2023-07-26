@@ -384,4 +384,5 @@ export interface 자변_AirtableRecord {
   '출입국 제출일'?: string;
   반려사유?: string;
   허가서?: Array<AirTableImage>;
+  APP거주유형?: '1' | '2';
 }
