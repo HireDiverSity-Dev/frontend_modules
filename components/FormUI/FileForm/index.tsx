@@ -64,8 +64,10 @@ function FileForm({ form, uiSetting, lang, auth }: FormUIProps) {
 
   // react-hook-form 등록
   useEffect(() => {
-    if (imageList.length != 0) field.onChange(imageList);
-    field.onBlur();
+    if (field.value.length != 0) {
+      field.onChange(imageList);
+      field.onBlur();
+    }
   }, [imageList]);
 
   // input 클릭 시 이미지 업로드
