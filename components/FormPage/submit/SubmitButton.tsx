@@ -55,7 +55,7 @@ function FormSubmitButton({ form, page, auth }: Props) {
   return (
     <Button
       variant="contained"
-      sx={{ width: '100%', mt: 3, display: isReady(page.submit.conditions, watch) ? 'none' : undefined }}
+      sx={{ width: '100%', my: 3, display: isReady(page.submit.conditions, watch) ? 'none' : undefined }}
       disabled={!formState.isValid || loading}
       onClick={async (e) => {
         console.log('[Submissions]\n', form.watch());
