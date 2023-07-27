@@ -19,6 +19,16 @@ export const FormUIDataTypes = {
 };
 export type FormUIDataType = keyof typeof FormUIDataTypes;
 
+export const ErrorlessFormUIDataTypeList = [
+  FormUIDataTypes.text,
+  FormUIDataTypes.longtext,
+  FormUIDataTypes.emailAuth,
+  FormUIDataTypes.date,
+  FormUIDataTypes.paragraph,
+  FormUIDataTypes.divider,
+  FormUIDataTypes.dropdown,
+  FormUIDataTypes.checkbox,
+];
 export const CanDisableFormUIDataTypeList = [
   FormUIDataTypes.text,
   FormUIDataTypes.longtext,

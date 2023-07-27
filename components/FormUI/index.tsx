@@ -7,6 +7,7 @@ import FormSemiTitle from 'fe-modules/components/FormUI/_elements/FormSemiTitle'
 import FormTitle from 'fe-modules/components/FormUI/_elements/FormTitle';
 import ExampleImg from 'fe-modules/components/FormUI/ExampleImg';
 import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
+import { ErrorlessFormUIDataTypeList } from 'fe-modules/models/FormUI/FormUIData';
 import { Translation } from 'fe-modules/models/lang';
 import { useWatch } from 'react-hook-form';
 
@@ -27,9 +28,8 @@ function FormUI({ form, uiSetting, lang, auth }: FormUIProps) {
   return (
     <FormBox id={newSetting.FormItem_id}>
       <FormTitle uiSetting={newSetting} lang={lang} />
-      {form.formState.errors[newSetting.FormItem_id] && uiSetting.data.type !== 'checkbox' && (
-        <FormError msg={'check your answer'} />
-      )}
+      {form.formState.errors[newSetting.FormItem_id] &&
+        ErrorlessFormUIDataTypeList.includes(uiSetting.data.type) === false && <FormError msg={'check your answer'} />}
       <FormSemiTitle uiSetting={newSetting} lang={lang} />
       {newSetting.data.imgSrc &&
         newSetting.data.imgSrc.map((img: string, index: number) => {
