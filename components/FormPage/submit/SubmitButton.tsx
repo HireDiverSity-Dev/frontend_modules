@@ -31,13 +31,13 @@ function FormSubmitButton({ form, page, auth, setIsSubmitted }: Props) {
     try {
       const res = await onSubmitForm(curData, page, auth);
       if (res.status !== 200) throw new Error(res.data?.message);
-      if (res.data.statusCode !== 200) throw new Error(res.data?.body?.error);
+      if (res.data.statusCode !== 200) throw new Error('Error occured while submitting ' + res.data?.body?.error);
       localStorage.removeItem(page.path);
       const onRedirect = getRedirect(curData, page.redirect as string);
       openModal(<SubmitModal onClick={onRedirect} preset="성공" translation={t} />, { width: '60%' });
       setIsSubmitted(true);
     } catch (error: any) {
-      console.log(error);
+      console.error(error);
       openModal(<SubmitModal preset="실패" translation={t} />, { width: '60%' });
     }
     reset(curData, {
