@@ -78,8 +78,7 @@ function FileForm({ form, uiSetting, lang, auth }: FormUIProps) {
           else {
             const saveDirFormItem_id = form.getValues('saveDir');
             const saveDir = form.getValues(saveDirFormItem_id);
-            if (saveDir?.email) filePath = saveDir.email; // 2순위 : 인증된 이메일
-            else if (saveDir) filePath = saveDir; // 3순위 : 저장 경로
+            if (saveDir !== undefined) filePath = saveDir; // 2순위 : 인증된 이메일 , 3순위 : 세팅된 saveDir
           }
           if (formData.s3Path) filePath += '/' + formData.s3Path;
           const imageObj = await fileUploadRequest(e.target.files[i], filePath, imgCnt + cnt);

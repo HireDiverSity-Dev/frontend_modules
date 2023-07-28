@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Checkbox, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { getVerificationConfirmClient, postVerificationSendClient } from 'fe-modules/apis/client/verification';
 import FlexBox from 'fe-modules/components/basic/FlexBox';
 import EmailAuthButton from 'fe-modules/components/FormUI/EmailAuthForm/EmailAuthButton';
@@ -39,7 +39,7 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
   });
 
   const { field: emailField, fieldState: emailFieldState } = useController({
-    name: `${name}.email` as string,
+    name: name,
     control: form.control,
     rules: {
       required: uiSetting.rule?.required,
@@ -50,18 +50,8 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
     },
   });
 
-  const { field: verifyField } = useController({
-    name: `${name}.isVerified`,
-    control: form.control,
-    rules: {
-      validate: (value) => value === true,
-    },
-    defaultValue: false,
-  });
-
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     emailField.onChange(e.target.value);
-    verifyField.onChange(false);
     setIsVerified(false);
     setIsSented(false);
   };
@@ -87,7 +77,6 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
       if (res.status !== 200) throw new Error('email confirm failed');
       setIsVerified(true);
       emailField.onChange(emailValue);
-      verifyField.onChange(true);
       saveDirField.onChange(name);
       setIsInvalid(false);
     } catch (error) {
@@ -98,7 +87,6 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
 
   return (
     <FlexBox sx={{ flexDirection: 'column', gap: 2, display: uiSetting.rule?.invisible ? 'none' : '' }}>
-      <Checkbox sx={{ display: 'none' }} name={`${name}.isVerified`} checked={isVerified} />
       <Box sx={style.box}>
         <TextInput
           field={emailField}
