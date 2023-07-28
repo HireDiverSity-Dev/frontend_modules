@@ -8,6 +8,10 @@ export interface 연장_ProgressProps {
   data: 연장_AirtableRecord;
 }
 
+export interface 자변_ProgressProps {
+  data: 자변_AirtableRecord;
+}
+
 export type 신규_진행상태 =
   | '심사대기'
   | '검토중'
@@ -66,6 +70,27 @@ export type 연장_진행상태 =
   | '테스트용'
   | '환불 대상'
   | '정밀심사 대상자';
+
+export type 자변_진행상태 =
+  | ' 00. 사범처리대상'
+  | '심사대기'
+  | '서류 보완 요청'
+  | '보완 서류 검토중'
+  | '서류 준비 완료'
+  | '전자민원 신청 완료'
+  | '3-2. 학생에게 전자민원 신청 완료 안내 완료'
+  | '출입국 사무소 접수 완료'
+  | '3-4. 학생에게 출입국 사무소 접수 완료 안내 완료'
+  | '반려 (보완)'
+  | '이첩'
+  | '4-3. 학생에게 반려 이메일 안내 완료'
+  | '반려 서류 준비 완료'
+  | '반려 재신청 완료'
+  | '허가서 발급 완료'
+  | '7-2. 학생에게 허가서 발송 완료'
+  | '8. 모든 절차 완료'
+  | '테스트용'
+  | '무효신청';
 
 export const causes: Array<string> = Object.keys(SupplementInfo.연장.폼);
 export type 연장_보완서류 = (typeof causes)[number];
@@ -308,5 +333,56 @@ export interface 연장_AirtableRecord {
   '유재정 준비 완료'?: boolean;
   'GKS 준비 완료'?: boolean;
   거주지준비완료?: boolean;
+  APP거주유형?: '1' | '2';
+}
+
+export interface 자변_AirtableRecord {
+  [key: string]:
+    | undefined
+    | string
+    | boolean
+    | number
+    | AirTableError
+    | Array<string>
+    | Array<AirTableImage>
+    | Array<boolean | null>;
+  진행상황?: 자변_진행상태;
+  이메일?: string;
+  학교?: string;
+  전체이름?: string;
+  하다시연번?: string;
+  결제확인용?: Array<string>;
+  결제확인완료?: Array<boolean>;
+  결제링크?: string;
+  증여외보완_진행중?: Array<string>;
+  표등보완_진행중?: Array<string>;
+  잔최장보완_진행중?: Array<string>;
+  거주지보완_진행중?: Array<string>;
+  '증,여,외 검토 완료'?: boolean;
+  '표,등 검토 완료'?: boolean;
+  '잔고, 최종, GKS 검토 완료'?: boolean;
+  '개인거주 검토 완료'?: boolean;
+  '기숙사 검토 완료'?: boolean;
+  '고/게 검토 완료'?: boolean;
+  'Airbnb 검토 완료'?: boolean;
+  '친구.지인 집 검토 완료'?: boolean;
+  '하숙, 쉐어하우스 검토 완료'?: boolean;
+  'AIRD 검토 완료'?: boolean;
+  '거주지 검토 완료'?: boolean;
+  '증명사진 준비 완료'?: boolean;
+  '여권 사본 준비 완료'?: boolean;
+  '외국인 등록증 준비 완료'?: boolean;
+  '표입허 준비 완료'?: boolean;
+  '등록금납입증명서 준비 완료'?: boolean;
+  'GKS 준비완료'?: boolean;
+  '잔고증명서 준비 완료'?: boolean;
+  '최종학력 준비 완료'?: boolean;
+  '거주지 준비 완료'?: boolean;
+  '반려 서류'?: string;
+  '반려 관련 코맨트'?: string;
+  '전자민원 접수일'?: string;
+  '출입국 제출일'?: string;
+  반려사유?: string;
+  허가서?: Array<AirTableImage>;
   APP거주유형?: '1' | '2';
 }
