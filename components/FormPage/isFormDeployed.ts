@@ -1,7 +1,6 @@
 import { FormPageProps } from 'fe-modules/models/FormPage/FormPage';
 
 export default function isFormDeployed(props: FormPageProps) {
-  console.log(props.isDeployed, props.startDate, props.endDate);
   if (props.isDeployed === true) return true;
 
   if (props.startDate === undefined) return false;
