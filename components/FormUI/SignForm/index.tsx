@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { Box } from '@mui/material';
+import FlexBox from 'fe-modules/components/basic/FlexBox';
 import SignClear from 'fe-modules/components/FormUI/SignForm/SignClear';
 import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
 import { useController } from 'react-hook-form';
@@ -31,28 +32,29 @@ const SignForm = ({ form, uiSetting, lang }: FormUIProps) => {
   };
 
   return (
-    <div
-      style={{
+    <FlexBox
+      sx={{
         justifyContent: 'center',
         overflow: 'hidden',
-        display: uiSetting.rule?.invisible ? 'none' : 'flex',
+        flexDirection: 'column',
+        display: uiSetting.rule?.invisible ? 'none' : '',
       }}
     >
-      <Box sx={{ width: 300 }}>
-        <Box sx={{ bgcolor: '#00000010' }}>
-          <SignatureCanvas
-            ref={sigCanvas}
-            backgroundColor="#00000000"
-            canvasProps={{
-              width: 300,
-              height: 150,
-            }}
-            onEnd={onChangeHandler}
-          />
-        </Box>
+      <Box sx={{ width: '100%', bgcolor: '#00000010' }}>
+        <SignatureCanvas
+          ref={sigCanvas}
+          backgroundColor="#00000000"
+          canvasProps={{
+            width: 300,
+            height: 150,
+          }}
+          onEnd={onChangeHandler}
+        />
       </Box>
-      <SignClear lang={lang} onClick={clearSignature} />
-    </div>
+      <FlexBox sx={{ width: '100%' }}>
+        <SignClear lang={lang} onClick={clearSignature} />
+      </FlexBox>
+    </FlexBox>
   );
 };
 

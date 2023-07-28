@@ -42,8 +42,7 @@ async function preProcessData(curData: FieldValues, uiSettings: Array<FormUISett
             if (auth.email) filePath = auth.email; // 1순위 : 로그인 된 이메일
             else {
               const saveDir = curData?.[saveDirFormItem_id];
-              if (saveDir?.email) filePath = saveDir.email; // 2순위 : 인증된 이메일
-              else if (saveDir) filePath = saveDir; // 3순위 : 저장 경로
+              if (saveDir !== undefined) filePath = saveDir; // 2순위 : 인증된 이메일, 3순위 : 저장 경로
             }
             if ((formData as File_FormUIData).s3Path) filePath += (formData as File_FormUIData).s3Path;
             const signFile = base64ToFile(curData[key], (formData as File_FormUIData).s3Path);
@@ -51,10 +50,6 @@ async function preProcessData(curData: FieldValues, uiSettings: Array<FormUISett
             const path = `temp/${filePath}/sign/${curDate.replace(':', '')}_signature`;
             await uploadFileToPrivateS3(path, signFile);
             processedValue = [path];
-            break;
-          case 'emailAuth':
-            const val = value as { email: string; isVerified: boolean };
-            processedValue = val?.isVerified ? val?.email : '';
             break;
           default:
             break;
