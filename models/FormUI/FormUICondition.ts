@@ -37,6 +37,7 @@ export const formConditionActionParams = {
   notRequired: [0, '선택 입력으로 변경'],
   setValue: [1, '다음 값으로 설정'],
   hideSubmit: [0, '제출 버튼 숨기기'],
+  setNextPage: [1, '다음 페이지로 이동'],
 };
 export type FormUIConditionAction = keyof typeof formConditionActionParams;
 

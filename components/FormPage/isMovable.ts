@@ -1,10 +1,11 @@
 import makeNewRule from 'fe-modules/components/FormUI/_checkFormUI/getNewRule';
 import { FormUICondition } from 'fe-modules/models/FormUI/FormUICondition';
 import { FormUIRule } from 'fe-modules/models/FormUI/FormUIRule';
+import { FieldValues, UseFormWatch } from 'react-hook-form';
 
 // TODO: 매개변수 최적화
 
-function isMovable(pageConditions: Array<FormUICondition> | undefined, watch: Record<string, any>) {
+function isMovable(pageConditions: Array<FormUICondition> | undefined | null, watch: UseFormWatch<FieldValues>) {
   let canMoveNext = true;
   if (pageConditions && pageConditions.length > 0) {
     let pageRule: FormUIRule = {

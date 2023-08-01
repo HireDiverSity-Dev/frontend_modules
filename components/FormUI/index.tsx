@@ -9,11 +9,9 @@ import ExampleImg from 'fe-modules/components/FormUI/ExampleImg';
 import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
 import { TitlelessFormUIDataTypeList } from 'fe-modules/models/FormUI/FormUIData';
 import { Translation } from 'fe-modules/models/lang';
-import { useWatch } from 'react-hook-form';
 
 function FormUI({ form, uiSetting, lang, auth }: FormUIProps) {
-  const watch = useWatch({ control: form.control });
-  const newSetting = getNewSetting(uiSetting, watch);
+  const newSetting = getNewSetting(uiSetting, form.watch);
 
   if (newSetting.data.type === 'signature') {
     newSetting.data = {
