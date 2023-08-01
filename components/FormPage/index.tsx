@@ -27,8 +27,9 @@ function FormPage({ props, auth }: { props: FormPageProps; auth: Auth }) {
   }, [form.watch()]);
 
   useEffect(() => {
-    const defaultData = getDefaultData(props, savedValues);
-    form.reset(defaultData);
+    getDefaultData(props, savedValues).then((defaultData) => {
+      form.reset(defaultData);
+    });
   }, []);
 
   const [isDeployed] = useState(isFormDeployed(props));
