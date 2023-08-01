@@ -4,31 +4,40 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Button } from '@mui/material';
 import isMovable from 'fe-modules/components/FormPage/isMovable';
 import getNewSetting from 'fe-modules/components/FormUI/_checkFormUI/getNewSetting';
+import isConditionSatisfied from 'fe-modules/components/FormUI/_checkFormUI/isConditionSatisfied';
 import { FormUISetting, FormUIUseFormReturn } from 'fe-modules/models/FormUI/FormUI';
 import { FormUICondition } from 'fe-modules/models/FormUI/FormUICondition';
 import { useTranslation } from 'next-i18next';
-import { useWatch } from 'react-hook-form';
 
 interface Props {
   form: FormUIUseFormReturn;
   uiSettings: FormUISetting[];
-  pageConditions: Array<FormUICondition> | undefined;
+  pageConditions: Array<FormUICondition> | undefined | null;
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
   endPage: number;
 }
 
-function prevPage({ page, setPage }: Props) {
+export function prevPage({ form, page, setPage }: Props) {
   if (page > 1) {
-    setPage(page - 1);
-    window.scrollTo(0, 0);
+    const pageHistory = form.getValues('pageHistory') ?? [];
+    if (pageHistory.length > 0) {
+      const pageDestination = pageHistory.pop();
+      form.setValue('pageHistory', pageHistory);
+      if (pageDestination !== undefined) {
+        setPage(pageDestination);
+        window.scrollTo(0, 0);
+        return;
+      }
+    }
   }
 }
 
-function nextPage({ form, uiSettings, page, setPage, endPage }: Props) {
+export function nextPage({ form, uiSettings, pageConditions, page, setPage, endPage }: Props) {
   let canMoveNext = true;
   for (let i = 0; i < uiSettings.length; i += 1) {
     const setting = uiSettings[i];
+    if (setting.page !== page) continue;
     const value = form.watch(setting.FormItem_id);
     const { invalid } = form.getFieldState(setting.FormItem_id);
     if (!setting.rule?.invisible) {
@@ -48,26 +57,44 @@ function nextPage({ form, uiSettings, page, setPage, endPage }: Props) {
   }
 
   if (canMoveNext && page < endPage) {
-    setPage(page + 1);
-    window.scrollTo(0, 0);
+    // page history 저장
+    const pageHistory = (form.getValues('pageHistory') as number[]) ?? [];
+    pageHistory.push(page);
+    form.setValue('pageHistory', pageHistory);
+
+    // 다음 페이지 계산
+    let pageDestination = page + 1;
+    pageConditions?.forEach((condition) => {
+      const satisfied = isConditionSatisfied(condition.triggers, form.watch); // 조건 충족할 경우 액션 처리
+      console.log(satisfied);
+      if (satisfied && condition.action.action === 'setNextPage') {
+        const parsedPage = parseInt(condition.action.val ?? '');
+        if (!isNaN(parsedPage)) {
+          pageDestination = parsedPage;
+        }
+      }
+    });
+    console.log(pageDestination);
+
+    // 다음 페이지로 이동
+    setPage(pageDestination);
   }
 }
 
 function PageController(props: Props) {
   const { t } = useTranslation('customForm');
   const { form, uiSettings, pageConditions, page, endPage } = props;
-  const watch = useWatch({ control: form.control });
 
   const newSettings = uiSettings
     .filter((uiSetting) => uiSetting.page === page)
     .map((uiSetting) => {
-      const newSetting = getNewSetting(uiSetting, watch);
+      const newSetting = getNewSetting(uiSetting, form.watch);
       return newSetting;
     });
 
   const [canMoveNext, setCanMoveNext] = useState(false);
   useEffect(() => {
-    const tempMoveNext = isMovable(pageConditions, watch);
+    const tempMoveNext = isMovable(pageConditions, form.watch);
     setCanMoveNext(tempMoveNext);
   }, [pageConditions, form.watch()]);
 

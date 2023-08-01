@@ -1,11 +1,11 @@
 import { Trigger } from 'fe-modules/models/FormUI/FormUICondition';
-import { FormUIRule } from 'fe-modules/models/FormUI/FormUIRule';
+import { FieldValues, UseFormWatch } from 'react-hook-form';
 
-function isConditionSatisfied(triggers: Array<Trigger>, rule: FormUIRule, watch: Record<string, any>) {
+function isConditionSatisfied(triggers: Array<Trigger>, watch: UseFormWatch<FieldValues>) {
   let satisfied = true;
   triggers.forEach((trigger) => {
-    const value = watch[trigger.FormItem_id];
-
+    const value = watch(trigger.FormItem_id);
+    console.log('value', value);
     switch (trigger.operator) {
       case 'equal':
         if (`${value}` !== trigger.val) {
@@ -88,16 +88,6 @@ function isConditionSatisfied(triggers: Array<Trigger>, rule: FormUIRule, watch:
         ) {
           satisfied = false;
         } else if (value === undefined || value === null) {
-          satisfied = false;
-        }
-        break;
-      case 'visible':
-        if (!rule?.invisible) {
-          satisfied = false;
-        }
-        break;
-      case 'invisible':
-        if (!rule?.invisible) {
           satisfied = false;
         }
         break;

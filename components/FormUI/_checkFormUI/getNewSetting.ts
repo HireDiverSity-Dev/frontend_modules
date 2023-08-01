@@ -1,7 +1,8 @@
 import { FormUISetting } from 'fe-modules/models/FormUI/FormUI';
+import { FieldValues, UseFormWatch } from 'react-hook-form';
 import getNewRule from './getNewRule';
 
-function getNewSetting(uiSetting: FormUISetting, watch: Record<string, any>): FormUISetting {
+function getNewSetting(uiSetting: FormUISetting, watch: UseFormWatch<FieldValues>): FormUISetting {
   let newUiSetting = { ...uiSetting, disabled: false };
   let newRule = { ...uiSetting.rule };
 
