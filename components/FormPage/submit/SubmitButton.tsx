@@ -33,8 +33,8 @@ function FormSubmitButton({ form, page, auth, setIsSubmitted }: Props) {
       if (res.status !== 200) throw new Error(res.data?.message);
       if (res.data.statusCode !== 200) throw new Error('Error occured while submitting ' + res.data?.body?.error);
       localStorage.removeItem(page.path);
-      const onRedirect = getRedirect(curData, page.redirect as string);
-      openModal(<SubmitModal onClick={onRedirect} preset="성공" translation={t} />, { width: '60%' });
+      const onRedirect = getRedirect(curData, page);
+      openModal(<SubmitModal onClick={onRedirect} preset="성공" translation={t} />, { width: '60%' }, onRedirect);
       setIsSubmitted(true);
     } catch (error: any) {
       console.error(error);

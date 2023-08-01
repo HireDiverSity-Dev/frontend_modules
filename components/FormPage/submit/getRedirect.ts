@@ -1,7 +1,11 @@
+import { FormPageProps } from 'fe-modules/models/FormPage/FormPage';
 import { FieldValues } from 'react-hook-form';
 
-function getRedirect(curData: FieldValues, redirect: string) {
+function getRedirect(curData: FieldValues, page: FormPageProps) {
+  const redirect = page.redirect;
+  const forms = page.forms;
   let redirectFunction;
+  console.log(page);
 
   if (redirect && redirect !== '') {
     redirectFunction = () => {
@@ -10,8 +14,14 @@ function getRedirect(curData: FieldValues, redirect: string) {
       let redirectUrl = redirect;
       Object.entries(curData)
         .filter(([, value]) => value)
-        .forEach(([key, value]) => {
-          console.log(key, value);
+        .forEach(([_id, value]) => {
+          let key = '';
+          forms.forEach((form) => {
+            if (form.FormItem_id === _id) {
+              key = form.data.name;
+            }
+          });
+
           if (redirectUrl.indexOf(`{{${key}}}`) >= 0) {
             redirectUrl = redirectUrl.replace(
               `{{${key}}}`,
