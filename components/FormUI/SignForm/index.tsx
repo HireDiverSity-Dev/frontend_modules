@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Box } from '@mui/material';
 import FlexBox from 'fe-modules/components/basic/FlexBox';
 import SignClear from 'fe-modules/components/FormUI/SignForm/SignClear';
@@ -31,6 +31,13 @@ const SignForm = ({ form, uiSetting, lang }: FormUIProps) => {
     }
   };
 
+  useEffect(() => {
+    const canvasParent = document.getElementById('canvasParent');
+    const canvas = document.querySelector('canvas');
+    canvas?.setAttribute('width', (canvasParent?.offsetWidth || 0).toString());
+    canvas?.setAttribute('height', (canvasParent?.offsetHeight || 0).toString());
+  }, []);
+
   return (
     <FlexBox
       sx={{
@@ -40,13 +47,13 @@ const SignForm = ({ form, uiSetting, lang }: FormUIProps) => {
         display: uiSetting.rule?.invisible ? 'none' : '',
       }}
     >
-      <Box sx={{ width: '100%', bgcolor: '#00000010' }}>
+      <Box id="canvasParent" sx={{ width: '100%', bgcolor: '#00000010' }}>
         <SignatureCanvas
           ref={sigCanvas}
           backgroundColor="#00000000"
           canvasProps={{
-            width: 300,
-            height: 150,
+            width: 500,
+            height: 200,
           }}
           onEnd={onChangeHandler}
         />
