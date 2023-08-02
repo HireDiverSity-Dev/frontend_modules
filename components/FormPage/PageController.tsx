@@ -78,6 +78,7 @@ export function nextPage({ form, uiSettings, pageConditions, page, setPage, endP
 
     // 다음 페이지로 이동
     setPage(pageDestination);
+    window.scrollTo(0, 0);
   }
 }
 
