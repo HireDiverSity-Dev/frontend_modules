@@ -3,7 +3,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Button } from '@mui/material';
 import isMovable from 'fe-modules/components/FormPage/isMovable';
-import getNewSetting from 'fe-modules/components/FormUI/_checkFormUI/getNewSetting';
+import getUiSettingsObject from 'fe-modules/components/FormUI/_checkFormUI/getUiSettingsObject';
 import isConditionSatisfied from 'fe-modules/components/FormUI/_checkFormUI/isConditionSatisfied';
 import { FormUISetting, FormUIUseFormReturn } from 'fe-modules/models/FormUI/FormUI';
 import { FormUICondition } from 'fe-modules/models/FormUI/FormUICondition';
@@ -63,10 +63,10 @@ export function nextPage({ form, uiSettings, pageConditions, page, setPage, endP
     form.setValue('pageHistory', pageHistory);
 
     // 다음 페이지 계산
+    const uiSettingsObject = getUiSettingsObject(uiSettings);
     let pageDestination = page + 1;
     pageConditions?.forEach((condition) => {
-      const satisfied = isConditionSatisfied(condition.triggers, form.watch); // 조건 충족할 경우 액션 처리
-      console.log(satisfied);
+      const satisfied = isConditionSatisfied(form, uiSettingsObject, condition.triggers); // 조건 충족할 경우 액션 처리
       if (satisfied && condition.action.action === 'setNextPage') {
         const parsedPage = parseInt(condition.action.val ?? '');
         if (!isNaN(parsedPage)) {
@@ -84,17 +84,13 @@ export function nextPage({ form, uiSettings, pageConditions, page, setPage, endP
 function PageController(props: Props) {
   const { t } = useTranslation('customForm');
   const { form, uiSettings, pageConditions, page, endPage } = props;
+  const uiSettingsObject = getUiSettingsObject(uiSettings);
 
-  const newSettings = uiSettings
-    .filter((uiSetting) => uiSetting.page === page)
-    .map((uiSetting) => {
-      const newSetting = getNewSetting(uiSetting, form.watch);
-      return newSetting;
-    });
+  const newUiSettings = uiSettings.filter((uiSetting) => uiSetting.page === page);
 
   const [canMoveNext, setCanMoveNext] = useState(false);
   useEffect(() => {
-    const tempMoveNext = isMovable(pageConditions, form.watch);
+    const tempMoveNext = isMovable(form, uiSettingsObject, pageConditions);
     setCanMoveNext(tempMoveNext);
   }, [pageConditions, form.watch()]);
 
@@ -106,7 +102,7 @@ function PageController(props: Props) {
       </Button>
       <Button
         disabled={page === endPage || !canMoveNext}
-        onClick={() => nextPage({ ...props, uiSettings: newSettings })}
+        onClick={() => nextPage({ ...props, uiSettings: newUiSettings })}
       >
         {t('폼.페이지이동.다음')}
         <ChevronRightIcon />

@@ -1,46 +1,53 @@
 import React from 'react';
-import getNewSetting from 'fe-modules/components/FormUI/_checkFormUI/getNewSetting';
+import applyConditions from 'fe-modules/components/FormUI/_checkFormUI/applyConditions';
+import getUiSettingsObject from 'fe-modules/components/FormUI/_checkFormUI/getUiSettingsObject';
 import FormBody from 'fe-modules/components/FormUI/_elements/FormBody';
 import FormBox from 'fe-modules/components/FormUI/_elements/FormBox';
 import FormError from 'fe-modules/components/FormUI/_elements/FormError';
 import FormSemiTitle from 'fe-modules/components/FormUI/_elements/FormSemiTitle';
 import FormTitle from 'fe-modules/components/FormUI/_elements/FormTitle';
 import ExampleImg from 'fe-modules/components/FormUI/ExampleImg';
-import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
+import { FormUIProps, FormUISetting } from 'fe-modules/models/FormUI/FormUI';
 import { TitlelessFormUIDataTypeList } from 'fe-modules/models/FormUI/FormUIData';
 import { Translation } from 'fe-modules/models/lang';
 
-function FormUI({ form, uiSetting, lang, auth }: FormUIProps) {
-  const newSetting = getNewSetting(uiSetting, form.watch);
+function FormUI({ form, uiSettings, uiSetting, lang, auth }: FormUIProps & { uiSettings?: Array<FormUISetting> }) {
+  let newUiSetting: FormUISetting;
+  if (uiSettings) {
+    const uiSettingsObject = getUiSettingsObject(uiSettings);
+    newUiSetting = applyConditions(form, uiSettingsObject, uiSetting);
+  } else {
+    newUiSetting = uiSetting;
+  }
 
-  if (newSetting.data.type === 'signature') {
-    newSetting.data = {
-      ...newSetting.data,
+  if (newUiSetting.data.type === 'signature') {
+    newUiSetting.data = {
+      ...newUiSetting.data,
       title: SignatureLabel.title,
       subtitle: SignatureLabel.subtitle,
     };
   }
-  if (newSetting.rule?.invisible) {
-    return <FormBody form={form} uiSetting={newSetting} lang={lang} auth={auth} />;
+  if (newUiSetting.rule?.invisible) {
+    return <FormBody form={form} uiSetting={newUiSetting} lang={lang} auth={auth} />;
   }
   return (
-    <FormBox id={newSetting.FormItem_id}>
-      {TitlelessFormUIDataTypeList.includes(newSetting.data.type) ? (
+    <FormBox id={newUiSetting.FormItem_id}>
+      {TitlelessFormUIDataTypeList.includes(newUiSetting.data.type) ? (
         <></>
       ) : (
         <>
-          <FormTitle uiSetting={newSetting} lang={lang} />
-          {form.formState.errors[newSetting.FormItem_id] && uiSetting.data.type !== 'checkbox' && (
+          <FormTitle uiSetting={newUiSetting} lang={lang} />
+          {form.formState.errors[newUiSetting.FormItem_id] && uiSetting.data.type !== 'checkbox' && (
             <FormError msg={'check your answer'} />
           )}
-          <FormSemiTitle uiSetting={newSetting} lang={lang} />
+          <FormSemiTitle uiSetting={newUiSetting} lang={lang} />
         </>
       )}
-      {newSetting.data.imgSrc &&
-        newSetting.data.imgSrc.map((img: string, index: number) => {
+      {newUiSetting.data.imgSrc &&
+        newUiSetting.data.imgSrc.map((img: string, index: number) => {
           return <ExampleImg imgSrc={img} key={index} />;
         })}
-      <FormBody form={form} uiSetting={newSetting} lang={lang} auth={auth} />
+      <FormBody form={form} uiSetting={newUiSetting} lang={lang} auth={auth} />
     </FormBox>
   );
 }

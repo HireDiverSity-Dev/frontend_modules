@@ -1,7 +1,16 @@
 import { Action } from 'fe-modules/models/FormUI/FormUICondition';
 import { FormUIRule } from 'fe-modules/models/FormUI/FormUIRule';
 
-function applyAction(action: Action, rule: FormUIRule) {
+function getValueFormAction(action: Action) {
+  switch (action.action) {
+    case 'setValue':
+      return action.val;
+    default:
+      return undefined;
+  }
+}
+
+function getRuleFormAction(action: Action, rule: FormUIRule) {
   switch (action.action) {
     case 'show':
       rule = {
@@ -34,4 +43,4 @@ function applyAction(action: Action, rule: FormUIRule) {
   return rule;
 }
 
-export default applyAction;
+export { getRuleFormAction, getValueFormAction };

@@ -43,7 +43,16 @@ export default function PageBody({ props, auth, form, lang, setIsSubmitted }: Pr
         <Box sx={{ width: '100%', flex: 1 }}>
           {props.forms.map((uiSetting, index) => {
             if (uiSetting.page === page)
-              return <FormUI form={form} uiSetting={uiSetting} lang={lang} auth={auth} key={index} />;
+              return (
+                <FormUI
+                  form={form}
+                  uiSettings={props.forms}
+                  uiSetting={uiSetting}
+                  lang={lang}
+                  auth={auth}
+                  key={index}
+                />
+              );
           })}
         </Box>
         {getEndPage(props.forms) === page ? (

@@ -20,23 +20,15 @@ export default function SelectForm({ form, uiSetting, lang, multiple }: FormUIPr
 
   useEffect(() => {
     if (uiSetting.rule?.default && uiSetting.defaultValue) {
-      const defaultState = formData.options.map((val) => (uiSetting.defaultValue as string[]).includes(val!.name));
-      setState(defaultState);
-      defaultState.forEach((val, index) => {
-        if (val) {
-          handleChange({ target: { value: index.toString() } } as React.ChangeEvent<HTMLInputElement>);
-        }
-      });
+      field.onChange(uiSetting.defaultValue);
+      field.onBlur();
     }
-    if (field.value !== undefined)
-      setState(formData.options.map((val) => (field.value as string[]).includes(val!.name)));
   }, [uiSetting.rule?.default, uiSetting.defaultValue]);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const num = parseInt(event.target.value);
+  const makeNewState = (curState: boolean[], num: number) => {
     let newState: boolean[] = [];
     if (multiple) {
-      newState = state.map((val, index) => {
+      newState = curState.map((val, index) => {
         if (index === num) {
           return !val;
         } else {
@@ -47,6 +39,12 @@ export default function SelectForm({ form, uiSetting, lang, multiple }: FormUIPr
       newState = Array<boolean>(formData.options.length).fill(false);
       newState[num] = true;
     }
+    return newState;
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const num = parseInt(event.target.value);
+    let newState: boolean[] = makeNewState([...state], num);
 
     if (multiple) {
       const datas = newState.reduce((prev: string[], cur, index) => {
@@ -66,8 +64,28 @@ export default function SelectForm({ form, uiSetting, lang, multiple }: FormUIPr
       field.onChange(data);
       field.onBlur();
     }
-    setState(newState);
   };
+
+  useEffect(() => {
+    if (multiple) {
+      field.value = field.value as string[];
+      let indices: number[] = [];
+      formData.options.forEach((option, i) => {
+        if (field.value.includes(option.name)) indices.push(i);
+      });
+      let newState: boolean[] = [...state];
+      indices.forEach((index) => {
+        newState = makeNewState([...newState], index);
+      });
+      setState([...newState]);
+    } else {
+      let index = -1;
+      formData.options.forEach((option, i) => {
+        if (option.name === field.value) index = i;
+      });
+      if (index !== -1) setState(makeNewState([...state], index));
+    }
+  }, [field.value]);
 
   return (
     <FormGroup

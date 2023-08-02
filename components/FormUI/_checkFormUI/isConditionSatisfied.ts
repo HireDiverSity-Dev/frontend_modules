@@ -1,36 +1,41 @@
+import { FormUISetting, FormUIUseFormReturn } from 'fe-modules/models/FormUI/FormUI';
 import { Trigger } from 'fe-modules/models/FormUI/FormUICondition';
-import { FieldValues, UseFormWatch } from 'react-hook-form';
 
-function isConditionSatisfied(triggers: Array<Trigger>, watch: UseFormWatch<FieldValues>) {
+function isConditionSatisfied(
+  form: FormUIUseFormReturn,
+  uiSettingsObject: { [key: string]: FormUISetting },
+  triggers: Array<Trigger>,
+) {
   let satisfied = true;
   triggers.forEach((trigger) => {
-    const value = watch(trigger.FormItem_id);
-    console.log('value', value);
+    const formValue = form.watch(trigger.FormItem_id);
+    const formUiSetting = uiSettingsObject[trigger.FormItem_id];
+    console.log('formValue', formValue);
     switch (trigger.operator) {
       case 'equal':
-        if (`${value}` !== trigger.val) {
+        if (`${formValue}` !== trigger.val) {
           satisfied = false;
         }
         break;
       case 'notEqual':
-        if (`${value}` === trigger.val) {
+        if (`${formValue}` === trigger.val) {
           satisfied = false;
         }
         break;
       case 'contains':
-        if (!value) {
+        if (!formValue) {
           satisfied = false;
         } else {
-          switch (typeof value) {
+          switch (typeof formValue) {
             case 'string':
-              if (typeof value == 'string') {
-                if (value.indexOf(trigger.val as string) < 0) {
+              if (typeof formValue == 'string') {
+                if (formValue.indexOf(trigger.val as string) < 0) {
                   satisfied = false;
                 }
               }
               break;
             case 'object':
-              if (!value.includes(trigger.val)) {
+              if (!formValue.includes(trigger.val)) {
                 satisfied = false;
               }
               break;
@@ -40,17 +45,17 @@ function isConditionSatisfied(triggers: Array<Trigger>, watch: UseFormWatch<Fiel
         }
         break;
       case 'notContains':
-        if (value) {
-          switch (typeof value) {
+        if (formValue) {
+          switch (typeof formValue) {
             case 'string':
-              if (typeof value == 'string') {
-                if (value.indexOf(trigger.val as string) >= 0) {
+              if (typeof formValue == 'string') {
+                if (formValue.indexOf(trigger.val as string) >= 0) {
                   satisfied = false;
                 }
               }
               break;
             case 'object':
-              if (value.includes(trigger.val)) {
+              if (formValue.includes(trigger.val)) {
                 satisfied = false;
               }
               break;
@@ -58,41 +63,56 @@ function isConditionSatisfied(triggers: Array<Trigger>, watch: UseFormWatch<Fiel
         }
         break;
       case 'greaterThan':
-        if (typeof value === 'number' && typeof trigger.val === 'number' && value <= trigger.val) {
+        if (typeof formValue === 'number' && typeof trigger.val === 'number' && formValue <= trigger.val) {
           satisfied = false;
         }
         break;
       case 'lessorThan':
-        if (typeof value === 'number' && typeof trigger.val === 'number' && value >= trigger.val) {
+        if (typeof formValue === 'number' && typeof trigger.val === 'number' && formValue >= trigger.val) {
           satisfied = false;
         }
         break;
       case 'empty':
         if (
-          typeof value !== 'boolean' &&
-          value &&
-          (!['object', 'string'].includes(typeof value) || value.length > 0 || Object.keys(value).length > 0)
+          typeof formValue !== 'boolean' &&
+          formValue &&
+          (!['object', 'string'].includes(typeof formValue) ||
+            formValue.length > 0 ||
+            Object.keys(formValue).length > 0)
         ) {
           satisfied = false;
-        } else if (value !== undefined && value !== null) {
+        } else if (formValue !== undefined && formValue !== null) {
           satisfied = false;
         }
         break;
       case 'notEmpty':
         if (
-          typeof value !== 'boolean' &&
+          typeof formValue !== 'boolean' &&
           !(
-            value &&
-            (!['object', 'string'].includes(typeof value) || value.length > 0 || Object.keys(value).length > 0)
+            formValue &&
+            (!['object', 'string'].includes(typeof formValue) ||
+              formValue.length > 0 ||
+              Object.keys(formValue).length > 0)
           )
         ) {
           satisfied = false;
-        } else if (value === undefined || value === null) {
+        } else if (formValue === undefined || formValue === null) {
+          satisfied = false;
+        }
+        break;
+      case 'visible':
+        if (formUiSetting?.rule?.invisible === true) {
+          satisfied = false;
+        }
+        break;
+      case 'invisible':
+        if (formUiSetting?.rule?.invisible === undefined || formUiSetting?.rule?.invisible === false) {
           satisfied = false;
         }
         break;
     }
   });
+  console.log('satisfied', satisfied);
   return satisfied;
 }
 export default isConditionSatisfied;
