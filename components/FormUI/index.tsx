@@ -8,7 +8,6 @@ import FormTitle from 'fe-modules/components/FormUI/_elements/FormTitle';
 import ExampleImg from 'fe-modules/components/FormUI/ExampleImg';
 import { FormUIProps, FormUISetting } from 'fe-modules/models/FormUI/FormUI';
 import { TitlelessFormUIDataTypeList } from 'fe-modules/models/FormUI/FormUIData';
-import { Translation } from 'fe-modules/models/lang';
 
 function FormUI({ form, uiSettings, uiSetting, lang, auth }: FormUIProps & { uiSettings?: Array<FormUISetting> }) {
   let newUiSetting: FormUISetting;
