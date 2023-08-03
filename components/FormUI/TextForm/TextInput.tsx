@@ -4,20 +4,29 @@ import { ControllerFieldState, ControllerRenderProps, FieldValues } from 'react-
 interface TextInputProps {
   field: ControllerRenderProps<FieldValues, string>;
   fieldState?: ControllerFieldState;
-  disabled: boolean;
-  multiline: boolean;
+  placeholder?: string;
+  disabled?: boolean;
+  multiline?: boolean;
   onCustomChange?: (event: any) => void;
 }
-export default function TextInput({ field, fieldState, disabled, multiline, onCustomChange }: TextInputProps) {
+export default function TextInput({
+  field,
+  fieldState,
+  placeholder,
+  disabled,
+  multiline,
+  onCustomChange,
+}: TextInputProps) {
   return (
     <TextField
       onChange={onCustomChange ?? field.onChange}
       onBlur={field.onBlur}
       value={field.value ?? ''}
+      placeholder={placeholder ?? ''}
       name={field.name}
       inputRef={field.ref}
-      multiline={multiline}
-      disabled={disabled}
+      multiline={multiline ?? false}
+      disabled={disabled ?? false}
       error={fieldState?.invalid ?? false}
       fullWidth
     />

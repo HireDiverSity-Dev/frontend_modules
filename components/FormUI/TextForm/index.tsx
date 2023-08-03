@@ -5,7 +5,7 @@ import TextInput from 'fe-modules/components/FormUI/TextForm/TextInput';
 import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
 import { useController } from 'react-hook-form';
 
-function TextForm({ form, uiSetting, multiline }: FormUIProps & { multiline?: boolean }) {
+function TextForm({ form, uiSetting, lang, multiline }: FormUIProps & { multiline?: boolean }) {
   // 커스텀 패턴 전처리
   let patternValue = uiSetting?.data?.pattern?.value;
   if (uiSetting?.data?.pattern?.label === '커스텀') {
@@ -35,7 +35,12 @@ function TextForm({ form, uiSetting, multiline }: FormUIProps & { multiline?: bo
 
   return (
     <FlexBox sx={{ flexDirection: 'column', width: '100', display: uiSetting.rule?.invisible ? 'none' : '' }}>
-      <TextInput field={field} multiline={multiline ?? false} disabled={uiSetting.rule?.readonly ?? false} />
+      <TextInput
+        field={field}
+        multiline={multiline}
+        placeholder={uiSetting.data.placeholder?.[lang]}
+        disabled={uiSetting.rule?.readonly}
+      />
       {fieldState.invalid && <TextError msg={fieldState.error?.message ?? ''} />}
     </FlexBox>
   );
