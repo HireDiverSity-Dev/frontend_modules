@@ -12,6 +12,7 @@ function TextForm({ form, uiSetting, multiline }: FormUIProps & { multiline?: bo
     patternValue = patternValue?.replace(/#/g, '[0-9]');
     patternValue = patternValue?.replace(/@/g, '[a-zA-Z]');
     patternValue = patternValue?.replace(/[*]/g, '.');
+    patternValue = '^' + patternValue + '$';
   }
 
   let { field, fieldState } = useController({
