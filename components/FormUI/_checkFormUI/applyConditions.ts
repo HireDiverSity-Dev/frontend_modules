@@ -17,7 +17,6 @@ function applyConditions(
     if (satisfied) {
       newUiSetting.rule = getRuleFormAction(condition.action, { ...newUiSetting.rule } ?? {});
       const value = getValueFormAction(condition.action);
-      console.log('value', value, form.getValues(uiSetting.FormItem_id));
       if (value !== undefined && form.getValues(uiSetting.FormItem_id) !== value)
         form.setValue(uiSetting.FormItem_id, value);
     }
@@ -27,7 +26,6 @@ function applyConditions(
   if (newUiSetting?.rule.invisible == true) {
     newUiSetting.rule.required = false;
   }
-
   return {
     ...newUiSetting,
   };

@@ -10,7 +10,6 @@ function isConditionSatisfied(
   triggers.forEach((trigger) => {
     const formValue = form.watch(trigger.FormItem_id);
     const formUiSetting = uiSettingsObject[trigger.FormItem_id];
-    console.log('formValue', formValue);
     switch (trigger.operator) {
       case 'equal':
         if (`${formValue}` !== trigger.val) {
@@ -112,7 +111,6 @@ function isConditionSatisfied(
         break;
     }
   });
-  console.log('satisfied', satisfied);
   return satisfied;
 }
 export default isConditionSatisfied;
