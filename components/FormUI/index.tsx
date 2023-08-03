@@ -19,6 +19,10 @@ function FormUI({ form, uiSettings, uiSetting, lang, auth }: FormUIProps & { uiS
     newUiSetting = uiSetting;
   }
 
+  if (newUiSetting.data === undefined) {
+    return <></>;
+  }
+
   if (newUiSetting.data.type === 'signature') {
     newUiSetting.data = {
       ...newUiSetting.data,
