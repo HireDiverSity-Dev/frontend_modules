@@ -1,6 +1,7 @@
 import { getRuleFormAction, getValueFormAction } from 'fe-modules/components/FormUI/_checkFormUI/getFromAction';
 import isConditionSatisfied from 'fe-modules/components/FormUI/_checkFormUI/isConditionSatisfied';
 import { FormUISetting, FormUIUseFormReturn } from 'fe-modules/models/FormUI/FormUI';
+import { FormUIRule } from 'fe-modules/models/FormUI/FormUIRule';
 
 function applyConditions(
   form: FormUIUseFormReturn,
@@ -9,25 +10,30 @@ function applyConditions(
 ): FormUISetting {
   // 조건 충족할 경우 액션 처리
   // 새 uiSetting 리턴
-  let newUiSetting: FormUISetting = { ...uiSetting };
-  newUiSetting.rule = { ...newUiSetting.rule, disabled: false };
+  let newRule: FormUIRule = { ...uiSetting.rule, disabled: false };
 
-  newUiSetting.conditions?.forEach((condition) => {
+  for (const condition of uiSetting.conditions ?? []) {
     const satisfied = isConditionSatisfied(form, uiSettingsObject, condition.triggers);
     if (satisfied) {
-      newUiSetting.rule = getRuleFormAction(condition.action, { ...newUiSetting.rule } ?? {});
+      newRule = getRuleFormAction(condition.action, newRule);
       const value = getValueFormAction(condition.action);
       if (value !== undefined && form.getValues(uiSetting.FormItem_id) !== value)
         form.setValue(uiSetting.FormItem_id, value);
+      break;
+    } else {
+      newRule = getRuleFormAction(condition.action, newRule);
+      newRule.invisible = !newRule.invisible;
+      newRule.required = !newRule.required;
     }
-  });
+  }
 
   // 보이지 않을 경우 필수 처리 제거
-  if (newUiSetting?.rule.invisible == true) {
-    newUiSetting.rule.required = false;
+  if (newRule.invisible == true) {
+    newRule.required = false;
   }
   return {
-    ...newUiSetting,
+    ...uiSetting,
+    rule: newRule,
   };
 }
 

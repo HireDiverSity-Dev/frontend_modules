@@ -1,6 +1,5 @@
-import React from 'react';
 import applyConditions from 'fe-modules/components/FormUI/_checkFormUI/applyConditions';
-import getUiSettingsObject from 'fe-modules/components/FormUI/_checkFormUI/getUiSettingsObject';
+import { getNewUiSettingsObject } from 'fe-modules/components/FormUI/_checkFormUI/getUiSettings';
 import FormBody from 'fe-modules/components/FormUI/_elements/FormBody';
 import FormBox from 'fe-modules/components/FormUI/_elements/FormBox';
 import FormError from 'fe-modules/components/FormUI/_elements/FormError';
@@ -14,8 +13,8 @@ import { Translation } from 'fe-modules/models/lang';
 function FormUI({ form, uiSettings, uiSetting, lang, auth }: FormUIProps & { uiSettings?: Array<FormUISetting> }) {
   let newUiSetting: FormUISetting;
   if (uiSettings) {
-    const uiSettingsObject = getUiSettingsObject(uiSettings);
-    newUiSetting = applyConditions(form, uiSettingsObject, uiSetting);
+    const newUiSettingsObject = getNewUiSettingsObject(form, uiSettings);
+    newUiSetting = applyConditions(form, newUiSettingsObject, uiSetting);
   } else {
     newUiSetting = uiSetting;
   }

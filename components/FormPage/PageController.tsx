@@ -3,7 +3,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Button } from '@mui/material';
 import isMovable from 'fe-modules/components/FormPage/isMovable';
-import getUiSettingsObject from 'fe-modules/components/FormUI/_checkFormUI/getUiSettingsObject';
+import { getNewUiSettingsObject } from 'fe-modules/components/FormUI/_checkFormUI/getUiSettings';
 import isConditionSatisfied from 'fe-modules/components/FormUI/_checkFormUI/isConditionSatisfied';
 import { FormUISetting, FormUIUseFormReturn } from 'fe-modules/models/FormUI/FormUI';
 import { FormUICondition } from 'fe-modules/models/FormUI/FormUICondition';
@@ -63,7 +63,7 @@ export function nextPage({ form, uiSettings, pageConditions, page, setPage, endP
     form.setValue('pageHistory', pageHistory);
 
     // 다음 페이지 계산
-    const uiSettingsObject = getUiSettingsObject(uiSettings);
+    const uiSettingsObject = getNewUiSettingsObject(form, uiSettings);
     let pageDestination = page + 1;
     pageConditions?.forEach((condition) => {
       const satisfied = isConditionSatisfied(form, uiSettingsObject, condition.triggers); // 조건 충족할 경우 액션 처리
@@ -85,12 +85,12 @@ export function nextPage({ form, uiSettings, pageConditions, page, setPage, endP
 function PageController(props: Props) {
   const { t } = useTranslation('customForm');
   const { form, uiSettings, pageConditions, page, endPage } = props;
-  const uiSettingsObject = getUiSettingsObject(uiSettings);
 
   const newUiSettings = uiSettings.filter((uiSetting) => uiSetting.page === page);
 
   const [canMoveNext, setCanMoveNext] = useState(false);
   useEffect(() => {
+    const uiSettingsObject = getNewUiSettingsObject(form, uiSettings);
     const tempMoveNext = isMovable(form, uiSettingsObject, pageConditions);
     setCanMoveNext(tempMoveNext);
   }, [pageConditions, form.watch()]);
