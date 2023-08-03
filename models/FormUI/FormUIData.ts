@@ -43,7 +43,6 @@ export const TitlelessFormUIDataTypeList = [
   FormUIDataTypes.checkbox,
   FormUIDataTypes.divider,
   FormUIDataTypes.paragraph,
-  FormUIDataTypes.signature,
 ];
 
 /** DynamoDB FormItem 테이블 구조 */

@@ -23,13 +23,6 @@ function FormUI({ form, uiSettings, uiSetting, lang, auth }: FormUIProps & { uiS
     return <></>;
   }
 
-  if (newUiSetting.data.type === 'signature') {
-    newUiSetting.data = {
-      ...newUiSetting.data,
-      title: SignatureLabel.title,
-      subtitle: SignatureLabel.subtitle,
-    };
-  }
   if (newUiSetting.rule?.invisible) {
     return <FormBody form={form} uiSetting={newUiSetting} lang={lang} auth={auth} />;
   }
@@ -54,18 +47,5 @@ function FormUI({ form, uiSettings, uiSetting, lang, auth }: FormUIProps & { uiS
     </FormBox>
   );
 }
-
-const SignatureLabel: { [key: string]: Translation } = {
-  title: {
-    kr: '서명',
-    zh: '签名',
-    en: 'Signature',
-  },
-  subtitle: {
-    kr: '동의하시면 서명(*여권 상 이름으로 서명)',
-    zh: '同意的话请签名（*签护照上的英文姓名）',
-    en: 'If you agree to all of the terms below, please select Agree and sign the e-signature',
-  },
-};
 
 export default FormUI;
