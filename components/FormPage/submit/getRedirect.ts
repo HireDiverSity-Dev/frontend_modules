@@ -22,9 +22,9 @@ function getRedirect(curData: FieldValues, page: FormPageProps) {
             }
           });
 
-          if (redirectUrl.indexOf(`{{${key}}}`) >= 0) {
+          if (redirectUrl.indexOf(`{${key}}`) >= 0) {
             redirectUrl = redirectUrl.replace(
-              `{{${key}}}`,
+              `{${key}}`,
               //@ts-ignore
               `${typeof value === 'object' ? value?.email : value}`,
             );
