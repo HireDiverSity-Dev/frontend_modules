@@ -10,6 +10,14 @@ function getCurrentDate(addSeconds = false) {
 
   return currentDate;
 }
+
+function parseStringToDate(dateString: string) {
+  const date = new Date(
+    dateString.slice(0, 4) + '-' + dateString.slice(4, 6) + '-' + dateString.slice(6, 8) + ' ' + dateString.slice(9),
+  );
+  return date;
+}
+
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);
 
@@ -22,4 +30,4 @@ const formatDate = (dateString: string) => {
   return `${year}-${month}-${day} ${hour}:${minute}`;
 };
 
-export { formatDate, getCurrentDate };
+export { formatDate, getCurrentDate, parseStringToDate };

@@ -1,4 +1,4 @@
-import { postFromDynamoDB } from 'fe-modules/apis/dynamoDB/table';
+import { getListFromDynamoDB, postFromDynamoDB } from 'fe-modules/apis/dynamoDB/table';
 import formSubmit from 'fe-modules/apis/lambda/formSubmit';
 import { uploadFileToPrivateS3 } from 'fe-modules/apis/s3/file';
 import { ImageObj } from 'fe-modules/components/FormUI/FileForm/index';
@@ -8,7 +8,7 @@ import { FormUISetting } from 'fe-modules/models/FormUI/FormUI';
 import { File_FormUIData, FormUIData } from 'fe-modules/models/FormUI/FormUIData';
 import { FormUIValue } from 'fe-modules/models/FormUI/FormUIValue';
 import { Submission } from 'fe-modules/models/Submission/Submission';
-import { getCurrentDate } from 'fe-modules/utils/date';
+import { getCurrentDate, parseStringToDate } from 'fe-modules/utils/date';
 import { base64ToFile } from 'fe-modules/utils/encoding';
 import { getRandomString } from 'fe-modules/utils/function';
 import { FieldValues } from 'react-hook-form';
@@ -27,6 +27,8 @@ interface SubmitFormProps {
 async function preProcessData(curData: FieldValues, uiSettings: Array<FormUISetting>, auth: Auth) {
   const saveDirFormItem_id = curData?.saveDir;
   delete curData?.saveDir;
+  delete curData?.pageHistory;
+  console.log('curData:', curData);
   const formDataList: Array<FormUIData & { value: FormUIValue }> = await Promise.all(
     Object.entries(curData)
       .filter(([, value]) => value !== undefined && value !== null && value !== '')
@@ -58,10 +60,49 @@ async function preProcessData(curData: FieldValues, uiSettings: Array<FormUISett
         return newFormData;
       }),
   );
-  return formDataList;
+  const normalizedFormDataList: Array<FormUIData & { value: FormUIValue }> = [];
+  formDataList.forEach((formData) => {
+    if (formData?._id === undefined) return;
+    normalizedFormDataList.push(formData);
+  });
+  return normalizedFormDataList;
+}
+
+async function checkDuplicate(formDataList: Array<FormUIData & { value: FormUIValue }>, FormPage_id: string) {
+  let isDuplicate = true;
+  const submissionRes = await getListFromDynamoDB('Submission', JSON.stringify({ FormPage_id: FormPage_id }));
+  const submissionList: Array<Submission> = submissionRes?.data ?? [];
+  submissionList.sort((a, b) => parseStringToDate(b.createdAt).getTime() - parseStringToDate(a.createdAt).getTime());
+  // search for the last 5 min submissions
+  const lastSubmissions: Array<Submission> = [];
+  const nowDate = new Date();
+  submissionList.forEach((submission) => {
+    const submissionDate = parseStringToDate(submission.createdAt);
+    const diff = nowDate.getTime() - submissionDate.getTime();
+    if (diff < 5 * 60 * 1000) lastSubmissions.push(submission);
+  });
+  // diff check with last submissions
+  lastSubmissions.forEach((lastSubmission) => {
+    const lastSubmissionData = lastSubmission.data;
+    const lastSubmissionDataMap = new Map<string, FormUIValue>();
+    lastSubmissionData.forEach((data) => {
+      lastSubmissionDataMap.set(data.FormItem_id, data.value);
+    });
+    formDataList.forEach((formData) => {
+      if (lastSubmissionDataMap.has(formData._id)) {
+        const lastValue = lastSubmissionDataMap.get(formData._id);
+        if (typeof lastValue === 'string' && typeof formData.value === 'string' && lastValue !== formData.value) {
+          isDuplicate = false;
+        }
+      }
+    });
+  });
+  if (isDuplicate) throw new Error('Duplicate submission');
 }
 
 async function sendDynamoDB(formDataList: Array<FormUIData & { value: FormUIValue }>, FormPage_id: string) {
+  await checkDuplicate(formDataList, FormPage_id);
+
   const sendDynamoDBData: Array<{ value: FormUIValue; FormItem_id: string }> = formDataList.map((formData) => {
     const data = { value: formData.value, FormItem_id: formData._id };
     return data;
