@@ -94,6 +94,8 @@ async function checkDuplicate(formDataList: Array<FormUIData & { value: FormUIVa
         if (typeof lastValue === 'string' && typeof formData.value === 'string' && lastValue !== formData.value) {
           isDuplicate = false;
         }
+      } else {
+        isDuplicate = false;
       }
     });
   });
