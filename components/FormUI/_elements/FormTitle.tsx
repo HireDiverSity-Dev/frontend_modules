@@ -1,11 +1,11 @@
 import React from 'react';
 import { Typography } from '@mui/material';
 import { FormUISetting } from 'fe-modules/models/FormUI/FormUI';
-import { Lang } from 'fe-modules/models/lang';
+import { SupportLanguage } from 'fe-modules/models/lang';
 
 interface FormTitleProps {
   uiSetting: FormUISetting;
-  lang: Lang;
+  lang: SupportLanguage;
 }
 
 function Star() {

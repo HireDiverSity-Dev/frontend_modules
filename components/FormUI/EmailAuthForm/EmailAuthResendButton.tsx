@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Button, Typography } from '@mui/material';
 import FlexBox from 'fe-modules/components/basic/FlexBox';
-import { Lang, Translation } from 'fe-modules/models/lang';
+import { SupportLanguage, Translation } from 'fe-modules/models/lang';
 
-export default function EmailAuthResentButton({ onVerify, lang }: { onVerify: () => void; lang: Lang }) {
+export default function EmailAuthResentButton({ onVerify, lang }: { onVerify: () => void; lang: SupportLanguage }) {
   const [resend, setResend] = useState(false);
   return (
     <FlexBox sx={{ width: '100%', justifyContent: 'space-between' }}>
@@ -14,9 +14,9 @@ export default function EmailAuthResentButton({ onVerify, lang }: { onVerify: ()
           setResend(true);
         }}
       >
-        {Label.재전송버튼[lang as keyof Translation]}
+        {Label.재전송버튼[lang]}
       </Button>
-      {resend && <Typography variant="body2">{Label.재전송완료[lang as keyof Translation]}</Typography>}
+      {resend && <Typography variant="body2">{Label.재전송완료[lang]}</Typography>}
     </FlexBox>
   );
 }

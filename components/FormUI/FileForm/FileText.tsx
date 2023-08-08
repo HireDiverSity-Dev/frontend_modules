@@ -1,16 +1,12 @@
 import { Typography } from '@mui/material';
-import { Lang, Translation } from 'fe-modules/models/lang';
+import { SupportLanguage, Translation } from 'fe-modules/models/lang';
 
 interface FileTextProps {
-  lang: Lang;
+  lang: SupportLanguage;
 }
 
 export default function FileText({ lang }: FileTextProps) {
-  return (
-    <Typography sx={{ fontSize: '14px', color: '#909090', mt: 0.5, mb: 2 }}>
-      {Label.유의사항[lang as keyof Translation]}
-    </Typography>
-  );
+  return <Typography sx={{ fontSize: '14px', color: '#909090', mt: 0.5, mb: 2 }}>{Label.유의사항[lang]}</Typography>;
 }
 
 const Label: { [key: string]: Translation } = {

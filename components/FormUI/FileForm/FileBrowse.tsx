@@ -1,9 +1,9 @@
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { Box, Typography } from '@mui/material';
-import { Lang, Translation } from 'fe-modules/models/lang';
+import { SupportLanguage, Translation } from 'fe-modules/models/lang';
 
 interface FileBrowseProps {
-  lang: Lang;
+  lang: SupportLanguage;
   onClick: () => void;
 }
 
@@ -11,7 +11,7 @@ export default function FileBrowse({ lang, onClick }: FileBrowseProps) {
   return (
     <Box onClick={onClick} sx={styles.container}>
       <CloudUploadIcon fontSize="large" />
-      <Typography>{Label.파일찾기[lang as keyof Translation]}</Typography>
+      <Typography>{Label.파일찾기[lang]}</Typography>
     </Box>
   );
 }

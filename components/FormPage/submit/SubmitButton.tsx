@@ -8,7 +8,7 @@ import { useModal } from 'fe-modules/hooks/useModal';
 import { Auth } from 'fe-modules/models/auth';
 import { FormPageProps } from 'fe-modules/models/FormPage/FormPage';
 import { FormUIUseFormReturn } from 'fe-modules/models/FormUI/FormUI';
-import { Lang } from 'fe-modules/models/lang';
+import { SupportLanguage } from 'fe-modules/models/lang';
 import { useTranslation } from 'next-i18next';
 
 interface Props {
@@ -49,7 +49,7 @@ function FormSubmitButton({ form, page, auth, setIsSubmitted }: Props) {
   const buttonContent = loading ? (
     <CircularProgress />
   ) : page.submit ? (
-    page.submit.label[i18n.language as Lang]
+    page.submit.label[i18n.language as SupportLanguage]
   ) : (
     t(`버튼`)
   );

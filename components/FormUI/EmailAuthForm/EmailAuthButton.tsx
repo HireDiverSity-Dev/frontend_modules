@@ -1,12 +1,12 @@
 import { Button } from '@mui/material';
-import { Lang, Translation } from 'fe-modules/models/lang';
+import { SupportLanguage, Translation } from 'fe-modules/models/lang';
 
 interface EmailAuthButtonProps {
   isInvalid: boolean;
   isVerified: boolean;
   isSented: boolean;
   onVerify: () => void;
-  lang: Lang;
+  lang: SupportLanguage;
 }
 
 export default function EmailAuthButton({ isInvalid, isVerified, isSented, onVerify, lang }: EmailAuthButtonProps) {
@@ -19,7 +19,7 @@ export default function EmailAuthButton({ isInvalid, isVerified, isSented, onVer
       onClick={isVerified ? () => {} : onVerify}
       sx={{ height: '56px' }}
     >
-      {isVerified ? Label.인증완료[lang as keyof Translation] : Label.인증전[lang as keyof Translation]}
+      {isVerified ? Label.인증완료[lang] : Label.인증전[lang]}
     </Button>
   );
 }

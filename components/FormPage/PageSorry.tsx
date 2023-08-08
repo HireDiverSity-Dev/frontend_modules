@@ -1,9 +1,9 @@
 import { Box, Typography } from '@mui/material';
 import FlexBox from 'fe-modules/components/basic/FlexBox';
 import { FormPageProps } from 'fe-modules/models/FormPage/FormPage';
-import { Lang } from 'fe-modules/models/lang';
+import { SupportLanguage } from 'fe-modules/models/lang';
 
-export default function PageSorry({ props, lang }: { props: FormPageProps; lang: Lang }) {
+export default function PageSorry({ props, lang }: { props: FormPageProps; lang: SupportLanguage }) {
   scrollTo(0, 0);
   return (
     <>

@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import { Lang, Translation } from 'fe-modules/models/lang';
+import { SupportLanguage, Translation } from 'fe-modules/models/lang';
 
 const SignatureClearLabel: { clear: Translation } = {
   clear: {
@@ -10,14 +10,14 @@ const SignatureClearLabel: { clear: Translation } = {
 };
 
 interface SignSubmitProps {
-  lang: Lang;
+  lang: SupportLanguage;
   onClick: () => void;
 }
 
 export default function SignClear({ lang, onClick }: SignSubmitProps) {
   return (
     <Button sx={{ width: '100%', color: 'grey' }} onClick={onClick}>
-      {SignatureClearLabel.clear[lang as keyof Translation]}
+      {SignatureClearLabel.clear[lang]}
     </Button>
   );
 }

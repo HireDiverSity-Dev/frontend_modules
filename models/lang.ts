@@ -1,61 +1,73 @@
-export const enum Lang {
-  KOR = 'kr',
-  ENG = 'en',
-  CHN = 'zh',
-  JPN = 'jp',
-  VNM = 'vn',
-}
-
-export const LangList = [Lang.KOR, Lang.ENG, Lang.CHN, Lang.JPN, Lang.VNM];
-
-export const enum LangServer {
-  KOR = '한국어',
-  ENG = '영어',
-  CHN = '중국어',
-  JPN = '일본어',
-  VNM = '베트남어',
-}
-
-export const langConvertServer = (lang: Lang) => {
-  switch (lang) {
-    case Lang.KOR:
-      return LangServer.KOR;
-    case Lang.ENG:
-      return LangServer.ENG;
-    case Lang.CHN:
-      return LangServer.CHN;
-    case Lang.JPN:
-      return LangServer.JPN;
-    case Lang.VNM:
-      return LangServer.VNM;
-    default:
-      return LangServer.ENG;
-  }
-};
-
-export const langConvert = (lang: LangServer) => {
-  switch (lang) {
-    case LangServer.KOR:
-      return Lang.KOR;
-    case LangServer.ENG:
-      return Lang.ENG;
-    case LangServer.CHN:
-      return Lang.CHN;
-    case LangServer.JPN:
-      return Lang.JPN;
-    case LangServer.VNM:
-      return Lang.VNM;
-    default:
-      return Lang.ENG;
-  }
-};
-
-export const defaultLang = Lang.ENG;
-
-export interface Translation {
+export interface TranslationInterface {
   en: string;
   kr?: string;
   zh?: string;
   jp?: string;
   vn?: string;
+}
+export type SupportLanguage = keyof TranslationInterface; // SupportLanguage => SupportLanguage
+
+export type SupportLanguageKorean = '한국어' | '영어' | '중국어' | '일본어' | '베트남어'; // SupportLanguageKorean => SupportLanguageKorean
+export type SupportLanguageEnglish = 'Korean' | 'English' | 'Chinese' | 'Japanese' | 'Vietnamese';
+export type SupportLanguageLocale = '한국어' | 'English' | '中文' | '日本語' | 'Tiếng Việt';
+
+export const LanguageObject: {
+  korean: { [key in SupportLanguage]: SupportLanguageKorean };
+  english: { [key in SupportLanguage]: SupportLanguageEnglish };
+  locales: { [key in SupportLanguage]: SupportLanguageLocale };
+} = {
+  korean: {
+    en: '영어',
+    kr: '한국어',
+    zh: '중국어',
+    jp: '일본어',
+    vn: '베트남어',
+  },
+  english: {
+    en: 'English',
+    kr: 'Korean',
+    zh: 'Chinese',
+    jp: 'Japanese',
+    vn: 'Vietnamese',
+  },
+  locales: {
+    en: 'English',
+    kr: '한국어',
+    zh: '中文',
+    jp: '日本語',
+    vn: 'Tiếng Việt',
+  },
+};
+
+export const LanguageList: SupportLanguage[] = ['en', 'kr', 'zh', 'jp', 'vn']; // LangList => LanguageList
+
+export const DefaultTranslation: TranslationInterface = LanguageList.reduce((acc, cur: SupportLanguage) => {
+  acc[cur] = '';
+  return acc;
+}, {} as TranslationInterface);
+
+// supportLanguageConvertKorean => supportLanguageConvertKorean
+export const supportLanguageConvertToKorean = (lang: SupportLanguage) => {
+  return LanguageObject.korean[lang];
+};
+
+export const supportLanguageConvertToEnglish = (lang: SupportLanguage) => {
+  return LanguageObject.english[lang];
+};
+
+export const supportLanguageConvertToLocale = (lang: SupportLanguage) => {
+  return LanguageObject.locales[lang];
+};
+
+export const koreanConvertToSupportLanguage = (lang: SupportLanguageKorean) => {
+  return Object.keys(LanguageObject.korean).find((key) => LanguageObject.korean[key as SupportLanguage] === lang);
+};
+
+export class Translation {
+  [key: string]: string;
+  constructor(translation: TranslationInterface) {
+    LanguageList.forEach((lang: SupportLanguage) => {
+      this[lang] = translation[lang] ?? translation['en'];
+    });
+  }
 }

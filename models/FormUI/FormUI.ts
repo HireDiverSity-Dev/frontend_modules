@@ -3,13 +3,13 @@ import { FormUICondition } from 'fe-modules/models/FormUI/FormUICondition';
 import { FormUIData } from 'fe-modules/models/FormUI/FormUIData';
 import { FormUIRule } from 'fe-modules/models/FormUI/FormUIRule';
 import { FormUIValue } from 'fe-modules/models/FormUI/FormUIValue';
-import { Lang } from 'fe-modules/models/lang';
+import { SupportLanguage } from 'fe-modules/models/lang';
 import { FieldValues, UseFormReturn } from 'react-hook-form';
 
 export interface FormUIProps {
   form: FormUIUseFormReturn;
   uiSetting: FormUISetting;
-  lang: Lang;
+  lang: SupportLanguage;
   auth: Auth;
 }
 

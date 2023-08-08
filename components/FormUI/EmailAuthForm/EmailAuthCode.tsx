@@ -1,5 +1,5 @@
 import { Button, TextField } from '@mui/material';
-import { Lang, Translation } from 'fe-modules/models/lang';
+import { SupportLanguage, Translation } from 'fe-modules/models/lang';
 
 interface EmailAuthCodeProps {
   name: string;
@@ -7,7 +7,7 @@ interface EmailAuthCodeProps {
   setCode: (code: string) => void;
   onConfirm: (code: string) => void;
   isInvalid?: boolean;
-  lang: Lang;
+  lang: SupportLanguage;
 }
 
 export default function EmailAuthCode({ name, code, setCode, onConfirm, isInvalid, lang }: EmailAuthCodeProps) {
@@ -23,7 +23,7 @@ export default function EmailAuthCode({ name, code, setCode, onConfirm, isInvali
         error={isInvalid}
       />
       <Button variant="outlined" size="small" onClick={() => onConfirm(code)}>
-        {Label.인증버튼[lang as keyof Translation]}
+        {Label.인증버튼[lang]}
       </Button>
     </>
   );

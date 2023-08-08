@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { LangServer } from 'fe-modules/models/lang';
+import { SupportLanguageKorean } from 'fe-modules/models/lang';
 import { client } from '../network';
 
 export interface loginParams {
@@ -11,7 +11,7 @@ export interface loginResult {
   recordId: string;
   accessToken: string;
   refreshToken: string;
-  primaryLanguage: LangServer;
+  primaryLanguage: SupportLanguageKorean;
   univ: string;
   userVisaStatus: 'NEW' | 'EXTENSION' | 'CHANGE';
 }

@@ -1,8 +1,8 @@
 import { Box, Typography } from '@mui/material';
 import { FormPageProps } from 'fe-modules/models/FormPage/FormPage';
-import { Lang } from 'fe-modules/models/lang';
+import { SupportLanguage } from 'fe-modules/models/lang';
 
-export default function PageThankyou({ props, lang }: { props: FormPageProps; lang: Lang }) {
+export default function PageThankyou({ props, lang }: { props: FormPageProps; lang: SupportLanguage }) {
   scrollTo(0, 0);
   return (
     <>

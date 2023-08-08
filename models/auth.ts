@@ -1,4 +1,4 @@
-import { LangServer } from 'fe-modules/models/lang';
+import { SupportLanguageKorean } from 'fe-modules/models/lang';
 
 export const enum Status {
   VALID = 'valid',
@@ -12,7 +12,7 @@ export interface Auth {
   accessToken: string;
   refreshToken: string;
   email: string;
-  primaryLanguage: LangServer;
+  primaryLanguage: SupportLanguageKorean;
   userVisaStatus?: 'NEW' | 'EXTENSION' | 'CHANGE';
 }
 
@@ -22,5 +22,5 @@ export const DefaultAuth: Auth = {
   accessToken: '',
   refreshToken: '',
   email: '',
-  primaryLanguage: LangServer.ENG,
+  primaryLanguage: '영어',
 };

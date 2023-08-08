@@ -7,7 +7,7 @@ import FormUI from 'fe-modules/components/FormUI/index';
 import { Auth } from 'fe-modules/models/auth';
 import { FormPageProps } from 'fe-modules/models/FormPage/FormPage';
 import { FormUISetting, FormUIUseFormReturn } from 'fe-modules/models/FormUI/FormUI';
-import { Lang } from 'fe-modules/models/lang';
+import { SupportLanguage } from 'fe-modules/models/lang';
 
 function getEndPage(forms: Array<FormUISetting>): number {
   return forms[forms.length - 1].page;
@@ -17,7 +17,7 @@ interface Props {
   props: FormPageProps;
   form: FormUIUseFormReturn;
   auth: Auth;
-  lang: Lang;
+  lang: SupportLanguage;
   setIsSubmitted: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
