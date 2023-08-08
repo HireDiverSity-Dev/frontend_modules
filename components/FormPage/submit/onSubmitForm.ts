@@ -92,6 +92,7 @@ async function checkDuplicate(formDataList: Array<FormUIData & { value: FormUIVa
     formDataList.forEach((formData) => {
       if (lastSubmissionDataMap.has(formData._id)) {
         const lastValue = lastSubmissionDataMap.get(formData._id);
+        if (formData.type === 'signature') return;
         if (typeof lastValue === 'string' && typeof formData.value === 'string' && lastValue !== formData.value) {
           isDuplicate = false;
         }
