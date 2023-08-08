@@ -9,6 +9,7 @@ import TextInput from 'fe-modules/components/FormUI/TextForm/TextInput';
 import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
 import { Translation } from 'fe-modules/models/lang';
 import { useController } from 'react-hook-form';
+import EmailAuthNotice from './EmailAuthNotice';
 
 function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
   const name = uiSetting.FormItem_id;
@@ -113,7 +114,7 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
           />
         )}
       </Box>
-      {isSented && !isVerified && <Typography variant="caption">{Label.인증안내[lang]}</Typography>}
+      {isSented && !isVerified && <EmailAuthNotice lang={lang} />}
       {isSented && !isVerified && <EmailAuthResendButton onVerify={onVerify} lang={lang} />}
     </FlexBox>
   );
@@ -135,10 +136,5 @@ const Label: { [key: string]: Translation } = {
     kr: '이메일 인증 실패',
     zh: '邮箱验证失败',
     en: 'email verification failed',
-  },
-  인증안내: {
-    kr: '* "인증하기" 버튼을 눌러 이메일을 인증해주세요.',
-    zh: '* 请点击“点击验证”按钮来验证您的邮箱。',
-    en: '* Press "VERIFY" button to authenticate your email.',
   },
 };
