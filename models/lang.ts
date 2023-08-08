@@ -7,6 +7,7 @@ export interface TranslationInterface {
 }
 export type SupportLanguage = keyof TranslationInterface; // SupportLanguage => SupportLanguage
 
+export const defaultLanguageKorean: SupportLanguageKorean = '영어';
 export type SupportLanguageKorean = '한국어' | '영어' | '중국어' | '일본어' | '베트남어'; // SupportLanguageKorean => SupportLanguageKorean
 export type SupportLanguageEnglish = 'Korean' | 'English' | 'Chinese' | 'Japanese' | 'Vietnamese';
 export type SupportLanguageLocale = '한국어' | 'English' | '中文' | '日本語' | 'Tiếng Việt';
