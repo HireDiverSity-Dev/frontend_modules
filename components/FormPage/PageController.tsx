@@ -3,7 +3,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Button } from '@mui/material';
 import isMovable from 'fe-modules/components/FormPage/isMovable';
-import { getNewUiSettingsObject } from 'fe-modules/components/FormUI/_checkFormUI/getUiSettings';
+import { getNewUiSettings, getNewUiSettingsObject } from 'fe-modules/components/FormUI/_checkFormUI/getUiSettings';
 import isConditionSatisfied from 'fe-modules/components/FormUI/_checkFormUI/isConditionSatisfied';
 import { FormUISetting, FormUIUseFormReturn } from 'fe-modules/models/FormUI/FormUI';
 import { FormUICondition } from 'fe-modules/models/FormUI/FormUICondition';
@@ -34,9 +34,10 @@ export function prevPage({ form, page, setPage }: Props) {
 }
 
 export function nextPage({ form, uiSettings, pageConditions, page, setPage, endPage }: Props) {
+  const newUiSettings = getNewUiSettings(form, uiSettings);
   let canMoveNext = true;
-  for (let i = 0; i < uiSettings.length; i += 1) {
-    const setting = uiSettings[i];
+  for (let i = 0; i < newUiSettings.length; i += 1) {
+    const setting = newUiSettings[i];
     if (setting.page !== page) continue;
     const value = form.watch(setting.FormItem_id);
     const { invalid } = form.getFieldState(setting.FormItem_id);

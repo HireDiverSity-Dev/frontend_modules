@@ -4,4 +4,6 @@ export interface FormUIRule {
   invisible?: boolean;
   readonly?: boolean;
   disabled?: boolean;
+  wasRequired?: boolean;
+  wasInvisible?: boolean;
 }

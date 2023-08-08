@@ -11,6 +11,8 @@ function applyConditions(
   // 조건 충족할 경우 액션 처리
   // 새 uiSetting 리턴
   let newRule: FormUIRule = { ...uiSetting.rule, disabled: false };
+  newRule.wasInvisible = newRule.invisible;
+  newRule.wasRequired = newRule.required;
 
   for (const condition of uiSetting.conditions ?? []) {
     const satisfied = isConditionSatisfied(form, uiSettingsObject, condition.triggers);
@@ -21,9 +23,8 @@ function applyConditions(
         form.setValue(uiSetting.FormItem_id, value);
       break;
     } else {
-      newRule = getRuleFormAction(condition.action, newRule);
-      newRule.invisible = !newRule.invisible;
-      newRule.required = !newRule.required;
+      newRule.invisible = newRule.wasInvisible;
+      newRule.required = newRule.wasRequired;
     }
   }
 
