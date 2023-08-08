@@ -81,6 +81,7 @@ async function checkDuplicate(formDataList: Array<FormUIData & { value: FormUIVa
     const diff = nowDate.getTime() - submissionDate.getTime();
     if (diff < 5 * 60 * 1000) lastSubmissions.push(submission);
   });
+  if (lastSubmissions.length === 0) return;
   // diff check with last submissions
   lastSubmissions.forEach((lastSubmission) => {
     const lastSubmissionData = lastSubmission.data;
@@ -94,6 +95,8 @@ async function checkDuplicate(formDataList: Array<FormUIData & { value: FormUIVa
         if (typeof lastValue === 'string' && typeof formData.value === 'string' && lastValue !== formData.value) {
           isDuplicate = false;
         }
+      } else {
+        isDuplicate = false;
       }
     });
   });
