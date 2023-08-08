@@ -17,11 +17,11 @@ export default function FileBrowse({ lang, onClick }: FileBrowseProps) {
 }
 
 const Label: { [key: string]: Translation } = {
-  파일찾기: {
+  파일찾기: new Translation({
     kr: '파일 선택',
     zh: '浏览文件',
     en: 'Browse Files',
-  },
+  }),
 };
 
 const styles = {

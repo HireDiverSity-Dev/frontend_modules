@@ -2,11 +2,11 @@ import { Button } from '@mui/material';
 import { SupportLanguage, Translation } from 'fe-modules/models/lang';
 
 const SignatureClearLabel: { clear: Translation } = {
-  clear: {
+  clear: new Translation({
     kr: 'clear',
     zh: '擦除',
     en: 'clear',
-  },
+  }),
 };
 
 interface SignSubmitProps {

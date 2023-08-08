@@ -22,14 +22,14 @@ export default function EmailAuthResentButton({ onVerify, lang }: { onVerify: ()
 }
 
 const Label: { [key: string]: Translation } = {
-  재전송버튼: {
+  재전송버튼: new Translation({
     kr: '이메일 다시 보내기',
     zh: '再次发送验证码',
     en: 'Resend Email',
-  },
-  재전송완료: {
+  }),
+  재전송완료: new Translation({
     kr: '인증코드가 다시 전송되었습니다',
     zh: '已再次发送验证码',
     en: 'The verification code has been sent again',
-  },
+  }),
 };

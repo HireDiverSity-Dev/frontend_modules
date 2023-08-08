@@ -53,16 +53,16 @@ function BooleanForm({ form, uiSetting, lang }: FormUIProps) {
 }
 
 const Label: { true: Translation; false: Translation } = {
-  true: {
+  true: new Translation({
     kr: '예',
     en: 'Yes',
     zh: '是的',
-  },
-  false: {
+  }),
+  false: new Translation({
     kr: '아니오',
     en: 'No',
     zh: '不',
-  },
+  }),
 };
 
 export default BooleanForm;

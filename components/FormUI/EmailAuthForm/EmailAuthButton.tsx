@@ -25,14 +25,14 @@ export default function EmailAuthButton({ isInvalid, isVerified, isSented, onVer
 }
 
 const Label: { [key: string]: Translation } = {
-  인증완료: {
+  인증완료: new Translation({
     kr: '인증완료!',
     zh: '认证成功',
     en: 'Verified!',
-  },
-  인증전: {
+  }),
+  인증전: new Translation({
     kr: '코드발송',
     zh: '发送验证码',
     en: 'Send code',
-  },
+  }),
 };
