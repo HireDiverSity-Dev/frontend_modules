@@ -5,7 +5,8 @@ import { FormUIData } from 'fe-modules/models/FormUI/FormUIData';
 export default async function getDefaultData(props: FormPageProps, savedValues: any) {
   // 프리필 항목 설정: url query 로 들어오는 값 추가 -> 기본 세팅값 추가 -> undefined 순
   let newDefaultValues: any = { ...savedValues };
-  newDefaultValues.saveDir = props.directory;
+  console.log('getDefaultData', newDefaultValues);
+  if (newDefaultValues.saveDir === undefined) newDefaultValues.saveDir = props.directory;
 
   const preFills = new URLSearchParams(location.search);
 

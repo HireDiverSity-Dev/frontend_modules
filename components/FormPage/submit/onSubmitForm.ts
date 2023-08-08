@@ -41,15 +41,16 @@ async function preProcessData(curData: FieldValues, uiSettings: Array<FormUISett
             break;
           case 'signature':
             let filePath = '';
-            if (auth.email) filePath = auth.email; // 1순위 : 로그인 된 이메일
+            if (auth.email && typeof auth.email === 'string' && auth.email !== '')
+              filePath = auth.email; // 1순위 : 로그인 된 이메일
             else {
               const saveDir = curData?.[saveDirFormItem_id];
-              if (saveDir !== undefined) filePath = saveDir; // 2순위 : 인증된 이메일, 3순위 : 저장 경로
+              if (saveDir !== undefined && typeof saveDir === 'string') filePath = saveDir; // 2순위 : 인증된 이메일 , 3순위 : 세팅된 saveDir
             }
             if ((formData as File_FormUIData).s3Path) filePath += (formData as File_FormUIData).s3Path;
             const signFile = base64ToFile(curData[key], (formData as File_FormUIData).s3Path);
             const curDate = getCurrentDate();
-            const path = `temp/${filePath}/sign/${curDate.replace(':', '')}_signature`;
+            const path = `temp/${filePath}/sign/${curDate}_signature`;
             await uploadFileToPrivateS3(path, signFile);
             processedValue = [path];
             break;
@@ -61,10 +62,7 @@ async function preProcessData(curData: FieldValues, uiSettings: Array<FormUISett
       }),
   );
   const normalizedFormDataList: Array<FormUIData & { value: FormUIValue }> = [];
-  formDataList.forEach((formData) => {
-    if (formData?._id === undefined) return;
-    normalizedFormDataList.push(formData);
-  });
+  formDataList.forEach((formData) => {});
   return normalizedFormDataList;
 }
 

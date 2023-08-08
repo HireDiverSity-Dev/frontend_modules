@@ -5,6 +5,7 @@ import { getCurrentDate } from 'fe-modules/utils/date';
 import { getRandomString } from 'fe-modules/utils/function';
 
 async function fileUploadRequest(file: File, filePath: string, fileNumber: number) {
+  if (typeof filePath !== 'string') filePath = JSON.stringify(filePath);
   const fileType = getFileType(file);
   if (fileType === 'other') throw new Error('지원하지 않는 파일 형식입니다.');
   const objectUrl = URL.createObjectURL(file);
