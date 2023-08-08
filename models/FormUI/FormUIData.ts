@@ -128,6 +128,47 @@ export interface Paragraph_FormUIData extends FormUIData {
   text: Translation;
 }
 
+export function formUIDataNormalizeTranslation(formUIData: FormUIData) {
+  formUIData.title = new Translation(formUIData.title ?? { en: '' });
+  formUIData.subtitle = new Translation(formUIData.subtitle ?? { en: '' });
+  formUIData.placeholder = new Translation(formUIData.placeholder ?? { en: '' });
+  if (formUIData.type === 'dropdown') {
+    let data = formUIData as Dropdown_FormUIData;
+    data.options = data.options.map((option) => {
+      option.label = new Translation(option.label);
+      return option;
+    });
+    formUIData = data;
+  } else if (formUIData.type === 'boolean') {
+    let data = formUIData as Boolean_FormUIData;
+    data.options = data.options?.map((option) => {
+      option.label = new Translation(option.label);
+      return option;
+    });
+    formUIData = data;
+  } else if (formUIData.type === 'multiselect' || formUIData.type === 'singleselect') {
+    let data = formUIData as Select_FormUIData;
+    data.options = data.options.map((option) => {
+      option.label = new Translation(option.label);
+      return option;
+    });
+    formUIData = data;
+  } else if (formUIData.type === 'checkbox') {
+    let data = formUIData as Checkbox_FormUIData;
+    data.label = new Translation(data.label);
+    if (data.link) {
+      data.link = new Translation(data.link);
+    }
+    formUIData = data;
+  } else if (formUIData.type === 'paragraph') {
+    let data = formUIData as Paragraph_FormUIData;
+    data.text = new Translation(data.text);
+    formUIData = data;
+  }
+
+  return formUIData;
+}
+
 export type FormUIDataUseFormReturn = UseFormReturn<FormUIData>;
 export type File_FormUIDataUseFormReturn = UseFormReturn<File_FormUIData>;
 export type Boolean_FormUIDataUseFormReturn = UseFormReturn<Boolean_FormUIData>;
