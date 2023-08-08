@@ -62,7 +62,10 @@ async function preProcessData(curData: FieldValues, uiSettings: Array<FormUISett
       }),
   );
   const normalizedFormDataList: Array<FormUIData & { value: FormUIValue }> = [];
-  formDataList.forEach((formData) => {});
+  formDataList.forEach((formData) => {
+    if (formData?._id === undefined) return;
+    normalizedFormDataList.push(formData);
+  });
   return normalizedFormDataList;
 }
 
