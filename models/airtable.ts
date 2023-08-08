@@ -1,5 +1,3 @@
-import SupplementInfo from 'fe-modules/models/SupplementInfo.json';
-
 export interface ProgressProps {
   data: AirTableRecord;
 }
@@ -91,12 +89,6 @@ export type 자변_진행상태 =
   | '8. 모든 절차 완료'
   | '테스트용'
   | '무효신청';
-
-export const causes: Array<string> = Object.keys(SupplementInfo.연장.폼);
-export type 연장_보완서류 = (typeof causes)[number];
-export const isCause = (x: string) => {
-  return causes.includes(x);
-};
 
 interface Thumbnail {
   url?: string;

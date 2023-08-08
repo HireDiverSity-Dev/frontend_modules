@@ -64,10 +64,14 @@ export const koreanConvertToSupportLanguage = (lang: SupportLanguageKorean) => {
 };
 
 export class Translation {
+  en: string;
   [key: string]: string;
   constructor(translation: TranslationInterface) {
+    this.en = translation.en;
     LanguageList.forEach((lang: SupportLanguage) => {
-      this[lang] = translation[lang] ?? translation['en'];
+      if (lang === 'en') return;
+      if (translation[lang] === '') this[lang] = translation['en'];
+      else this[lang] = translation[lang] ?? translation['en'];
     });
   }
 }

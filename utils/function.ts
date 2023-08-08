@@ -1,24 +1,24 @@
+import { Translation, TranslationInterface } from 'fe-modules/models/lang';
+
 export function sendCustomEvent(eventName: string, eventParam?: Record<string, string>) {
   //@ts-ignore
   window.gtag('event', eventName, eventParam);
 }
-
-export const languagePreprocess = (text: string) => {
-  const textList = text.split(/&|＆/g).map((val) => val.trim());
-  if (textList.length === 3) {
-    return {
-      kr: textList[0],
-      zh: textList[1],
-      en: textList[2],
-    };
-  }
-  return {
-    kr: text,
-    zh: text,
-    en: text,
+export const languagePreprocess = (text: string): Translation => {
+  const translation: TranslationInterface = {
+    en: '',
   };
+  const textList = text.split(/&|＆/g).map((val) => val.trim());
+  if (textList.length === 1) translation.en = text;
+  else {
+    translation.kr = textList[0] ?? '';
+    translation.zh = textList[1] ?? '';
+    translation.en = textList[2] ?? '';
+    translation.jp = textList[3] ?? '';
+    translation.vn = textList[4] ?? '';
+  }
+  return new Translation(translation);
 };
-export const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 export function generateSubsets<T>(array: T[]): T[][] {
   const subsets: T[][] = [[]]; // 초기 부분집합은 빈 배열 하나
@@ -41,3 +41,5 @@ export const getRandomString = (length: number = 10) => {
   }
   return text;
 };
+
+export const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
