@@ -1,10 +1,13 @@
+import { useEffect } from 'react';
 import { Box, Typography } from '@mui/material';
 import FlexBox from 'fe-modules/components/basic/FlexBox';
 import { FormPageProps } from 'fe-modules/models/FormPage/FormPage';
 import { SupportLanguage } from 'fe-modules/models/lang';
 
 export default function PageSorry({ props, lang }: { props: FormPageProps; lang: SupportLanguage }) {
-  scrollTo(0, 0);
+  useEffect(() => {
+    scrollTo(0, 0);
+  }, []);
   return (
     <>
       <Box sx={{ width: '100%' }}>

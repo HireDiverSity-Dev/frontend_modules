@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import getDefaultData from 'fe-modules/components/FormPage/getDefaultData';
 import isFormDeployed from 'fe-modules/components/FormPage/isFormDeployed';
 import PageBody from 'fe-modules/components/FormPage/PageBody';
+import PageLoading from 'fe-modules/components/FormPage/PageLoading';
 import PageSorry from 'fe-modules/components/FormPage/PageSorry';
 import PageThankyou from 'fe-modules/components/FormPage/PageThankyou';
 import { Auth } from 'fe-modules/models/auth';
@@ -29,18 +30,22 @@ function FormPage({ props, auth }: { props: FormPageProps; auth: Auth }) {
   useEffect(() => {
     getDefaultData(props, savedValues).then((defaultData) => {
       form.reset(defaultData);
+      setIsLoaded(true);
     });
   }, []);
 
   const [isDeployed] = useState(isFormDeployed(props));
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   return (
     <>
       {isDeployed ? (
         isSubmitted ? (
           <PageThankyou props={props} lang={lang} />
-        ) : (
+        ) : isLoaded ? (
           <PageBody props={props} form={form} auth={auth} lang={lang} setIsSubmitted={setIsSubmitted} />
+        ) : (
+          <PageLoading />
         )
       ) : (
         <PageSorry props={props} lang={lang} />
