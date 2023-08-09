@@ -13,6 +13,11 @@ export default async function getDefaultData(props: FormPageProps, savedValues: 
   for (const form of props.forms) {
     const _id = form.FormItem_id;
 
+    if (form.data.type === 'emailAuth') {
+      // 이메일 인증 폼 건너뛰기
+      newDefaultValues[_id] = undefined;
+      continue;
+    }
     if (newDefaultValues[_id] !== undefined) continue; // 1순위 : 자동저장된 값
     // 2순위 : url로 들어오는 값
     const formItem = (await getFromDynamoDB('FormItem', _id)).data as FormUIData;

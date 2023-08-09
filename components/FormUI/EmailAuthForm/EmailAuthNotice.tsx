@@ -16,11 +16,10 @@ function EmailAuthNotice({ lang }: { lang: SupportLanguage }) {
 
 export default EmailAuthNotice;
 
-
 const Notice: Translation = new Translation({
-  'kr': '안내사항',
-  'zh': '公告',
-  'en': 'Notice',
+  kr: '안내사항',
+  zh: '公告',
+  en: 'Notice',
   jp: '注意',
   vn: 'Thông báo',
 });
