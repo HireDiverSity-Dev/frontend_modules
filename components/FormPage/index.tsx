@@ -7,6 +7,7 @@ import PageSorry from 'fe-modules/components/FormPage/PageSorry';
 import PageThankyou from 'fe-modules/components/FormPage/PageThankyou';
 import { Auth } from 'fe-modules/models/auth';
 import { FormPageProps } from 'fe-modules/models/FormPage/FormPage';
+import { FormUIValues } from 'fe-modules/models/FormUI/FormUIValue';
 import { SupportLanguage } from 'fe-modules/models/lang';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -18,7 +19,7 @@ function FormPage({ props, auth }: { props: FormPageProps; auth: Auth }) {
   let savedValues: any = {};
   if (typeof window !== 'undefined') savedValues = JSON.parse(localStorage.getItem(props._id) ?? '{}');
 
-  const form = useForm({
+  const form = useForm<FormUIValues>({
     mode: 'onBlur',
     reValidateMode: 'onChange',
     defaultValues: savedValues,

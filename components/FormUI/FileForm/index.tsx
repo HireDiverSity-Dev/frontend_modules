@@ -78,8 +78,10 @@ function FileForm({ form, uiSetting, lang, auth }: FormUIProps) {
             filePath = auth.email; // 1순위 : 로그인 된 이메일
           else {
             const saveDirFormItem_id = form.getValues('saveDir');
-            const saveDir = form.getValues(saveDirFormItem_id);
-            if (saveDir !== undefined && typeof saveDir === 'string') filePath = saveDir; // 2순위 : 인증된 이메일 , 3순위 : 세팅된 saveDir
+            if (saveDirFormItem_id !== undefined && typeof saveDirFormItem_id === 'string') {
+              const saveDir = form.getValues(saveDirFormItem_id);
+              if (saveDir !== undefined && typeof saveDir === 'string') filePath = saveDir; // 2순위 : 인증된 이메일 , 3순위 : 세팅된 saveDir
+            }
           }
           if (formData.s3Path) filePath += '/' + formData.s3Path;
           const imageObj = await fileUploadRequest(e.target.files[i], filePath, imgCnt + cnt);

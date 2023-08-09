@@ -33,6 +33,11 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
   const [isVerified, setIsVerified] = useState(false);
   const [isInvalid, setIsInvalid] = useState(false);
 
+  const { field: emailAuthField } = useController({
+    name: 'emailAuth',
+    control: form.control,
+  });
+
   const { field: saveDirField } = useController({
     name: `saveDir`,
     control: form.control,
@@ -52,6 +57,7 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     emailField.onChange(e.target.value);
+    emailAuthField.onChange(undefined);
     setIsVerified(false);
     setIsSented(false);
   };
@@ -77,6 +83,7 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
       if (res.status !== 200) throw new Error('email confirm failed');
       setIsVerified(true);
       emailField.onChange(emailValue);
+      emailAuthField.onChange(emailValue);
       saveDirField.onChange(name);
       setIsInvalid(false);
     } catch (error) {

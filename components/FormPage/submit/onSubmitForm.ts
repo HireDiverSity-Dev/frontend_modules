@@ -6,12 +6,11 @@ import { Auth } from 'fe-modules/models/auth';
 import { FormPageProps } from 'fe-modules/models/FormPage/FormPage';
 import { FormUISetting } from 'fe-modules/models/FormUI/FormUI';
 import { File_FormUIData, FormUIData } from 'fe-modules/models/FormUI/FormUIData';
-import { FormUIValue } from 'fe-modules/models/FormUI/FormUIValue';
+import { FormUIValue, FormUIValues } from 'fe-modules/models/FormUI/FormUIValue';
 import { Submission } from 'fe-modules/models/Submission/Submission';
 import { getCurrentDate, parseStringToDate } from 'fe-modules/utils/date';
 import { base64ToFile } from 'fe-modules/utils/encoding';
 import { getRandomString } from 'fe-modules/utils/function';
-import { FieldValues } from 'react-hook-form';
 
 interface AirtableProps {
   base: string;
@@ -24,10 +23,11 @@ interface SubmitFormProps {
   value: FormUIValue;
 }
 
-async function preProcessData(curData: FieldValues, uiSettings: Array<FormUISetting>, auth: Auth) {
+async function preProcessData(curData: FormUIValues, uiSettings: Array<FormUISetting>, auth: Auth) {
   const saveDirFormItem_id = curData?.saveDir;
   delete curData?.saveDir;
   delete curData?.pageHistory;
+  delete curData?.emailAuth;
   console.log('curData:', curData);
   const formDataList: Array<FormUIData & { value: FormUIValue }> = await Promise.all(
     Object.entries(curData)
@@ -43,7 +43,7 @@ async function preProcessData(curData: FieldValues, uiSettings: Array<FormUISett
             let filePath = '';
             if (auth.email && typeof auth.email === 'string' && auth.email !== '')
               filePath = auth.email; // 1순위 : 로그인 된 이메일
-            else {
+            else if (saveDirFormItem_id) {
               const saveDir = curData?.[saveDirFormItem_id];
               if (saveDir !== undefined && typeof saveDir === 'string') filePath = saveDir; // 2순위 : 인증된 이메일 , 3순위 : 세팅된 saveDir
             }
@@ -138,7 +138,7 @@ async function sendAirtable(formDataList: Array<FormUIData & { value: FormUIValu
   return await formSubmit(JSON.stringify(sendAirtableData));
 }
 
-async function onSubmitForm(curData: FieldValues, page: FormPageProps, auth: Auth) {
+async function onSubmitForm(curData: FormUIValues, page: FormPageProps, auth: Auth) {
   console.log('data:', curData);
   console.log('page:', page);
 

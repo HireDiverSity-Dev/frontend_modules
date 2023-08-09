@@ -33,6 +33,16 @@ export function prevPage({ form, page, setPage }: Props) {
   }
 }
 
+function blockToGoNextPage(form: FormUIUseFormReturn, setting: FormUISetting) {
+  const target = document.getElementById(setting.FormItem_id);
+  const clientRect = target?.getBoundingClientRect();
+  const relativeTop = clientRect?.top;
+  const scrolledTopLength = window.scrollY;
+  const absoluteTop = scrolledTopLength + (relativeTop ?? 0);
+  window.scrollTo(0, absoluteTop - 50);
+  form.setFocus(setting.FormItem_id);
+}
+
 export function nextPage({ form, uiSettings, pageConditions, page, setPage, endPage }: Props) {
   const newUiSettings = getNewUiSettings(form, uiSettings);
   let canMoveNext = true;
@@ -42,16 +52,18 @@ export function nextPage({ form, uiSettings, pageConditions, page, setPage, endP
     const value = form.watch(setting.FormItem_id);
     const { invalid } = form.getFieldState(setting.FormItem_id);
     if (!setting.rule?.invisible) {
+      if (setting.data.type === 'emailAuth') {
+        const emailAuthValue = form.watch('emailAuth');
+        if (emailAuthValue === undefined || emailAuthValue?.length === 0) {
+          canMoveNext = false;
+          blockToGoNextPage(form, setting);
+          break;
+        }
+      }
       if ((setting.rule?.required && (value === undefined || value?.length === 0)) || invalid) {
-        const target = document.getElementById(setting.FormItem_id);
-        const clientRect = target?.getBoundingClientRect();
-        const relativeTop = clientRect?.top;
-        const scrolledTopLength = window.scrollY;
-        const absoluteTop = scrolledTopLength + (relativeTop ?? 0);
-        window.scrollTo(0, absoluteTop - 50);
-        form.setFocus(setting.FormItem_id);
-        form.setError(setting.FormItem_id, { type: 'required' });
         canMoveNext = false;
+        blockToGoNextPage(form, setting);
+        form.setError(setting.FormItem_id, { type: 'required' });
         return;
       }
     }

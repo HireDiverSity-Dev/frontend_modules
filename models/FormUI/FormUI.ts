@@ -2,9 +2,9 @@ import { Auth } from 'fe-modules/models/auth';
 import { FormUICondition } from 'fe-modules/models/FormUI/FormUICondition';
 import { FormUIData } from 'fe-modules/models/FormUI/FormUIData';
 import { FormUIRule } from 'fe-modules/models/FormUI/FormUIRule';
-import { FormUIValue } from 'fe-modules/models/FormUI/FormUIValue';
+import { FormUIValue, FormUIValues } from 'fe-modules/models/FormUI/FormUIValue';
 import { SupportLanguage } from 'fe-modules/models/lang';
-import { FieldValues, UseFormReturn } from 'react-hook-form';
+import { UseFormReturn } from 'react-hook-form';
 
 export interface FormUIProps {
   form: FormUIUseFormReturn;
@@ -13,8 +13,7 @@ export interface FormUIProps {
   auth: Auth;
 }
 
-export type FormUIUseFormReturn = UseFormReturn<FieldValues, any>;
-
+export type FormUIUseFormReturn = UseFormReturn<FormUIValues, any>;
 export interface FormUISetting {
   FormItem_id: string;
   page: number;
