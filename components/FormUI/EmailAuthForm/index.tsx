@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box } from '@mui/material';
 import { getVerificationConfirmClient, postVerificationSendClient } from 'fe-modules/apis/client/verification';
+import sendVerificationEmail from 'fe-modules/apis/django/custom_form';
 import FlexBox from 'fe-modules/components/basic/FlexBox';
 import EmailAuthButton from 'fe-modules/components/FormUI/EmailAuthForm/EmailAuthButton';
 import EmailAuthCode from 'fe-modules/components/FormUI/EmailAuthForm/EmailAuthCode';
@@ -12,20 +13,6 @@ import EmailAuthNotice from './EmailAuthNotice';
 
 function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
   const name = uiSetting.FormItem_id;
-  let langApi: string; // API 발송용 언어
-  switch (lang) {
-    case 'kr':
-      langApi = 'korean';
-      break;
-    case 'en':
-      langApi = 'english';
-      break;
-    case 'zh':
-      langApi = 'chinese';
-      break;
-    default:
-      langApi = 'english';
-  }
 
   const [, setEmail] = useState('');
   const [code, setCode] = useState('');
@@ -66,7 +53,9 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
     const emailValue = emailField.value;
     setEmail(emailValue);
     try {
-      await postVerificationSendClient(emailValue, langApi);
+      await sendVerificationEmail(emailValue, lang).then((res) => {
+        console.log(res);
+      });
       setIsSented(true);
       setIsInvalid(false);
     } catch (error) {

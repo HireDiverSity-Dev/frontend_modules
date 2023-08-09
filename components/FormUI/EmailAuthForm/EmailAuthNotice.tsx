@@ -6,7 +6,7 @@ import { SupportLanguage } from 'fe-modules/models/lang';
 function EmailAuthNotice({ lang }: { lang: SupportLanguage }) {
   return (
     <Alert variant="outlined" severity="info" sx={{ my: 2 }}>
-      <AlertTitle>{`${Notice}`}</AlertTitle>
+      <AlertTitle>{`${Notice[lang]}`}</AlertTitle>
       {Label.map((val) => (
         <Typography variant="body2">{`- ${val[lang]}`}</Typography>
       ))}
