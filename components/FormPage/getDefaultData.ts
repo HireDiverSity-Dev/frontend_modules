@@ -1,11 +1,13 @@
 import { getFromDynamoDB } from 'fe-modules/apis/dynamoDB/table';
 import { FormPageProps } from 'fe-modules/models/FormPage/FormPage';
 import { FormUIData } from 'fe-modules/models/FormUI/FormUIData';
+import { FormUIValues } from 'fe-modules/models/FormUI/FormUIValue';
 
-export default async function getDefaultData(props: FormPageProps, savedValues: any) {
+export default async function getDefaultData(props: FormPageProps, savedValues: FormUIValues) {
   // 프리필 항목 설정: url query 로 들어오는 값 추가 -> 기본 세팅값 추가 -> undefined 순
-  let newDefaultValues: any = { ...savedValues };
+  let newDefaultValues: FormUIValues = { ...savedValues };
   console.log('getDefaultData', newDefaultValues);
+  delete newDefaultValues.emailAuth;
   if (newDefaultValues.saveDir === undefined) newDefaultValues.saveDir = props.directory;
 
   const preFills = new URLSearchParams(location.search);
