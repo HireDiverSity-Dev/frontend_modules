@@ -20,6 +20,7 @@ export interface FormPageProps {
   directory?: string;
   startDate?: string;
   endDate?: string;
+  submission?: number;
 }
 
 export function formPageNormalizeTranslation(formPage: FormPageProps) {
