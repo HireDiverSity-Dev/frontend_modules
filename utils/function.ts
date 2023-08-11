@@ -42,4 +42,8 @@ export const getRandomString = (length: number = 10) => {
   return text;
 };
 
+export const getRandomNumber = (min: number, max: number) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
 export const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
