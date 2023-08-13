@@ -279,6 +279,20 @@ export interface AirTableRecord {
   RC수령준비물?: string;
   관납료영수번호?: string;
   컨설팅대학교서류수령장소?: string;
+  보완사유링크_사진?: Array<string>;
+  보완사유링크_여권?: Array<string>;
+  보완사유링크_사증?: Array<string>;
+  보완사유링크_재학?: Array<string>;
+  보완사유링크_거주지?: Array<string>;
+  보완사유링크_GKS?: Array<string>;
+  보완사유링크_수원?: Array<string>;
+  앱보완사유_사진?: Array<string>;
+  앱보완사유_여권?: Array<string>;
+  앱보완사유_사증?: Array<string>;
+  앱보완사유_재학?: Array<string>;
+  앱보완사유_거주지?: Array<string>;
+  앱보완사유_GKS?: Array<string>;
+  앱보완사유_수원?: Array<string>;
 }
 
 export interface 연장_AirtableRecord {
