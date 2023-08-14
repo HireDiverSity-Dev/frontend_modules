@@ -42,7 +42,7 @@ function FormPage({ props, auth }: { props: FormPageProps; auth: Auth }) {
     <>
       {isDeployed ? (
         isSubmitted ? (
-          <PageThankyou props={props} lang={lang} />
+          <PageThankyou props={props} auth={auth} lang={lang} />
         ) : isLoaded ? (
           <PageBody props={props} form={form} auth={auth} lang={lang} setIsSubmitted={setIsSubmitted} />
         ) : (

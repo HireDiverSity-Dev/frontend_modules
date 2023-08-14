@@ -8,8 +8,7 @@ export interface FormPageProps {
   _id: string;
   path: string;
   title: Translation;
-  submit: {
-    conditions: Array<FormUICondition>;
+  submit: FormUISetting & {
     label: Translation;
   };
   forms: Array<FormUISetting>;
