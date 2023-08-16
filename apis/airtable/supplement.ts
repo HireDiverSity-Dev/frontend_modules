@@ -24,5 +24,4 @@ async function postChangeSupplement(recordId: string, docs: any) {
   return await aws.post('/airtable/change/supplement', body);
 }
 
-
-export { postExtendSupplement, postNewSupplement, postChangeSupplement };
+export { postChangeSupplement, postExtendSupplement, postNewSupplement };
