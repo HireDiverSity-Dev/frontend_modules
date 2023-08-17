@@ -14,6 +14,14 @@ export async function postUserAdmin(params: postUserAdminParams): Promise<AxiosR
   return await admin.post('/user', params);
 }
 
+interface patchUserAdminParams {
+  email: string;
+  recordId: string;
+}
+export async function patchUserAdmin(params: patchUserAdminParams): Promise<AxiosResponse> {
+  return await admin.patch(`/user?email=${params.email}&recordId=${params.recordId}`);
+}
+
 export interface userChangeVisaStatusParams {
   email: string;
   newVisaStatus: 'NEW' | 'EXTENSION' | 'CHANGE';
