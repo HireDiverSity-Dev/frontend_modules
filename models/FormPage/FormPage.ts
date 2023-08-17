@@ -8,9 +8,20 @@ export interface FormPageProps {
   _id: string;
   path: string;
   title: Translation;
-  submit: {
+  sorry?: {
     FormItem_id?: string;
     data?: FormUIData;
+    isUseButton?: boolean;
+    button?: {
+      redirect?: Translation;
+      label?: Translation;
+    };
+  };
+  thankyou?: {
+    FormItem_id?: string;
+    data?: FormUIData;
+  };
+  submit: {
     label: Translation;
     conditions?: Array<FormUICondition>;
   };
