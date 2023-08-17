@@ -45,6 +45,12 @@ export function formPageNormalizeTranslation(formPage: FormPageProps) {
     }
     return form;
   });
+  if (formPage.sorry && formPage.sorry?.data) {
+    formPage.sorry.data = formUIDataNormalizeTranslation(formPage.sorry.data);
+  }
+  if (formPage.thankyou && formPage.thankyou?.data) {
+    formPage.thankyou.data = formUIDataNormalizeTranslation(formPage.thankyou.data);
+  }
   return formPage;
 }
 
