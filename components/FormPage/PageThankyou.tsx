@@ -22,11 +22,11 @@ export default function PageThankyou({
         <Typography variant="subtitle1" sx={{ my: 2, textAlign: 'center' }}>
           {props.title[lang]}
         </Typography>
-        {props.submit.FormItem_id !== undefined ? (
+        {props.thankyou?.data ? (
           <FormUI
             form={useForm()}
             uiSettings={props.forms}
-            uiSetting={props.submit as unknown as FormUISetting}
+            uiSetting={props.thankyou as unknown as FormUISetting}
             lang={lang}
             auth={auth}
           />

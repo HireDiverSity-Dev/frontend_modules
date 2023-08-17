@@ -4,6 +4,7 @@ import isFormDeployed from 'fe-modules/components/FormPage/isFormDeployed';
 import PageBody from 'fe-modules/components/FormPage/PageBody';
 import PageLoading from 'fe-modules/components/FormPage/PageLoading';
 import PageSorry from 'fe-modules/components/FormPage/PageSorry';
+import PageSorryButton from 'fe-modules/components/FormPage/PageSorryButton';
 import PageThankyou from 'fe-modules/components/FormPage/PageThankyou';
 import { Auth } from 'fe-modules/models/auth';
 import { FormPageProps } from 'fe-modules/models/FormPage/FormPage';
@@ -49,7 +50,10 @@ function FormPage({ props, auth }: { props: FormPageProps; auth: Auth }) {
           <PageLoading />
         )
       ) : (
-        <PageSorry props={props} lang={lang} />
+        <>
+          <PageSorry props={props} lang={lang} auth={auth} />
+          {props.sorry?.isUseButton && <PageSorryButton props={props} lang={lang} />}
+        </>
       )}
     </>
   );
