@@ -18,19 +18,17 @@ export default function PageSorry({ props, lang, auth }: { props: FormPageProps;
         <Typography variant="subtitle1" sx={{ mt: 2, textAlign: 'center' }}>
           {props.title[lang]}
         </Typography>
-        <FlexBox sx={{ mt: 8, justifyContent: 'space-between', width: '100%' }}>
-          <Box textAlign="center">
+        <FlexBox sx={{ mt: 6, justifyContent: 'space-between', width: '100%', flexDirection: 'column', gap: 2 }}>
+          <FlexBox sx={{ justifyContent: 'space-between', width: '100%' }}>
             <Typography variant="subtitle2">Start Date</Typography>
-            <Typography variant="body1" mt={2}>
+            <Typography variant="body1">
               {props.startDate ? new Date(props.startDate).toLocaleString() : '-'}
             </Typography>
-          </Box>
-          <Box textAlign="center">
+          </FlexBox>
+          <FlexBox sx={{ justifyContent: 'space-between', width: '100%' }}>
             <Typography variant="subtitle2">End Date</Typography>
-            <Typography variant="body1" mt={2}>
-              {props.endDate ? new Date(props.endDate).toLocaleString() : '-'}
-            </Typography>
-          </Box>
+            <Typography variant="body1">{props.endDate ? new Date(props.endDate).toLocaleString() : '-'}</Typography>
+          </FlexBox>
         </FlexBox>
         <Box sx={{ width: '100%', flex: 1, mt: 4, textAlign: 'center' }}>
           {props.sorry?.data ? (
