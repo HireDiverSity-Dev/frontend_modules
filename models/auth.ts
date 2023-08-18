@@ -14,6 +14,7 @@ export interface Auth {
   email: string;
   primaryLanguage: SupportLanguageKorean;
   userVisaStatus?: 'NEW' | 'EXTENSION' | 'CHANGE';
+  univ: string;
 }
 
 export const DefaultAuth: Auth = {
@@ -23,4 +24,5 @@ export const DefaultAuth: Auth = {
   refreshToken: '',
   email: '',
   primaryLanguage: '영어',
+  univ: '',
 };
