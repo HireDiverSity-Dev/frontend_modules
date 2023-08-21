@@ -48,9 +48,7 @@ const clientSetToken = (client: AxiosInstance) => {
       try {
         if (typeof document !== 'undefined') {
           const auth = getAuth();
-          console.log('auth', auth);
           let accessToken = await getAccessToken(auth);
-          console.log('accessToken', accessToken);
           const decodedAccessToken = jwt_decode<Token>(accessToken);
           if (Date.now() >= decodedAccessToken.exp * 1000) {
             console.log('AccessToken expired');

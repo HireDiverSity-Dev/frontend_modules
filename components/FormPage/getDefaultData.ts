@@ -15,7 +15,7 @@ export default async function getDefaultData(props: FormPageProps, savedValues: 
   for (const form of props.forms) {
     const _id = form.FormItem_id;
 
-    if (form.data.type === 'emailAuth') {
+    if (form.data?.type === 'emailAuth') {
       // 이메일 인증 폼 건너뛰기
       newDefaultValues[_id] = undefined;
       continue;

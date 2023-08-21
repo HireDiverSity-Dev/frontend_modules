@@ -1,5 +1,8 @@
 function getCurrentDate(addSeconds = false) {
-  const now = new Date();
+  const curr = new Date();
+  const utc = curr.getTime() + curr.getTimezoneOffset() * 60 * 1000;
+  const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
+  const now = new Date(utc + KR_TIME_DIFF);
   const year = now.getFullYear().toString();
   const month = (now.getMonth() + 1).toString().padStart(2, '0');
   const day = now.getDate().toString().padStart(2, '0');

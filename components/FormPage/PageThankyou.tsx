@@ -1,8 +1,20 @@
 import { Box, Typography } from '@mui/material';
+import FormUI from 'fe-modules/components/FormUI/index';
+import { Auth } from 'fe-modules/models/auth';
 import { FormPageProps } from 'fe-modules/models/FormPage/FormPage';
+import { FormUISetting } from 'fe-modules/models/FormUI/FormUI';
 import { SupportLanguage } from 'fe-modules/models/lang';
+import { useForm } from 'react-hook-form';
 
-export default function PageThankyou({ props, lang }: { props: FormPageProps; lang: SupportLanguage }) {
+export default function PageThankyou({
+  props,
+  lang,
+  auth,
+}: {
+  props: FormPageProps;
+  lang: SupportLanguage;
+  auth: Auth;
+}) {
   scrollTo(0, 0);
   return (
     <>
@@ -10,7 +22,17 @@ export default function PageThankyou({ props, lang }: { props: FormPageProps; la
         <Typography variant="subtitle1" sx={{ my: 2, textAlign: 'center' }}>
           {props.title[lang]}
         </Typography>
-        <Box sx={{ width: '100%', flex: 1, my: 2, textAlign: 'center' }}>Submit Success</Box>
+        {props.thankyou?.data ? (
+          <FormUI
+            form={useForm()}
+            uiSettings={props.forms}
+            uiSetting={props.thankyou as unknown as FormUISetting}
+            lang={lang}
+            auth={auth}
+          />
+        ) : (
+          <Box sx={{ width: '100%', flex: 1, my: 2, textAlign: 'center' }}>Submit Success</Box>
+        )}
       </Box>
     </>
   );

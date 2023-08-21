@@ -1,39 +1,53 @@
 import { useEffect } from 'react';
 import { Box, Typography } from '@mui/material';
 import FlexBox from 'fe-modules/components/basic/FlexBox';
+import FormUI from 'fe-modules/components/FormUI/index';
+import { Auth } from 'fe-modules/models/auth';
 import { FormPageProps } from 'fe-modules/models/FormPage/FormPage';
+import { FormUISetting } from 'fe-modules/models/FormUI/FormUI';
 import { SupportLanguage } from 'fe-modules/models/lang';
+import { useForm } from 'react-hook-form';
 
-export default function PageSorry({ props, lang }: { props: FormPageProps; lang: SupportLanguage }) {
+export default function PageSorry({ props, lang, auth }: { props: FormPageProps; lang: SupportLanguage; auth: Auth }) {
   useEffect(() => {
     scrollTo(0, 0);
   }, []);
   return (
     <>
-      <Box sx={{ width: '100%' }}>
+      <FlexBox sx={{ width: '100%', height: '100%', justifyContent: 'space-between', flexDirection: 'column' }}>
         <Typography variant="subtitle1" sx={{ mt: 2, textAlign: 'center' }}>
           {props.title[lang]}
         </Typography>
-        <Box sx={{ width: '100%', flex: 1, mt: 4, textAlign: 'center' }}>
-          <Typography variant="body1">
-            This form is not application period. Please check the application period.
-          </Typography>
-        </Box>
-        <FlexBox sx={{ mt: 20, justifyContent: 'center', gap: 8, flexDirection: 'column' }}>
-          <Box textAlign="center">
+        <FlexBox sx={{ mt: 6, justifyContent: 'space-between', width: '100%', flexDirection: 'column', gap: 2 }}>
+          <FlexBox sx={{ justifyContent: 'space-between', width: '100%' }}>
             <Typography variant="subtitle2">Start Date</Typography>
-            <Typography variant="body1" mt={2}>
+            <Typography variant="body1">
               {props.startDate ? new Date(props.startDate).toLocaleString() : '-'}
             </Typography>
-          </Box>
-          <Box textAlign="center">
+          </FlexBox>
+          <FlexBox sx={{ justifyContent: 'space-between', width: '100%' }}>
             <Typography variant="subtitle2">End Date</Typography>
-            <Typography variant="body1" mt={2}>
-              {props.endDate ? new Date(props.endDate).toLocaleString() : '-'}
-            </Typography>
-          </Box>
+            <Typography variant="body1">{props.endDate ? new Date(props.endDate).toLocaleString() : '-'}</Typography>
+          </FlexBox>
         </FlexBox>
-      </Box>
+        <Box sx={{ width: '100%', flex: 1, mt: 4, textAlign: 'center' }}>
+          {props.sorry?.data ? (
+            <FormUI
+              form={useForm()}
+              uiSettings={props.forms}
+              uiSetting={props.sorry as unknown as FormUISetting}
+              lang={lang}
+              auth={auth}
+            />
+          ) : (
+            <Typography variant="body1">
+              The application period is not open now.
+              <br />
+              Please check the application period.
+            </Typography>
+          )}
+        </Box>
+      </FlexBox>
     </>
   );
 }

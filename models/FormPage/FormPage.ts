@@ -1,6 +1,6 @@
 import { FormUISetting } from 'fe-modules/models/FormUI/FormUI';
 import { FormUICondition } from 'fe-modules/models/FormUI/FormUICondition';
-import { formUIDataNormalizeTranslation } from 'fe-modules/models/FormUI/FormUIData';
+import { FormUIData, formUIDataNormalizeTranslation } from 'fe-modules/models/FormUI/FormUIData';
 import { Translation } from 'fe-modules/models/lang';
 import { UseFormReturn } from 'react-hook-form';
 
@@ -8,9 +8,22 @@ export interface FormPageProps {
   _id: string;
   path: string;
   title: Translation;
+  sorry?: {
+    FormItem_id?: string;
+    data?: FormUIData;
+    isUseButton?: boolean;
+    button?: {
+      redirect?: Translation;
+      label?: Translation;
+    };
+  };
+  thankyou?: {
+    FormItem_id?: string;
+    data?: FormUIData;
+  };
   submit: {
-    conditions: Array<FormUICondition>;
     label: Translation;
+    conditions?: Array<FormUICondition>;
   };
   forms: Array<FormUISetting>;
   isCompleted: boolean;
@@ -32,6 +45,12 @@ export function formPageNormalizeTranslation(formPage: FormPageProps) {
     }
     return form;
   });
+  if (formPage.sorry && formPage.sorry?.data) {
+    formPage.sorry.data = formUIDataNormalizeTranslation(formPage.sorry.data);
+  }
+  if (formPage.thankyou && formPage.thankyou?.data) {
+    formPage.thankyou.data = formUIDataNormalizeTranslation(formPage.thankyou.data);
+  }
   return formPage;
 }
 
