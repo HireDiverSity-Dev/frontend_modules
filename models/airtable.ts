@@ -12,6 +12,7 @@ export interface 자변_ProgressProps {
 
 export type 신규_진행상태 =
   | '심사대기'
+  | '입국전'
   | '검토중'
   | '보완서류 요청'
   | '보완서류 검토중'
@@ -293,6 +294,7 @@ export interface AirTableRecord {
   앱보완사유_거주지?: Array<string>;
   앱보완사유_GKS?: Array<string>;
   앱보완사유_수원?: Array<string>;
+  입국보완마감일?: string;
 }
 
 export interface 연장_AirtableRecord {
