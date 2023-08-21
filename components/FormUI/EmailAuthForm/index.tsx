@@ -43,7 +43,7 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
   });
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    emailField.onChange(e.target.value);
+    emailField.onChange(e.target.value.toLowerCase());
     emailAuthField.onChange(undefined);
     setIsVerified(false);
     setIsSented(false);
