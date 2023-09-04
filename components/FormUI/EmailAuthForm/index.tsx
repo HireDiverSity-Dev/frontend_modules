@@ -88,6 +88,7 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
           field={emailField}
           fieldState={emailFieldState}
           multiline={false}
+          placeholder="e.g. your@email.com"
           disabled={(uiSetting.rule?.readonly ?? false) || isVerified}
           onCustomChange={onChange}
         />

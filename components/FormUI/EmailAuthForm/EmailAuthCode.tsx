@@ -20,6 +20,7 @@ export default function EmailAuthCode({ name, code, setCode, onConfirm, isInvali
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setCode(event.target.value);
         }}
+        placeholder="e.g. 000000"
         error={isInvalid}
       />
       <Button variant="outlined" size="small" onClick={() => onConfirm(code)}>
