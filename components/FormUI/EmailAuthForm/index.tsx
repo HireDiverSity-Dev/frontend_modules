@@ -110,7 +110,7 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
           />
         )}
       </Box>
-      {isSented && !isVerified && <EmailAuthNotice lang={lang} />}
+      {!isVerified && <EmailAuthNotice lang={lang} />}
       {isSented && !isVerified && <EmailAuthResendButton onVerify={onVerify} lang={lang} />}
     </FlexBox>
   );
