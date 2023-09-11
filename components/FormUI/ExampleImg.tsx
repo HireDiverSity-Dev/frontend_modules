@@ -7,7 +7,7 @@ const ExampleImg = ({ imgSrc }: { imgSrc: string }) => {
   const { openModal, closeModal } = useModal();
 
   const onClick = () => {
-    openModal(<FullImage />);
+    openModal(<FullImage />, { width: '80vw' });
   };
 
   const FullImage = () => {
