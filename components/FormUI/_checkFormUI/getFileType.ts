@@ -1,8 +1,8 @@
-export function getFileType(file: File): 'image' | 'pdf' | 'other' {
+export async function getFileType(file: File): Promise<'image' | 'pdf' | 'other'> {
   const imageExtensions = ['jpg', 'jpeg', 'png', 'gif'];
   const pdfExtensions = ['pdf'];
 
-  const extension = file?.name?.split('.')?.pop()?.toLowerCase();
+  const extension = await file?.name?.split('.')?.pop()?.toLowerCase();
 
   if (!extension) return 'other';
 
