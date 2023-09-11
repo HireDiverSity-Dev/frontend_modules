@@ -71,7 +71,7 @@ function FileForm({ form, uiSetting, lang, auth }: FormUIProps) {
       for (let i = 0; i < e.target.files.length; i++) {
         try {
           const file = e.target.files[i];
-          const fileType = getFileType(file);
+          const fileType = await getFileType(file);
           if (fileType === 'other') throw new Error("Can't upload this file type");
           let filePath = '';
           if (auth.email && typeof auth.email === 'string' && auth.email !== '')
