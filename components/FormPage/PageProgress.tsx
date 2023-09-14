@@ -1,4 +1,4 @@
-import { LinearProgress } from '@mui/material';
+import { LinearProgress, Typography } from '@mui/material';
 import FlexBox from '../basic/FlexBox';
 
 interface Props {
@@ -20,6 +20,7 @@ function PageProgress({ page, endPage }: Props) {
       />
       <Typography sx={{ mr: 3 }}>{`${progressPercent}%`}</Typography>
     </FlexBox>
+  );
 }
 
 export default PageProgress;
