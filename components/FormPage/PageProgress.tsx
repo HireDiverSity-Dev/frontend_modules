@@ -18,7 +18,7 @@ function PageProgress({ page, endPage }: Props) {
           height: 20,
         }}
       />
-      <Typography sx={{ mr: 3 }}>{`${progressPercent}%`}</Typography>
+      <Typography sx={{ mr: 3 }}>{`${progressPercent.toFixed(2)}%`}</Typography>
     </FlexBox>
   );
 }
