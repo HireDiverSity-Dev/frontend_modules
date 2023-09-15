@@ -6,7 +6,9 @@ const clientUrl = 'https://api.hirevisa.com';
 const lambdaUrl = 'https://sdiazawpj5.execute-api.ap-northeast-2.amazonaws.com/v1';
 const awsUrl = 'https://aws.hirevisa.com/api';
 const djangoUrl = 'https://py.hirevisa.com';
-const testUrl = 'http://localhost:3009/api';
+// const testUrl = 'http://localhost:3009/api';
+
+const crawlerUrl = 'http://52.79.233.127:53001/api';
 
 const admin = axios.create({
   baseURL: adminUrl,
@@ -51,4 +53,11 @@ const django = axios.create({
   },
 });
 
-export { admin, aws, client, clientRefresh, django, lambda };
+const crawler = axios.create({
+  baseURL: crawlerUrl,
+  validateStatus: (status) => {
+    return status < 400;
+  },
+});
+
+export { admin, aws, client, clientRefresh, crawler, django, lambda };
