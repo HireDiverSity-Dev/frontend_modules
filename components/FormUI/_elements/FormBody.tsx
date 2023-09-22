@@ -12,10 +12,12 @@ import SelectForm from 'fe-modules/components/FormUI/SelectForm';
 import SignForm from 'fe-modules/components/FormUI/SignForm';
 import TextForm from 'fe-modules/components/FormUI/TextForm';
 import { FormUIProps } from 'fe-modules/models/FormUI/FormUI';
+import PhoneForm from '../PhoneForm/PhoneForm';
 
 function FormBody(props: FormUIProps) {
   const type = props.uiSetting.data.type;
   let body: JSX.Element;
+
   switch (type) {
     case 'text':
       body = <TextForm {...props} />;
@@ -58,6 +60,9 @@ function FormBody(props: FormUIProps) {
       break;
     case 'divider':
       body = <Divider sx={{ my: 3 }} />;
+      break;
+    case 'phone':
+      body = <PhoneForm {...props} />;
       break;
     default:
       body = <>Rendering Error</>;

@@ -16,6 +16,7 @@ export const FormUIDataTypes = {
   emailAuth: 'emailAuth',
   paragraph: 'paragraph',
   divider: 'divider',
+  phone: 'phone',
 };
 export type FormUIDataType = keyof typeof FormUIDataTypes;
 
@@ -128,6 +129,11 @@ export interface Paragraph_FormUIData extends FormUIData {
   text: Translation;
 }
 
+export interface Phone_FormUIData extends FormUIData {
+  type: 'phone';
+  koreanNumbersOnly: boolean;
+}
+
 export function formUIDataNormalizeTranslation(formUIData: FormUIData) {
   formUIData.title = new Translation(formUIData.title ?? { en: '' });
   formUIData.subtitle = new Translation(formUIData.subtitle ?? { en: '' });
@@ -175,3 +181,4 @@ export type Boolean_FormUIDataUseFormReturn = UseFormReturn<Boolean_FormUIData>;
 export type Select_FormUIDataUseFormReturn = UseFormReturn<Select_FormUIData>;
 export type Checkbox_FormUIDataUseFormReturn = UseFormReturn<Checkbox_FormUIData>;
 export type Paragraph_FormUIDataUseFormReturn = UseFormReturn<Paragraph_FormUIData>;
+export type Phone_FormUIDataUseFormReturn = UseFormReturn<Phone_FormUIData>;
