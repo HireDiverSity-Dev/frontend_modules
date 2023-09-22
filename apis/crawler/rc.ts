@@ -1,5 +1,6 @@
-import { RCCrawlingState } from '@/types/rc';
 import { crawler } from '../network';
+
+export type RCCrawlingState = 'all' | 'wait' | 'in-progress' | 'done' | 'error';
 
 export async function getRCCrawlingList(startTime: number, endTime?: number, state?: RCCrawlingState) {
   const _endTime = endTime ?? new Date().getTime();
