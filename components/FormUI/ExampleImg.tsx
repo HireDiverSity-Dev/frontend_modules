@@ -1,33 +1,19 @@
-import { Button, Typography } from '@mui/material';
+import { Button, Typography, Dialog } from '@mui/material';
 import FlexBox from 'fe-modules/components/basic/FlexBox';
-import { useModal } from 'fe-modules/hooks/useModal';
+import { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-const ExampleImg = ({ imgSrc }: { imgSrc: string }) => {
-  const { openModal, closeModal } = useModal();
-
-  const onClick = () => {
-    openModal(<FullImage />, { width: '80vw' });
-  };
-
-  const FullImage = () => {
-    return (
-      <FlexBox
-        sx={{
-          position: 'relative',
-          flexDirection: 'column',
-          width: '100%',
-          gap: 1,
-          p: 3,
-        }}
-      >
+function FullImage({ imgSrc, open, onClose }: any) {
+  return (
+    <Dialog open={open} onClose={onClose}>
+      <FlexBox sx={{ flexDirection: 'column', paddingY: 5 }}>
         <FlexBox sx={{ gap: 2, mb: 3 }}>
           {!isMobile && (
             <a href={imgSrc} target="_blank">
               <Button variant="outlined">View original</Button>
             </a>
           )}
-          <Button variant="contained" onClick={closeModal}>
+          <Button variant="contained" onClick={onClose}>
             Close
           </Button>
         </FlexBox>
@@ -35,18 +21,24 @@ const ExampleImg = ({ imgSrc }: { imgSrc: string }) => {
           src={imgSrc}
           style={{
             position: 'relative',
-            maxWidth: '100%',
-            maxHeight: '100%',
+            width: '100%',
+            height: '100%',
+            objectFit: 'contain',
           }}
         />
       </FlexBox>
-    );
-  };
+    </Dialog>
+  );
+}
+
+const ExampleImg = ({ imgSrc }: { imgSrc: string }) => {
+  const [open, setOpen] = useState<boolean>(false);
+  const onCloseDialog = () => setOpen(false);
 
   return (
     <FlexBox sx={{ mb: '10px' }}>
       <div style={{ position: 'relative', width: 'auto', cursor: 'pointer' }}>
-        <img src={imgSrc} style={{ height: 200, objectFit: 'contain' }} onClick={onClick} />
+        <img src={imgSrc} style={{ height: 200, objectFit: 'contain' }} onClick={() => setOpen(true)} />
         <Typography
           variant="caption"
           sx={{
@@ -63,6 +55,7 @@ const ExampleImg = ({ imgSrc }: { imgSrc: string }) => {
           Click
         </Typography>
       </div>
+      <FullImage open={open} imgSrc={imgSrc} onClose={onCloseDialog} />
     </FlexBox>
   );
 };
