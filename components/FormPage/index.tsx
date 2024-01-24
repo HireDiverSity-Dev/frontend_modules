@@ -17,23 +17,24 @@ function FormPage({ props, auth }: { props: FormPageProps; auth: Auth }) {
   const { i18n } = useTranslation(['customForm', 'form', 'common']);
   const lang = i18n.language as SupportLanguage;
 
-  let savedValues: any = {};
-  if (typeof window !== 'undefined') savedValues = JSON.parse(localStorage.getItem(props._id) ?? '{}');
+  // let savedValues: any = {};
+  // if (typeof window !== 'undefined') savedValues = JSON.parse(localStorage.getItem(props._id) ?? '{}');
 
   const form = useForm<FormUIValues>({
     mode: 'onBlur',
     reValidateMode: 'onChange',
-    defaultValues: savedValues,
+    // defaultValues: savedValues,
   });
-  useEffect(() => {
-    localStorage.setItem(props._id, JSON.stringify(form.getValues()));
-  }, [form.watch()]);
+  // useEffect(() => {
+  //   localStorage.setItem(props._id, JSON.stringify(form.getValues()));
+  // }, [form.watch()]);
 
   useEffect(() => {
-    getDefaultData(props, savedValues).then((defaultData) => {
-      form.reset(defaultData);
-      setIsLoaded(true);
-    });
+    // getDefaultData(props, savedValues).then((defaultData) => {
+    //   form.reset(defaultData);
+    //   setIsLoaded(true);
+    // });
+    setIsLoaded(true);
   }, []);
 
   const [isDeployed] = useState(isFormDeployed(props));
