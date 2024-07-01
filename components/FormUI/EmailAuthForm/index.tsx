@@ -55,7 +55,21 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
     const emailValue = emailField.value;
     setEmail(emailValue);
     try {
-      await getEmailVerificationCodeWithAPI2(emailValue, lang);
+      const langCode =
+        lang === "jp"
+          ? "ja"
+          : lang === "vn"
+          ? "vi"
+          : lang === "kr"
+          ? "ko"
+          : lang;
+
+      await fetch(
+        `/api/user/email-verification?email=${emailValue}&langCode=${langCode}`,
+        {
+          method: "GET",
+        }
+      );
       setIsSented(true);
       setIsInvalid(false);
     } catch (error) {
@@ -68,8 +82,13 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
     const emailValue = emailField.value;
     setEmail(emailValue);
     try {
-      const res = await confirmEmailVerificationCodeWithAPI2(emailValue, code);
-      if (res.status !== 200) throw new Error("email confirm failed");
+      await fetch("/api/user/email-verification", {
+        method: "POST",
+        body: JSON.stringify({
+          email: emailValue,
+          verificationCode: code,
+        }),
+      });
 
       setIsVerified(true);
       emailField.onChange(emailValue);
