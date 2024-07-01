@@ -1,14 +1,17 @@
-import axios from 'axios';
-import { clientSetToken } from 'fe-modules/apis/token';
+import axios from "axios";
+import { clientSetToken } from "fe-modules/apis/token";
 
-const adminUrl = 'https://admin.api.hirevisa.com';
-const clientUrl = 'https://api.hirevisa.com';
-const lambdaUrl = 'https://sdiazawpj5.execute-api.ap-northeast-2.amazonaws.com/v1';
-const awsUrl = 'https://aws.hirevisa.com/api';
-const djangoUrl = 'https://py.hirevisa.com';
+const adminUrl = "https://admin.api.hirevisa.com";
+const clientUrl = "https://api.hirevisa.com";
+const lambdaUrl =
+  "https://sdiazawpj5.execute-api.ap-northeast-2.amazonaws.com/v1";
+const awsUrl = "https://aws.hirevisa.com/api";
+const djangoUrl = "https://py.hirevisa.com";
+
+const api2Url = "https://api2.hirevisa.com";
 // const testUrl = 'http://localhost:3009/api';
 
-const crawlerUrl = 'http://52.79.233.127:53001/api';
+const crawlerUrl = "http://52.79.233.127:53001/api";
 
 const admin = axios.create({
   baseURL: adminUrl,
@@ -31,6 +34,13 @@ const client = axios.create({
   },
 });
 clientSetToken(client);
+
+const api2 = axios.create({
+  baseURL: api2Url,
+  validateStatus: (status) => {
+    return status < 500;
+  },
+});
 
 const lambda = axios.create({
   baseURL: lambdaUrl,
@@ -60,4 +70,4 @@ const crawler = axios.create({
   },
 });
 
-export { admin, aws, client, clientRefresh, crawler, django, lambda };
+export { admin, aws, client, clientRefresh, crawler, django, lambda, api2 };
