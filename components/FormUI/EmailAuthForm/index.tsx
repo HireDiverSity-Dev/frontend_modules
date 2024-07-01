@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { Box } from "@mui/material";
 import {
-  getVerificationConfirmClient,
-  postVerificationSendClient,
+  getEmailVerificationCodeWithAPI2,
+  confirmEmailVerificationCodeWithAPI2,
 } from "fe-modules/apis/client/verification";
-import getEmailVerificationCodeWithAPI2 from "fe-modules/apis/django/custom_form";
-import confirmEmailVerificationCodeWithAPI2 from "fe-modules/apis/django/custom_form";
 import FlexBox from "fe-modules/components/basic/FlexBox";
 import EmailAuthButton from "fe-modules/components/FormUI/EmailAuthForm/EmailAuthButton";
 import EmailAuthCode from "fe-modules/components/FormUI/EmailAuthForm/EmailAuthCode";
@@ -70,11 +68,7 @@ function EmailAuthForm({ form, uiSetting, lang }: FormUIProps) {
     const emailValue = emailField.value;
     setEmail(emailValue);
     try {
-      const res = await confirmEmailVerificationCodeWithAPI2(
-        emailValue,
-        code,
-        new Date().getTime() / 1000
-      );
+      const res = await confirmEmailVerificationCodeWithAPI2(emailValue, code);
       if (res.status !== 200) throw new Error("email confirm failed");
 
       setIsVerified(true);

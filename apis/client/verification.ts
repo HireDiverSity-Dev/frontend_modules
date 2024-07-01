@@ -28,13 +28,12 @@ export async function getEmailVerificationCodeWithAPI2(
 
 export async function confirmEmailVerificationCodeWithAPI2(
   email: string,
-  verificationCode: string,
-  verifyTime: number
+  verificationCode: string
 ) {
   const url = `/api/user/email-verification`;
   return await api2.post(url, {
     email,
     verificationCode,
-    verifyTime,
+    verifyTime: new Date().getTime() / 1000,
   });
 }
