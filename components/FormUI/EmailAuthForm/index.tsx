@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 import {
   getEmailVerificationCodeWithAPI2,
   confirmEmailVerificationCodeWithAPI2,
-} from "fe-modules/apis/client/verification";
+} from "@/pages/api/user";
 import FlexBox from "fe-modules/components/basic/FlexBox";
 import EmailAuthButton from "fe-modules/components/FormUI/EmailAuthForm/EmailAuthButton";
 import EmailAuthCode from "fe-modules/components/FormUI/EmailAuthForm/EmailAuthCode";
